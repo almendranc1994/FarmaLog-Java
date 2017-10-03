@@ -40,9 +40,13 @@ public class AnadirInsumo extends javax.swing.JFrame {
 
         jLabel1.setText("Nombre:");
 
+        txtNombreInsumo.setName("txtNombre"); // NOI18N
+
         btnBuscar.setText("Buscar");
+        btnBuscar.setName("btnBuscar"); // NOI18N
 
         btnNuevo.setText("Nuevo");
+        btnNuevo.setName("btnNuevo"); // NOI18N
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoActionPerformed(evt);
@@ -50,6 +54,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
         });
 
         btnAgregar.setText("Agregar");
+        btnAgregar.setName("btnAgregar"); // NOI18N
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
@@ -67,6 +72,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
                 "Código", "Nombre", "Descripción", "PU", "Marca"
             }
         ));
+        tablaInsumos.setName("tableAñadirInsumos"); // NOI18N
         jScrollPane1.setViewportView(tablaInsumos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

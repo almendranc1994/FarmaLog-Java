@@ -76,7 +76,7 @@ public class CompraDeInsumos extends javax.swing.JFrame {
                 "Código", "Proveedor", "Marca", "Precio Unidad", "Volumen"
             }
         ));
-        jTable1.setName("tablaComrpas"); // NOI18N
+        jTable1.setName("tablaCompras"); // NOI18N
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Insumo"));
@@ -85,11 +85,19 @@ public class CompraDeInsumos extends javax.swing.JFrame {
 
         jTextField2.setName("txtNombreInsumo"); // NOI18N
 
+        jTextField3.setName("txtDescripcion"); // NOI18N
+
         jLabel3.setText("Descripción:");
+
+        jTextField4.setName("txtUnidadMedida"); // NOI18N
 
         jLabel4.setText("Unidad Medida:");
 
+        jTextField5.setName("txtStock"); // NOI18N
+
         jLabel5.setText("Stock:");
+
+        jTextField6.setName("txtVolumenCompra"); // NOI18N
 
         jLabel6.setText("Volumen de compra:");
 
