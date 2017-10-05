@@ -1,6 +1,6 @@
 
 package Modelo;
-
+//prueba
 public class Insumo {
     private int codigoInsumo;
     private String nombreInsumo;
