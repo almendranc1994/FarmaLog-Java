@@ -29,13 +29,13 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tableLstSolicitudesSuministro = new javax.swing.JTable();
+        btnVerSolicitud = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Lista Solicitudes Suministro");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableLstSolicitudesSuministro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -43,14 +43,14 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
                 "Codigo Solicitud", "Fecha Peticion", "Fecha limite", "Prioridad", "Institucion"
             }
         ));
-        jTable1.setName("tableLstSolicitudesSuministro"); // NOI18N
-        jScrollPane1.setViewportView(jTable1);
+        tableLstSolicitudesSuministro.setName("tableLstSolicitudesSuministro"); // NOI18N
+        jScrollPane1.setViewportView(tableLstSolicitudesSuministro);
 
-        jButton1.setText("Ver Solicitud");
-        jButton1.setName("btnVerSolicitud"); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnVerSolicitud.setText("Ver Solicitud");
+        btnVerSolicitud.setName("btnVerSolicitud"); // NOI18N
+        btnVerSolicitud.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnVerSolicitudActionPerformed(evt);
             }
         });
 
@@ -64,7 +64,7 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnVerSolicitud)
                 .addGap(32, 32, 32))
         );
         jPanel1Layout.setVerticalGroup(
@@ -73,7 +73,7 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(btnVerSolicitud)
                 .addGap(7, 7, 7))
         );
 
@@ -97,9 +97,9 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnVerSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerSolicitudActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnVerSolicitudActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,9 +137,9 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnVerSolicitud;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableLstSolicitudesSuministro;
     // End of variables declaration//GEN-END:variables
 }
