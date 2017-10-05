@@ -7,7 +7,7 @@ package Controlador;
 
 /**
  *
- * @author Andre
+ * @author Andre Pando
  */
 public class InsumoBL {
     
