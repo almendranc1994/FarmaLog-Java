@@ -7,7 +7,7 @@ package Modelo;
 
 /**
  *
- * @author Andre
+ * @author Andre Pando
  */
 public class DetalleSolicitud {
     private String descripcion;
