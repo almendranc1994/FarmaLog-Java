@@ -36,6 +36,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
         tablaInsumos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Añadir Insumos");
         setName("Añadir Insumo"); // NOI18N
 
         jLabel1.setText("Nombre:");
