@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package sitemafamalog;
-
+import Controlador.InsumoBL;
 /**
  *
  * @author Karla Isabel Pedraza Salinas 20141056
@@ -16,6 +16,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
      */
     public AnadirInsumo() {
         initComponents();
+        txtPrecio.setEnabled(false);
     }
 
     /**
@@ -35,7 +36,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaInsumos = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Añadir Insumos");
@@ -47,6 +48,11 @@ public class AnadirInsumo extends javax.swing.JFrame {
 
         btnBuscar.setText("Buscar");
         btnBuscar.setName("btnBuscar"); // NOI18N
+        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseClicked(evt);
+            }
+        });
 
         btnNuevo.setText("Nuevo");
         btnNuevo.setName("btnNuevo"); // NOI18N
@@ -98,7 +104,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtNombreInsumo, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                                .addComponent(jTextField1))
+                                .addComponent(txtPrecio))
                             .addGap(18, 18, 18)
                             .addComponent(btnBuscar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -117,7 +123,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -135,6 +141,10 @@ public class AnadirInsumo extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
+        insumoBL logNegInsumo;
+    }//GEN-LAST:event_btnBuscarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -178,8 +188,8 @@ public class AnadirInsumo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tablaInsumos;
     private javax.swing.JTextField txtNombreInsumo;
+    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }
