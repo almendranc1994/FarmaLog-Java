@@ -16,6 +16,16 @@ public class RegistroProveedor extends javax.swing.JFrame {
      */
     public RegistroProveedor() {
         initComponents();
+        txtNombre.setEnabled(false);
+        txtApellido.setEnabled(false);
+        txtCorreo.setEnabled(false);
+        txtTelefono.setEnabled(false);
+        txtDireccion.setEnabled(false);
+        tableInsumosAsociados.setEnabled(false);
+        btnAñadir.setEnabled(false);
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        
     }
 
     /**
@@ -45,11 +55,9 @@ public class RegistroProveedor extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnAñadir = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
+        btnNuevo = new javax.swing.JMenu();
+        btnGuardar = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -171,6 +179,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
                 "Código", "Nombre", "U. Medida", "Marca"
             }
         ));
+        tableInsumosAsociados.setName("tableInsumosAsociados"); // NOI18N
         jScrollPane1.setViewportView(tableInsumosAsociados);
 
         btnEliminar.setText("Eliminar");
@@ -222,15 +231,30 @@ public class RegistroProveedor extends javax.swing.JFrame {
                 .addGap(304, 304, 304))
         );
 
-        jButton1.setText("Guardar");
+        btnNuevo.setText("Nuevo");
+        btnNuevo.setName("btnNuevo"); // NOI18N
+        btnNuevo.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                btnNuevoMenuSelected(evt);
+            }
+        });
+        jMenuBar2.add(btnNuevo);
 
-        jButton2.setText("Cancelar");
-
-        jMenu3.setText("Nuevo");
-        jMenuBar2.add(jMenu3);
-
-        jMenu4.setText("Guardar");
-        jMenuBar2.add(jMenu4);
+        btnGuardar.setText("Guardar");
+        btnGuardar.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                btnGuardarMenuSelected(evt);
+            }
+        });
+        jMenuBar2.add(btnGuardar);
 
         jMenu5.setText("Buscar");
         jMenuBar2.add(jMenu5);
@@ -249,18 +273,10 @@ public class RegistroProveedor extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(29, 29, 29))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,10 +285,6 @@ public class RegistroProveedor extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -306,6 +318,23 @@ public class RegistroProveedor extends javax.swing.JFrame {
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
         new AnadirInsumo().setVisible(true);
     }//GEN-LAST:event_btnAñadirActionPerformed
+
+    private void btnNuevoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_btnNuevoMenuSelected
+        txtNombre.setEnabled(true);txtNombre.setText("");
+        txtApellido.setEnabled(true);txtApellido.setText("");
+        txtCorreo.setEnabled(true);txtCorreo.setText("");
+        txtTelefono.setEnabled(true);txtTelefono.setText("");
+        txtDireccion.setEnabled(true);txtDireccion.setText("");
+        tableInsumosAsociados.setEnabled(true);
+        tableInsumosAsociados.removeAll();
+        btnAñadir.setEnabled(true);
+        btnModificar.setEnabled(true);
+        btnEliminar.setEnabled(true); 
+    }//GEN-LAST:event_btnNuevoMenuSelected
+
+    private void btnGuardarMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_btnGuardarMenuSelected
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarMenuSelected
 
     /**
      * @param args the command line arguments
@@ -345,9 +374,9 @@ public class RegistroProveedor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAñadir;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JMenu btnGuardar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JMenu btnNuevo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -356,8 +385,6 @@ public class RegistroProveedor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
