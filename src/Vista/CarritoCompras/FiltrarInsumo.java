@@ -36,20 +36,20 @@ public class FiltrarInsumo extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                { new Integer(123456), "A", "5,500 m2", "5/09/17", "11/11/17", "Alta",  new Integer(3)},
-                { new Integer(123457), "B", "2,300 ml", "6/09/17", "10/10/17", "Media",  new Integer(2)},
-                { new Integer(123458), "C", "2,000 L", "7/09/17", "20/10/17", "Baja",  new Integer(0)},
-                { new Integer(123459), "D", "100 g", "8/09/17", "23/11/17", "Media",  new Integer(3)}
+                {"A", "5,500 m2", "5/09/17", "11/11/17", "Alta",  new Integer(3)},
+                {"B", "2,300 ml", "6/09/17", "10/10/17", "Media",  new Integer(2)},
+                {"C", "2,000 L", "7/09/17", "20/10/17", "Baja",  new Integer(0)},
+                {"D", "100 g", "8/09/17", "23/11/17", "Media",  new Integer(3)}
             },
             new String [] {
-                "Código", "Insumo", "Volumen", "Fecha petición", "Fecha límite", "Prioridad", "Proveedores disponibles"
+                "Insumo", "Volumen", "Fecha petición", "Fecha límite", "Prioridad", "Proveedores disponibles"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
