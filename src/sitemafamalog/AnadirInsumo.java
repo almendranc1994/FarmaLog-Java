@@ -5,12 +5,17 @@
  */
 package sitemafamalog;
 import Controlador.InsumoBL;
+import Modelo.Insumo;
+import Modelo.ProveedorxInsumo;
+
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 /**
  *
  * @author Karla Isabel Pedraza Salinas 20141056
  */
 public class AnadirInsumo extends javax.swing.JFrame {
-
+    ArrayList<ProveedorxInsumo> listaInsumos;
     /**
      * Creates new form AnadirInsumo
      */
@@ -143,9 +148,21 @@ public class AnadirInsumo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
-        insumoBL logNegInsumo;
+        ProveedorxInsumoBL logNegProvxIns;
+        listaInsumos=new ArrayList<ProveedorxInsumo>();
+        listaInsumos = logNegProvxIns.devolverListaInsumo(txtNombreInsumo);
+        actualizarDatosTabla();
     }//GEN-LAST:event_btnBuscarMouseClicked
-
+    public void actualizarDatosTabla(){
+        DefaultTableModel modelo = (DefaultTableModel)tablaInsumos.getModel();
+        Object[] fila = new Object[3];
+        for(int i=0; i<listaInsumos.size();i++){
+            fila[0] = listaInsumos.get(i).getId();
+            fila[1] = listaInsumos.get(i).getDni();
+            fila[2] = listaInsumos.get(i).getNombreCompleto();
+            modelo.addRow(fila);
+        }
+    }
     /**
      * @param args the command line arguments
      */
