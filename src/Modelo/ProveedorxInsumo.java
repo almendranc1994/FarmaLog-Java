@@ -14,7 +14,7 @@ public class ProveedorxInsumo {
     private Proveedor proveedor;
     private UnidadMedida uniMed;
     private int stock;
-    private String marca;
+    private Marca marca;
     private double precio;
     
     /**
@@ -76,14 +76,14 @@ public class ProveedorxInsumo {
     /**
      * @return the marca
      */
-    public String getMarca() {
+    public Marca getMarca() {
         return marca;
     }
 
     /**
      * @param marca the marca to set
      */
-    public void setMarca(String marca) {
+    public void setMarca(Marca marca) {
         this.marca = marca;
     }
 
