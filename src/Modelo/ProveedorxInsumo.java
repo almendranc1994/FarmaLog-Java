@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Modelo;
-
+import Controlador.*;
 /**
  *
  * @author Karla Isabel Pedraza Salinas 20141056
@@ -16,7 +16,17 @@ public class ProveedorxInsumo {
     private int stock;
     private Marca marca;
     private double precio;
-    
+    public ProveedorxInsumo(){
+        
+    }
+    public ProveedorxInsumo(int idProveedor,int idInsumo,int idUnidad,int stock,int idMarca,double precio){
+        proveedor=(new ProveedoresBL()).BuscarProveedor(idProveedor);
+        insumo=(new InsumoBL()).BuscarInsumo(idInsumo);
+        UniMed=(new UnidadMedidaBL()).BuscarUnidadMedida(idUnidad);
+        this.stock=stock;
+        marca=(new MarcaBL()).BuscarMarca(idMarca);
+        this.precio=precio;
+    }
     /**
      * @return the insumo
      */
