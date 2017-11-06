@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author Karla Isabel Pedraza Salinas 20141056
  */
 public class ProveedorxInsumoBL {
-    private InsumoDA accesoDatos;
+    private ProveedorxInsumoDA accesoDatos;
     
     public ProveedorxInsumoBL(){
         accesoDatos = new ProveedorxInsumoDA();
