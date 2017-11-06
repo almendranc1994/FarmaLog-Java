@@ -5,6 +5,7 @@
  */
 package sitemafamalog;
 import Controlador.InsumoBL;
+import Controlador.ProveedorxInsumoBL;
 import Modelo.Insumo;
 import Modelo.ProveedorxInsumo;
 
@@ -22,6 +23,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
     public AnadirInsumo() {
         initComponents();
         txtPrecio.setEnabled(false);
+        listaInsumos = new ArrayList<ProveedorxInsumo>();
     }
 
     /**
@@ -149,17 +151,19 @@ public class AnadirInsumo extends javax.swing.JFrame {
 
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
         ProveedorxInsumoBL logNegProvxIns;
+        logNegProvxIns = new ProveedorxInsumoBL();
         listaInsumos=new ArrayList<ProveedorxInsumo>();
-        listaInsumos = logNegProvxIns.devolverListaInsumo(txtNombreInsumo);
+        listaInsumos = logNegProvxIns.devolverListaInsumo(txtNombreInsumo.toString());
         actualizarDatosTabla();
     }//GEN-LAST:event_btnBuscarMouseClicked
     public void actualizarDatosTabla(){
         DefaultTableModel modelo = (DefaultTableModel)tablaInsumos.getModel();
-        Object[] fila = new Object[3];
+        Object[] fila = new Object[4];
         for(int i=0; i<listaInsumos.size();i++){
-            fila[0] = listaInsumos.get(i).getId();
-            fila[1] = listaInsumos.get(i).getDni();
-            fila[2] = listaInsumos.get(i).getNombreCompleto();
+            fila[0] = listaInsumos.get(i).getInsumo().getCodigoInsumo();
+            fila[1] = listaInsumos.get(i).getInsumo().getNombreInsumo();
+            fila[2] = listaInsumos.get(i).getInsumo().getDescripcionInsumo();
+            fila[3] = listaInsumos.get(i).getMarca().getNombre();
             modelo.addRow(fila);
         }
     }
