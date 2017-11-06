@@ -21,14 +21,14 @@ public class Conexion {
     
     private static final int MAX_RETRY = 10;
     
-    private static final String url = "jdbc:mysql://localhost:3306/javabase";
-    private static final String username = "java";
-    private static final String password = "password";
+    private static final String url = "jdbc:mysql://200.16.7.96/inf282g1";
+    private static final String username = "inf282g1";
+    private static final String password = "BRXRKa3O5JUiqJWn";
     
     private static int retries = 0;
     private static volatile Connection conn = null;
     
-    private Conexion() {}
+    public Conexion() {}
     
     public static Connection getConexion() {
 
