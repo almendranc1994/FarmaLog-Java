@@ -7,23 +7,38 @@ package AccesoDatos;
 import java.util.ArrayList;
 import Modelo.Insumo;
 import java.sql.*;
+
+import com.mysql.jdbc.Connection;
 /**
  *
  * @author HP
  */
 public class InsumoDA {
-    private String ruta="test/clientes.txt";
-    
-    public ArrayList<Insumo> devolverLista(){
-        ArrayList<Insumo> insumos = new ArrayList<Insumo>();
-        try {//registrar el Driver
-            Class.forName("com.mysql.jdbc.Driver");
-            //establecer la conexión
-            Connection con = DriverManager.getConnection("jdbc:mysql://50.62.209.188/20141056", "kpedraza", "Mjw1h88");
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+    public Insumo BuscarInsumo(int idInsumo){
+       Insumo insumo;
+       int idIns=0;
+       String nombre="";
+       String descripcion="";
+       
+        try{    
+            Statement sentencia=Conexion.getConexion().createStatement();
+            ResultSet rs = sentencia.executeQuery("SELECT * FROM Insumo");
+            idIns=0;
+            while(rs.next()){
+                idIns= Integer.parseInt(rs.getString("idInsumo"));
+                nombre = rs.getString("nombre");
+                descripcion=rs.getString("descripcion");
+                if(idInsumo == idIns) break;
+            }
         }
-        return insumos;
+        catch (SQLException e){
+            // do something appropriate with the exception, *at least*:
+            e.printStackTrace();
+        }
+        if(idInsumo==idIns)
+            insumo=new Insumo(idInsumo,nombre,descripcion);
+        else
+            insumo=new Insumo();
+        return insumo;
     }
-    
 }
