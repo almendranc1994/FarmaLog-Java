@@ -4,11 +4,20 @@
  * and open the template in the editor.
  */
 package Controlador;
-
+import Modelo.Proveedor;
+import AccesoDatos.ProveedoresDA;
 /**
  *
  * @author Andre Pando
  */
 public class ProveedoresBL {
+    private ProveedoresDA accesoDatos;
     
+    public ProveedoresBL(){
+        accesoDatos = new ProveedoresDA();
+    }
+    
+    public Proveedor BuscarProveedor(int idProveedor){
+        return accesoDatos.BuscarProveedor(idProveedor);
+    }
 }
