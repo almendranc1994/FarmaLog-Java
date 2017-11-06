@@ -22,19 +22,19 @@ public class ProveedorxInsumoDA {
         try{    
             Statement sentencia=Conexion.getConexion().createStatement();
             ResultSet rs = sentencia.executeQuery("SELECT * FROM Insumo");
-            String idInsumo="";
+            int idInsumo=0;
             while(rs.next()){
-                idInsumo= rs.getString("idInsumo");
+                idInsumo= Integer.parseInt(rs.getString("idInsumo"));
                 String nombre = rs.getString("nombre");
                 if(nombre == nombreInsumo) break;
             }
             rs = sentencia.executeQuery("SELECT * FROM ProveedorxInsumo");
             while(rs.next()){
-                String idProveedor= rs.getString("Proveedor_idProveedor");
-                String idInsumo2 = rs.getString("Insumo_idInsumo");
-                String idUnidad = rs.getString("Unidad de Medida_idUnidad de Medida");
+                int idProveedor= Integer.parseInt(rs.getString("Proveedor_idProveedor"));
+                int idInsumo2 = Integer.parseInt(rs.getString("Insumo_idInsumo"));
+                int idUnidad = Integer.parseInt(rs.getString("Unidad de Medida_idUnidad de Medida"));
                 int stock = Integer.parseInt(rs.getString("stock"));
-                String idMarca = rs.getString("Marca_idMarca");
+                int idMarca = Integer.parseInt(rs.getString("Marca_idMarca"));
                 Double precio = Double.parseDouble(rs.getString("precio"));
                 if(idInsumo2==idInsumo){
                     ProveedorxInsumo provxIns=new ProveedorxInsumo(idProveedor,idInsumo,idUnidad,stock,idMarca,precio);
