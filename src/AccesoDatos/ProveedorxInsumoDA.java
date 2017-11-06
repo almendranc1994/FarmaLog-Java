@@ -30,11 +30,11 @@ public class ProveedorxInsumoDA {
             }
             rs = sentencia.executeQuery("SELECT * FROM ProveedorxInsumo");
             while(rs.next()){
-                int idProveedor= Integer.parseInt(rs.getString("Proveedor_idProveedor"));
-                int idInsumo2 = Integer.parseInt(rs.getString("Insumo_idInsumo"));
-                int idUnidad = Integer.parseInt(rs.getString("Unidad de Medida_idUnidad de Medida"));
+                int idProveedor= Integer.parseInt(rs.getString("idProveedor"));
+                int idInsumo2 = Integer.parseInt(rs.getString("idInsumo"));
+                int idUnidad = Integer.parseInt(rs.getString("idUnidadMedida"));
                 int stock = Integer.parseInt(rs.getString("stock"));
-                int idMarca = Integer.parseInt(rs.getString("Marca_idMarca"));
+                int idMarca = Integer.parseInt(rs.getString("idMarca"));
                 Double precio = Double.parseDouble(rs.getString("precio"));
                 if(idInsumo2==idInsumo){
                     ProveedorxInsumo provxIns=new ProveedorxInsumo(idProveedor,idInsumo,idUnidad,stock,idMarca,precio);
