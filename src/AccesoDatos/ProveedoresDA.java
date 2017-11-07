@@ -15,7 +15,7 @@ public class ProveedoresDA {
        String telefono="";
        Boolean esNacional=false;
        
-        try{    
+       try{    
             Statement sentencia=Conexion.getConexion().createStatement();
             ResultSet rs = sentencia.executeQuery("SELECT * FROM Proveedor");
             while(rs.next()){

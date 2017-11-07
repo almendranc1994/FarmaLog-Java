@@ -37,7 +37,7 @@ public class ProveedorxInsumoDA {
                 int idMarca = Integer.parseInt(rs.getString("idMarca"));
                 Double precio = Double.parseDouble(rs.getString("precio"));
                 if(idInsumo2==idInsumo){
-                    ProveedorxInsumo provxIns=new ProveedorxInsumo(idProveedor,idInsumo,idUnidad,stock,idMarca,precio);
+                    ProveedorxInsumo provxIns = new ProveedorxInsumo(idProveedor,idInsumo,idUnidad,stock,idMarca,precio);
                     listaInsumos.add(provxIns);
                 }
             }
