@@ -153,23 +153,6 @@ public class AnadirInsumo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
     
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
-        System.out.println("Botón apretado o:");
-        ProveedorxInsumoBL logNegProvxIns=new ProveedorxInsumoBL();
-        System.out.println("bl creado");
-        try{
-            System.out.println("dentro del try");
-            listaInsumos = logNegProvxIns.devolverListaInsumo(txtNombreInsumo.toString());
-            System.out.println("a punto de salir del try");
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-        if(listaInsumos!=null)
-            actualizarDatosTabla();
-    }//GEN-LAST:event_btnBuscarMouseClicked
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
         System.out.println("Botón apretado o: "+txtNombreInsumo.getText());
         ProveedorxInsumoBL logNegProvxIns=new ProveedorxInsumoBL();
         System.out.println("bl creado");
@@ -183,6 +166,10 @@ public class AnadirInsumo extends javax.swing.JFrame {
         }
         if(listaInsumos!=null)
             actualizarDatosTabla();
+    }//GEN-LAST:event_btnBuscarMouseClicked
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
     public void actualizarDatosTabla(){
         DefaultTableModel modelo = (DefaultTableModel)tablaInsumos.getModel();
