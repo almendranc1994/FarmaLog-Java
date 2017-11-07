@@ -6,10 +6,14 @@
 package Vista.CarritoCompras;
 
 import Modelo.Carrito;
+import Modelo.DetalleCompra;
+import Modelo.Insumo;
+import Modelo.Proveedor;
 import java.util.ArrayList;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -25,6 +29,72 @@ public class SolicitudesCompra extends javax.swing.JFrame {
      */
     public SolicitudesCompra() {
         initComponents();
+        cleanDatos();
+        addListeners();
+        
+        // TODO
+        simulaDatos();
+    }
+    
+    private void cleanDatos() {
+        carritos.clear();
+        ((DefaultMutableTreeNode)treeCarritos.getModel().getRoot()).removeAllChildren();
+        unselectCarrito();
+    }
+    
+    public void simulaDatos() {
+        Proveedor prov1 = new Proveedor("El proveedor!", true);
+        Proveedor prov2 = new Proveedor("Proveyente", true);
+        Proveedor prov3 = new Proveedor("Provss", true);
+        Proveedor prov4 = new Proveedor("Wong", true);
+        
+        DetalleCompra detalles[] = new DetalleCompra[100];
+        for(int i=0;i<100;i++) {
+            Proveedor prov;
+            if(i<25) prov = prov1;
+            else if(i<50) prov = prov2;
+            else if(i<75) prov = prov3;
+            else prov = prov4;
+            
+            detalles[i] = new DetalleCompra(new Insumo(-1, "Insumo " + (i+1), "nnn"), prov);
+        }
+        
+        Carrito carrito[] = new Carrito[4];
+        
+        try {
+        
+            carrito[0] = new Carrito(prov1);
+            for(int i=0;i<25;i++) carrito[0].addDetalle(detalles[i]);
+
+            carrito[1] = new Carrito(prov2);
+            for(int i=25;i<50;i++) carrito[1].addDetalle(detalles[i]);
+            
+            carrito[2] = new Carrito(prov3);
+            for(int i=50;i<75;i++) carrito[2].addDetalle(detalles[i]);
+            
+            carrito[3] = new Carrito(prov4);
+            for(int i=75;i<100;i++) carrito[3].addDetalle(detalles[i]);
+        
+        } catch(Exception ex) {
+            // Do nothing, I'm perfect :p
+        }
+        
+        for(int i=0;i<4;i++) addCarrito(carrito[i]);
+    }
+    
+    public void addCarrito(Carrito carritoNuevo) {
+        carritos.add(carritoNuevo);
+        
+        DefaultTreeModel model = (DefaultTreeModel)treeCarritos.getModel();
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode)model.getRoot();
+        
+        DefaultMutableTreeNode nodeCarrito = new DefaultMutableTreeNode(carritoNuevo);
+        carritoNuevo.addTreeStructure(nodeCarrito);
+        
+        root.add(nodeCarrito);
+        model.reload(root);
+        
+        treeCarritos.updateUI();
     }
     
     private void selectCarrito(Carrito carrito) {
@@ -41,7 +111,7 @@ public class SolicitudesCompra extends javax.swing.JFrame {
         bEliminarCarrito.setEnabled(false);
     }
     
-    public void addListeners() {
+    private void addListeners() {
         treeCarritos.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
@@ -135,10 +205,10 @@ public class SolicitudesCompra extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bVerCarrito)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bGenerarCompra)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bEliminarCarrito))
