@@ -13,4 +13,9 @@ public class Carrito {
     
     private Proveedor proveedor;
     
+    @Override
+    public String toString() {
+        return proveedor.getNombreEmpresa();
+    }
+    
 }

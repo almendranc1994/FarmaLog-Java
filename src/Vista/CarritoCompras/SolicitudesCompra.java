@@ -5,19 +5,68 @@
  */
 package Vista.CarritoCompras;
 
+import Modelo.Carrito;
+import java.util.ArrayList;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+
 /**
  *
  * @author alulab14
  */
 public class SolicitudesCompra extends javax.swing.JFrame {
 
+    private ArrayList<Carrito> carritos = new ArrayList<>();
+    private Carrito selectedCarrito = null;
+    
     /**
      * Creates new form FiltrarInsumo
      */
     public SolicitudesCompra() {
         initComponents();
     }
+    
+    private void selectCarrito(Carrito carrito) {
+        selectedCarrito = carrito;
+        bVerCarrito.setEnabled(true);
+        bGenerarCompra.setEnabled(true);
+        bEliminarCarrito.setEnabled(true);
+    }
+    
+    private void unselectCarrito() {
+        selectedCarrito = null;
+        bVerCarrito.setEnabled(false);
+        bGenerarCompra.setEnabled(false);
+        bEliminarCarrito.setEnabled(false);
+    }
+    
+    public void addListeners() {
+        treeCarritos.addTreeSelectionListener(new TreeSelectionListener() {
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+                DefaultMutableTreeNode node = (DefaultMutableTreeNode)
+                           treeCarritos.getLastSelectedPathComponent();
 
+                /* if nothing is selected */ 
+                if (node == null || node.getParent()==null) {
+                    unselectCarrito();
+                    return;
+                }
+                
+                /* React to the node selection. */
+                while(node.getParent()!=treeCarritos.getModel().getRoot()) {
+                    node = (DefaultMutableTreeNode) node.getParent();
+                }
+                
+                /* retrieve the node that was selected */ 
+                Carrito carritoSeleccionado = (Carrito) node.getUserObject();
+                
+                selectCarrito(carritoSeleccionado);
+            }
+        });
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,14 +78,15 @@ public class SolicitudesCompra extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        treeCarritos = new javax.swing.JTree();
+        bVerCarrito = new javax.swing.JButton();
+        bGenerarCompra = new javax.swing.JButton();
+        bEliminarCarrito = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        dgSolicitudes = new javax.swing.JTable();
+        bSeleccionar = new javax.swing.JButton();
+        bCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Solicitudes de compra");
@@ -60,37 +110,43 @@ public class SolicitudesCompra extends javax.swing.JFrame {
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Insumo E");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jTree1.setRootVisible(false);
-        jScrollPane2.setViewportView(jTree1);
+        treeCarritos.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        treeCarritos.setRootVisible(false);
+        jScrollPane2.setViewportView(treeCarritos);
 
-        jButton3.setText("Ver carrito");
-        jButton3.setEnabled(false);
+        bVerCarrito.setText("Ver carrito");
+        bVerCarrito.setEnabled(false);
 
-        jButton4.setText("Generar compra");
-        jButton4.setEnabled(false);
+        bGenerarCompra.setText("Generar compra");
+        bGenerarCompra.setEnabled(false);
+
+        bEliminarCarrito.setText("Eliminar carrito");
+        bEliminarCarrito.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
-            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bGenerarCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bVerCarrito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bEliminarCarrito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(bVerCarrito)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bGenerarCompra)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4))
+                .addComponent(bEliminarCarrito))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Solicitudes"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        dgSolicitudes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"A", "5,500 m2", "5/09/17", "11/11/17", "Alta",  new Integer(3)},
                 {"B", "2,300 ml", "6/09/17", "10/10/17", "Media",  new Integer(2)},
@@ -116,12 +172,12 @@ public class SolicitudesCompra extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(dgSolicitudes);
 
-        jButton1.setText("Seleccionar");
-        jButton1.setEnabled(false);
+        bSeleccionar.setText("Seleccionar");
+        bSeleccionar.setEnabled(false);
 
-        jButton2.setText("Cancelar");
+        bCancelar.setText("Cancelar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -132,9 +188,9 @@ public class SolicitudesCompra extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(bCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1))
+                .addComponent(bSeleccionar))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,8 +198,8 @@ public class SolicitudesCompra extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)))
+                    .addComponent(bCancelar)
+                    .addComponent(bSeleccionar)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -207,15 +263,16 @@ public class SolicitudesCompra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton bCancelar;
+    private javax.swing.JButton bEliminarCarrito;
+    private javax.swing.JButton bGenerarCompra;
+    private javax.swing.JButton bSeleccionar;
+    private javax.swing.JButton bVerCarrito;
+    private javax.swing.JTable dgSolicitudes;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTree jTree1;
+    private javax.swing.JTree treeCarritos;
     // End of variables declaration//GEN-END:variables
 }

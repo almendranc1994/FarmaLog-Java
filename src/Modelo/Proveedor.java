@@ -3,7 +3,9 @@ package Modelo;
 public class Proveedor {
     
     private int codigo;
-    private String nombre;
+    private String nombreEmpresa;
+    private String nombres;
+    private String apellidos;
     private String direccion;
     private String Correo;
     private String telefono;
@@ -12,14 +14,39 @@ public class Proveedor {
     public Proveedor(){
         
     }
-    public Proveedor(int idProv,String nombre,String direccion,String correo, String telefono,Boolean esNac){
-        codigo=idProv;
-        this.nombre=nombre;
-        this.direccion=direccion;
-        Correo=correo;
-        this.telefono=telefono;
+    public Proveedor(String nombreEmpresa, Boolean esNac){
+        //codigo = idProv;
+        this.nombreEmpresa = nombreEmpresa;
+        codigo = -1;
         esNacional=esNac;
-    }    
+        
+        this.nombres = null;
+        this.apellidos = null;
+        Correo=null;
+    }
+    
+    public Proveedor(int idProveedor, String nombreEmpresa, Boolean esNac){
+        codigo = idProveedor;
+        this.nombreEmpresa = nombreEmpresa;
+        esNacional=esNac;
+        
+        Correo = null;
+        nombres = null;
+        apellidos = null;
+    }
+    
+    public void setNombreEmpresa(String nombreEmpresa) {
+        this.nombreEmpresa = nombreEmpresa;
+    }
+    
+    public String getNombreEmpresa() {
+        return nombreEmpresa;
+    }
+    
+    public void setIdProveedor(int idProveedor) {
+        codigo = idProveedor;
+    }
+    
     public int getCodigo() {
         return codigo;
     }
@@ -28,14 +55,22 @@ public class Proveedor {
         this.codigo = codigo;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombres() {
+        return nombres;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombres(String nombre) {
+        this.nombres = nombre;
     }
 
+    public String getApellidos() {
+        return apellidos;
+    }
+    
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+    
     public String getDireccion() {
         return direccion;
     }
