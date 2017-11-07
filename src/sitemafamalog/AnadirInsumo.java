@@ -8,7 +8,6 @@ import Controlador.InsumoBL;
 import Controlador.ProveedorxInsumoBL;
 import Modelo.Insumo;
 import Modelo.ProveedorxInsumo;
-
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 /**
@@ -23,7 +22,6 @@ public class AnadirInsumo extends javax.swing.JFrame {
     public AnadirInsumo() {
         initComponents();
         txtPrecio.setEnabled(false);
-        listaInsumos = new ArrayList<ProveedorxInsumo>();
     }
 
     /**
@@ -58,6 +56,11 @@ public class AnadirInsumo extends javax.swing.JFrame {
         btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBuscarMouseClicked(evt);
+            }
+        });
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -148,20 +151,39 @@ public class AnadirInsumo extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
-
+    
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
-        ProveedorxInsumoBL logNegProvxIns;
-        logNegProvxIns = new ProveedorxInsumoBL();
-        listaInsumos=new ArrayList<ProveedorxInsumo>();
+        System.out.println("Botón apretado o:");
+        ProveedorxInsumoBL logNegProvxIns=new ProveedorxInsumoBL();
+        System.out.println("bl creado");
         try{
+            System.out.println("dentro del try");
             listaInsumos = logNegProvxIns.devolverListaInsumo(txtNombreInsumo.toString());
+            System.out.println("a punto de salir del try");
         }
         catch(Exception e){
-            
+            System.out.println(e.getMessage());
         }
         if(listaInsumos!=null)
             actualizarDatosTabla();
     }//GEN-LAST:event_btnBuscarMouseClicked
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        System.out.println("Botón apretado o:, a buscar "+txtNombreInsumo.getText());
+        ProveedorxInsumoBL logNegProvxIns=new ProveedorxInsumoBL();
+        System.out.println("bl creado");
+        try{
+            System.out.println("dentro del try");
+            listaInsumos = logNegProvxIns.devolverListaInsumo(txtNombreInsumo.getText());
+            System.out.println("a punto de salir del try");
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        if(listaInsumos!=null)
+            actualizarDatosTabla();
+    }//GEN-LAST:event_btnBuscarActionPerformed
     public void actualizarDatosTabla(){
         DefaultTableModel modelo = (DefaultTableModel)tablaInsumos.getModel();
         Object[] fila = new Object[4];

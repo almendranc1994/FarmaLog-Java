@@ -22,12 +22,14 @@ public class ProveedorxInsumo {
         marca=new Marca();
     }
     public ProveedorxInsumo(int idProveedor,int idInsumo,int idUnidad,int stock,int idMarca,double precio){
-        /*proveedor=(new ProveedoresBL()).BuscarProveedor(idProveedor);
+        proveedor=(new ProveedoresBL()).BuscarProveedor(idProveedor);
         insumo=(new InsumoBL()).BuscarInsumo(idInsumo);
-        UniMed=(new UnidadMedidaBL()).BuscarUnidadMedida(idUnidad);
+        uniMed=new UnidadMedida();
+                //(new UnidadMedidaBL()).BuscarUnidadMedida(idUnidad);
         this.stock=stock;
-        marca=(new MarcaBL()).BuscarMarca(idMarca);
-        this.precio=precio;*/
+        marca=new Marca();
+                //(new MarcaBL()).BuscarMarca(idMarca);
+        this.precio=precio;
     }
     /**
      * @return the insumo

@@ -21,6 +21,8 @@ public class ProveedorxInsumoBL {
     }
     
     public ArrayList<ProveedorxInsumo> devolverListaInsumo(String nombre){
+        System.out.println("BL");
+        System.out.println("Busquemos... "+nombre);
         return accesoDatos.devolverListaInsumo(nombre);
     }
 }
