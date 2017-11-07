@@ -18,7 +18,8 @@ import com.mysql.jdbc.Connection;
  */
 public class ProveedorxInsumoDA {
     public ArrayList<ProveedorxInsumo> devolverListaInsumo(String nombreInsumo){
-        ArrayList<ProveedorxInsumo> listaInsumos = new ArrayList<ProveedorxInsumo>();
+        System.out.println("entrando a devolver");
+        /*ArrayList<ProveedorxInsumo> listaInsumos = new ArrayList<ProveedorxInsumo>();
         try{    
             Statement sentencia=Conexion.getConexion().createStatement();
             ResultSet rs = sentencia.executeQuery("SELECT * FROM Insumo");
@@ -48,6 +49,7 @@ public class ProveedorxInsumoDA {
             e.printStackTrace();
         }
         return listaInsumos;
-        
+        */
+        return null;
     } 
 }

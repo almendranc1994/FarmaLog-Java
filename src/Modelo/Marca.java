@@ -12,6 +12,9 @@ package Modelo;
 public class Marca {
     private int idMarca;
     private String nombre;
+    public Marca(){
+        
+    }
     public Marca(int idMarca, String nombre){
         this.idMarca=idMarca;
         this.nombre=nombre;

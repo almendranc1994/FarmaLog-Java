@@ -153,8 +153,14 @@ public class AnadirInsumo extends javax.swing.JFrame {
         ProveedorxInsumoBL logNegProvxIns;
         logNegProvxIns = new ProveedorxInsumoBL();
         listaInsumos=new ArrayList<ProveedorxInsumo>();
-        listaInsumos = logNegProvxIns.devolverListaInsumo(txtNombreInsumo.toString());
-        actualizarDatosTabla();
+        try{
+            listaInsumos = logNegProvxIns.devolverListaInsumo(txtNombreInsumo.toString());
+        }
+        catch(Exception e){
+            
+        }
+        if(listaInsumos!=null)
+            actualizarDatosTabla();
     }//GEN-LAST:event_btnBuscarMouseClicked
     public void actualizarDatosTabla(){
         DefaultTableModel modelo = (DefaultTableModel)tablaInsumos.getModel();

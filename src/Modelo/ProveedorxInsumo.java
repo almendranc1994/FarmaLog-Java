@@ -17,7 +17,9 @@ public class ProveedorxInsumo {
     private Marca marca;
     private double precio;
     public ProveedorxInsumo(){
-        
+        proveedor=new Proveedor();
+        uniMed=new UnidadMedida();
+        marca=new Marca();
     }
     public ProveedorxInsumo(int idProveedor,int idInsumo,int idUnidad,int stock,int idMarca,double precio){
         /*proveedor=(new ProveedoresBL()).BuscarProveedor(idProveedor);
