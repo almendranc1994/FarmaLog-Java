@@ -37,29 +37,47 @@ public class ProveedorxInsumoDA {
                 System.out.println("id: "+idInsumo);
                 nombre= rs.getString("nombre");
                 System.out.println("nombre: "+nombre);
-                System.out.println(nombre+" "+nombreInsumo+" ?");
+                System.out.println(nombre+"=="+nombreInsumo+" ?");
                 
                 if(nombre.equals(nombreInsumo)){
                     System.out.println("Sí son iguales :yesss:");
                     break;
                 }
             }
-            if(!nombre.equals(nombreInsumo)) return null;
+            System.out.println("así que sale del while");
+            
+            if(!nombre.equals(nombreInsumo)){
+                System.out.println("devuelve null");
+                return null;
+            }
+            else{
+                System.out.println("continuemos c:<");
+            }
             System.out.println("id del insumo: "+idInsumo);
-            rs = sentencia.executeQuery("SELECT * FROM ProveedorxInsumo");
-            while(rs.next()){
-                int idProveedor= Integer.parseInt(rs.getString("idProveedor"));
-                int idInsumo2 = Integer.parseInt(rs.getString("idInsumo"));
-                int idUnidad = Integer.parseInt(rs.getString("idUnidadMedida"));
-                int stock = Integer.parseInt(rs.getString("stock"));
-                int idMarca = Integer.parseInt(rs.getString("idMarca"));
-                Double precio = Double.parseDouble(rs.getString("precio"));
+            System.out.println("holi0");
+            Statement sentencia2=con.createStatement();
+            ResultSet rs2 = sentencia2.executeQuery("SELECT * FROM ProveedorxInsumo");
+            System.out.println("holi0");
+                
+            while(rs2.next()){
+                System.out.println("holi");
+                int idProveedor= Integer.parseInt(rs2.getString("idProveedor"));
+                int idInsumo2 = Integer.parseInt(rs2.getString("idInsumo"));
+                int idUnidad = Integer.parseInt(rs2.getString("idUnidadMedida"));
+                int stock = Integer.parseInt(rs2.getString("stock"));
+                int idMarca = Integer.parseInt(rs2.getString("idMarca"));
+                Double precio = Double.parseDouble(rs2.getString("precio"));
+                System.out.println("id del insumo del la tabla INSUMOXPROVEEDOR: "+idInsumo2);
+                System.out.println(idInsumo+"=="+idInsumo2+" ?");
                 if(idInsumo2==idInsumo){
+                    System.out.println("Sí son iguales :yesss: x2");
                     ProveedorxInsumo provxIns = new ProveedorxInsumo(idProveedor,idInsumo,idUnidad,stock,idMarca,precio);
+                    System.out.println("creamos un provxIns");
                     listaInsumos.add(provxIns);
+                    System.out.println("agregado a la lista");
                 }
             }
-            
+            con.close();
         }
         catch (Exception e){
             // do something appropriate with the exception, *at least*:
