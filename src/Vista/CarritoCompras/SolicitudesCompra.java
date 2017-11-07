@@ -9,12 +9,12 @@ package Vista.CarritoCompras;
  *
  * @author alulab14
  */
-public class FiltrarInsumo extends javax.swing.JFrame {
+public class SolicitudesCompra extends javax.swing.JFrame {
 
     /**
      * Creates new form FiltrarInsumo
      */
-    public FiltrarInsumo() {
+    public SolicitudesCompra() {
         initComponents();
     }
 
@@ -39,6 +39,7 @@ public class FiltrarInsumo extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Solicitudes de compra");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Carritos de compras"));
 
@@ -186,20 +187,21 @@ public class FiltrarInsumo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FiltrarInsumo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SolicitudesCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FiltrarInsumo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SolicitudesCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FiltrarInsumo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SolicitudesCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FiltrarInsumo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SolicitudesCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FiltrarInsumo().setVisible(true);
+                new SolicitudesCompra().setVisible(true);
             }
         });
     }
