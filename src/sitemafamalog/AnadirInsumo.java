@@ -170,7 +170,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        System.out.println("Botón apretado o:, a buscar "+txtNombreInsumo.getText());
+        System.out.println("Botón apretado o: "+txtNombreInsumo.getText());
         ProveedorxInsumoBL logNegProvxIns=new ProveedorxInsumoBL();
         System.out.println("bl creado");
         try{
