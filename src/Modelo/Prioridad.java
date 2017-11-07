@@ -9,8 +9,9 @@ package Modelo;
  *
  * @author franco
  */
-public class Carrito {
+public class Prioridad {
     
-    private Proveedor proveedor;
+    private String nombre;
+    private String descripcion;
     
 }

@@ -5,12 +5,19 @@
  */
 package Modelo;
 
+import java.util.Date;
+
 /**
  *
  * @author franco
  */
-public class Carrito {
+public class SolicitudSuministro {
     
-    private Proveedor proveedor;
+    private Date fechaPeticion;
+    private Date fechaLimite;
+    private String institucion;
+    private Prioridad prioridad;
+    // TODO
+    //private Empleado empleado;
     
 }

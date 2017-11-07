@@ -5,16 +5,20 @@
  */
 package Modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author franco
  */
 public class DetalleCompra {
     
-    private double volumen;
     private Insumo insumo;
     private Proveedor proveedor;
+    private double volumen;
     private double precioUnitario;
     private UnidadMedida um;
+    private ArrayList<SolicitudSuministro> solicitudesRelacionadas;
+    
     
 }
