@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Andre
  */
 public class ListaSolicitudesSuministro extends javax.swing.JFrame {
-    private SolicitudSuministroBL gestorSolicudSuministro;
+    private SolicitudSuministroBL gestorSolicudSuministro = new SolicitudSuministroBL();
     private ArrayList<SolicitudSuministro> listaSolSuministro;
     /**
      * Creates new form ListaSolicitudesSuministro

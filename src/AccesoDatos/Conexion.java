@@ -53,12 +53,30 @@ public class Conexion {
                         }
                     }
                     
-                    try (Connection c = (Connection) DriverManager.getConnection(url, username, password)) {
+                    try {
                         System.out.println("Database connected!");
-                        conn = c;
+                        conn = (Connection) DriverManager.getConnection(url, username, password);
                     } catch (SQLException e) {
                         if(retries>=MAX_RETRY)
                             throw new IllegalStateException("Cannot connect the database!", e);
+                        else {
+                            retries ++;
+                            return getConexion();
+                        }
+                    }
+                    
+                    try {
+                        if (conn.isClosed()) {
+                            if(retries>=MAX_RETRY)
+                                throw new IllegalStateException("Cannot connect the database!", null);
+                            else {
+                                retries ++;
+                                return getConexion();
+                            }
+                        }
+                    } catch (SQLException ex) {
+                        if(retries>=MAX_RETRY)
+                            throw new IllegalStateException("Cannot connect the database!", ex);
                         else {
                             retries ++;
                             return getConexion();
