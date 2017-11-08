@@ -33,7 +33,7 @@ public class Conexion {
     public static Connection getConexion() {
 
         try {
-            if(conn.isClosed()) conn = null;
+            if(conn!=null && conn.isClosed()) conn = null;
         } catch (SQLException ex) {
             conn = null;
         }
@@ -53,9 +53,12 @@ public class Conexion {
                         }
                     }
                     
-                    try (Connection c = (Connection) DriverManager.getConnection(url, username, password)) {
+                    try {
                         System.out.println("Database connected!");
-                        conn = c;
+                        conn = (Connection) DriverManager.getConnection(url, username, password);
+                        if (conn.isClosed()) {
+                            throw new SQLException("Connection closed");
+                        }
                     } catch (SQLException e) {
                         if(retries>=MAX_RETRY)
                             throw new IllegalStateException("Cannot connect the database!", e);
