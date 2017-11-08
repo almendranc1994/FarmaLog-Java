@@ -5,6 +5,7 @@
  */
 package AccesoDatos;
 import Modelo.SolicitudSuministro;
+import AccesoDatos.PrioridadDA;
 import Modelo.Prioridad;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +19,8 @@ import java.util.Date;
  * @author HP
  */
 public class SolicitudSuministroDA {
+    private PrioridadDA accesoPrioridades;
+    
     public ArrayList<SolicitudSuministro> obtenerListaSolicitudesSuministro(){
         ArrayList<SolicitudSuministro> lista = new ArrayList<SolicitudSuministro>();
         try{
@@ -25,22 +28,26 @@ public class SolicitudSuministroDA {
             ResultSet rs = sentencia.executeQuery("SELECT * FROM SolicitudSumnistros");
             while(rs.next()){
                 SolicitudSuministro s = new SolicitudSuministro();
-                s.setCodigoSolicitudSuministro(Integer.parseInt((rs.getString("idSolicitudSuministro"))));
+                s.setCodigoSolicitudSuministro(Integer.parseInt(rs.getString("idSolicitudSumnistro")));                
                 try{
-                  DateFormat formatterFeticion = new SimpleDateFormat("MM/dd/yyyy");
-                  Date datePeticion = (Date)formatterFeticion.parse(rs.getString("fechaPeticion"));
-                  s.setFechaPeticion(datePeticion);
+                    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+                    String dateString1 = rs.getString("fechaPeticion");
+                    Date date1 = sdf1.parse(dateString1);
+                    s.setFechaPeticion(date1);
                 }catch (Exception e){}
                 try{
-                  DateFormat formatterLimite = new SimpleDateFormat("MM/dd/yyyy");
-                  Date dateLimite = (Date)formatterLimite.parse(rs.getString("fechaPeticion"));
-                  s.setFechaLimite(dateLimite);
+                    SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+                    String dateString2 = rs.getString("fechaLimite");
+                    Date date2 = sdf2.parse(dateString2);
+                    s.setFechaLimite(date2);
                 }catch (Exception e){}
                 s.setInstitucion(rs.getString("institucion"));
                 Prioridad p = new Prioridad();
-                    
+                p.setIdPrioridad(Integer.parseInt(rs.getString("Prioridad_idPrioridad")));
+                s.setPrioridad(p);
                 lista.add(s);
             }
+            Conexion.closeConexion();
         }catch(SQLException e){
             e.printStackTrace();
             return null;

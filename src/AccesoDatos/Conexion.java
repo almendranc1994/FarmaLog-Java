@@ -73,4 +73,12 @@ public class Conexion {
         return conn;
     }
     
+    public static void closeConexion(){
+        try {
+            if(conn!=null && conn.isClosed()) conn = null;
+        } catch (SQLException ex) {
+            conn = null;
+        }
+    }
+    
 }
