@@ -4,20 +4,40 @@
  * and open the template in the editor.
  */
 package sitemafamalog;
-
+import Controlador.SolicitudSuministroBL;
+import Modelo.SolicitudSuministro;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Andre
  */
 public class ListaSolicitudesSuministro extends javax.swing.JFrame {
-
+    private SolicitudSuministroBL gestorSolicudSuministro;
+    private ArrayList<SolicitudSuministro> listaSolSuministro;
     /**
      * Creates new form ListaSolicitudesSuministro
      */
     public ListaSolicitudesSuministro() {
         initComponents();
+        listaSolSuministro = gestorSolicudSuministro.obtenerListaSolicitudSuministro();
+        actualizarTabla();
     }
-
+    
+    public void actualizarTabla(){
+        DefaultTableModel modelo = (DefaultTableModel)tableLstSolicitudesSuministro.getModel();
+        Object [] fila = new Object [6];
+        for(int i=0; i<listaSolSuministro.size(); i++){
+            fila[0] = listaSolSuministro.get(i).getCodigoSolicitudSuministro();
+            fila[1] = listaSolSuministro.get(i).getFechaPeticion();
+            fila[2] = listaSolSuministro.get(i).getFechaLimite();
+            fila[3] = listaSolSuministro.get(i).getPrioridad();
+            fila[4] = listaSolSuministro.get(i).getInstitucion();
+            fila[5] = false;
+            modelo.addRow(fila);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,10 +47,12 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableLstSolicitudesSuministro = new javax.swing.JTable();
         btnVerSolicitud = new javax.swing.JButton();
+        btnEliminarSolicitud = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Lista Solicitudes Suministro");
@@ -40,7 +62,7 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo Solicitud", "Fecha Peticion", "Fecha limite", "Prioridad", "Institucion"
+                "Codigo Solicitud", "Fecha Peticion", "Fecha limite", "Prioridad", "Institucion", ""
             }
         ));
         tableLstSolicitudesSuministro.setName("tableLstSolicitudesSuministro"); // NOI18N
@@ -54,18 +76,21 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
             }
         });
 
+        btnEliminarSolicitud.setText("Eliminar Solicitud");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVerSolicitud)
-                .addGap(32, 32, 32))
+                .addGap(18, 18, 18)
+                .addComponent(btnEliminarSolicitud)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,7 +98,9 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnVerSolicitud)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVerSolicitud)
+                    .addComponent(btnEliminarSolicitud))
                 .addGap(7, 7, 7))
         );
 
@@ -83,7 +110,7 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -137,7 +164,9 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEliminarSolicitud;
     private javax.swing.JButton btnVerSolicitud;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableLstSolicitudesSuministro;
