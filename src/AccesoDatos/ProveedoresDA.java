@@ -10,6 +10,18 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class ProveedoresDA {
+    public void registrarProveedor(Proveedor p){
+        try{
+            Statement sentencia = Conexion.getConexion().createStatement();
+            String instruccion = "INSERT INTO Proveedor (idProveedor,nombreEmpresa,nombres,apellidos,direccion,correo,telefono)" + 
+                    " values("+p.getCodigo() + ",'" + "PUCP" + p.getNombres() + p.getApellidos() + p.getDireccion() + p.getCorreo() + p.getTelefono()+"')";
+            sentencia.executeUpdate(instruccion);
+            
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
     public Proveedor BuscarProveedor(int idProveedor){
        System.out.println("Entrado a buscarpROVEEDOR");
        int idProv = -1;

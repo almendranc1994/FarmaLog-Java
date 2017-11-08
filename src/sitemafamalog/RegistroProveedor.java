@@ -5,17 +5,25 @@
  */
 package sitemafamalog;
 
+import Modelo.Proveedor;
+import Controlador.ProveedoresBL;
 /**
  *
  * @author Andre
  */
 public class RegistroProveedor extends javax.swing.JFrame {
-
+    
+    private Proveedor prov;
+    private ProveedoresBL logicaNegocio;
     /**
      * Creates new form RegistroProveedor
      */
     public RegistroProveedor() {
         initComponents();
+        
+        prov = new Proveedor();
+        logicaNegocio = new ProveedoresBL();
+        
         txtNombre.setEnabled(false);
         txtApellido.setEnabled(false);
         txtCorreo.setEnabled(false);
@@ -334,6 +342,12 @@ public class RegistroProveedor extends javax.swing.JFrame {
 
     private void btnGuardarMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_btnGuardarMenuSelected
         // TODO add your handling code here:
+        prov.setNombres(txtNombre.getText());
+        prov.setApellidos(txtApellido.getText());
+        prov.setCorreo(txtCorreo.getText());
+        prov.setDireccion(txtDireccion.getText());
+        prov.setTelefono(txtTelefono.getText());
+        logicaNegocio.registrarProveedor(prov);
     }//GEN-LAST:event_btnGuardarMenuSelected
 
     /**
