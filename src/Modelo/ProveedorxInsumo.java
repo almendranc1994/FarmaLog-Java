@@ -22,13 +22,19 @@ public class ProveedorxInsumo {
         marca=new Marca();
     }
     public ProveedorxInsumo(int idProveedor,int idInsumo,int idUnidad,int stock,int idMarca,double precio){
+        System.out.println("ProveedorxInsumo con muchos parámetros");
         proveedor=(new ProveedoresBL()).BuscarProveedor(idProveedor);
+        System.out.println("proveedor encontrado");
         insumo=(new InsumoBL()).BuscarInsumo(idInsumo);
-        uniMed=new UnidadMedida();
+        System.out.println("insumo encontrado");
+        uniMed=new UnidadMedida("mililitros","ml");
                 //(new UnidadMedidaBL()).BuscarUnidadMedida(idUnidad);
+        System.out.println("unimed encontrado");
         this.stock=stock;
-        marca=new Marca();
+        System.out.println("stock asignado");
+        marca=new Marca(1,"Altex");
                 //(new MarcaBL()).BuscarMarca(idMarca);
+        System.out.println("marca asignada");
         this.precio=precio;
     }
     /**

@@ -34,4 +34,8 @@ public class UnidadMedida {
     public UnidadMedida(){
         
     }
+    public UnidadMedida(String unidad,String abrev){
+        this.unidad=unidad;
+        this.abrev=abrev;
+    }
 }

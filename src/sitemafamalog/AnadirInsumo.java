@@ -82,10 +82,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
 
         tablaInsumos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Código", "Nombre", "Descripción", "Marca"
@@ -159,7 +156,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
         try{
             System.out.println("dentro del try");
             listaInsumos = logNegProvxIns.devolverListaInsumo(txtNombreInsumo.getText());
-            System.out.println("a punto de salir del try");
+            System.out.println("a punto de salir del try, tamaño de lista Insumos= "+listaInsumos.size());
         }
         catch(Exception e){
             System.out.println(e.getMessage());

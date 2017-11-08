@@ -67,7 +67,7 @@ public class ProveedorxInsumoDA {
                 int stock = Integer.parseInt(rs2.getString("stock"));
                 int idMarca = Integer.parseInt(rs2.getString("idMarca"));
                 Double precio = Double.parseDouble(rs2.getString("precio"));
-                System.out.println("id del insumo del la tabla INSUMOXPROVEEDOR: "+idInsumo2);
+                System.out.println("id del insumo del la tabla INSUMOXPROVEEDOR: "+idProveedor+" "+idInsumo2+" "+idUnidad+" "+stock+" "+idMarca+" "+precio);
                 System.out.println(idInsumo+"=="+idInsumo2+" ?");
                 if(idInsumo2==idInsumo){
                     System.out.println("Sí son iguales :yesss: x2");

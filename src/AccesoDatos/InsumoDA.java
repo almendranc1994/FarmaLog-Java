@@ -6,7 +6,14 @@
 package AccesoDatos;
 import java.util.ArrayList;
 import Modelo.Insumo;
-import java.sql.*;
+import com.mysql.jdbc.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.mysql.jdbc.Connection;
 /**
@@ -21,7 +28,9 @@ public class InsumoDA {
        String descripcion="";
        
         try{    
-            Statement sentencia=Conexion.getConexion().createStatement();
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g1","inf282g1","BRXRKa3O5JUiqJWn");
+            Statement sentencia=con.createStatement();
             ResultSet rs = sentencia.executeQuery("SELECT * FROM Insumo");
             idIns=0;
             while(rs.next()){
@@ -31,7 +40,7 @@ public class InsumoDA {
                 if(idInsumo == idIns) break;
             }
         }
-        catch (SQLException e){
+        catch (Exception e){
             // do something appropriate with the exception, *at least*:
             e.printStackTrace();
         }

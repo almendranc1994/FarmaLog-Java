@@ -1,11 +1,17 @@
 
 package AccesoDatos;
 import Modelo.Proveedor;
-import java.sql.*;
+import com.mysql.jdbc.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 public class ProveedoresDA {
     public Proveedor BuscarProveedor(int idProveedor){
-        
+       System.out.println("Entrado a buscarpROVEEDOR");
        int idProv = -1;
        String nombreEmpresa = null;
        String nombres = null;
@@ -16,28 +22,30 @@ public class ProveedoresDA {
        Boolean esNacional = false;
        
        try{    
-            Statement sentencia=Conexion.getConexion().createStatement();
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g1","inf282g1","BRXRKa3O5JUiqJWn");
+            Statement sentencia=con.createStatement();
             ResultSet rs = sentencia.executeQuery("SELECT * FROM Proveedor WHERE idProveedor="+idProveedor);
             while(rs.next()){
+                System.out.println("guuuuu");
                 idProv= Integer.parseInt(rs.getString("idProveedor"));
                 nombreEmpresa = rs.getString("nombreEmpresa");
                 nombres = rs.getString("nombres");
                 apellidos = rs.getString("apellidos");
-                direccion=rs.getString("descripcion");
                 correo=rs.getString("correo");
                 telefono=rs.getString("telefono");
-                esNacional=rs.getBoolean("esNacional");
                 
                 if(idProv==idProveedor) break;
             }
             
-        } catch (SQLException e){
-            e.printStackTrace();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
             // Retornar null si no se pudo acceder a la db
             return null;
         }
         
         if(idProv == idProveedor) {
+            
             Proveedor proveedor = new Proveedor(idProv,nombreEmpresa,esNacional);
             proveedor.setNombres(nombres);
             proveedor.setApellidos(apellidos);
