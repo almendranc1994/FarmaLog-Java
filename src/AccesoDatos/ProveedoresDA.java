@@ -4,6 +4,18 @@ import Modelo.Proveedor;
 import java.sql.*;
 
 public class ProveedoresDA {
+    public void registrarProveedor(Proveedor p){
+        try{
+            Statement sentencia = Conexion.getConexion().createStatement();
+            String instruccion = "INSERT INTO Proveedor (idProveedor,nombreEmpresa,nombres,apellidos,direccion,correo,telefono)" + 
+                    " values("+p.getCodigo() + ",'" + "PUCP" + p.getNombres() + p.getApellidos() + p.getDireccion() + p.getCorreo() + p.getTelefono()+"')";
+            sentencia.executeUpdate(instruccion);
+            
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
     public Proveedor BuscarProveedor(int idProveedor){
         
        int idProv = -1;
