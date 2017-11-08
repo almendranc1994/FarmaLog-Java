@@ -10,6 +10,7 @@ import Modelo.Insumo;
 import Modelo.ProveedorxInsumo;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import javax.swing.WindowConstants;
 /**
  *
  * @author Karla Isabel Pedraza Salinas 20141056
@@ -43,7 +44,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Añadir Insumos");
         setName("Añadir Insumo"); // NOI18N
 
@@ -145,6 +146,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
         // TODO add your handling code here:
         RegistroNuevoInsumo frmNewInsumo = new RegistroNuevoInsumo();
         frmNewInsumo.setVisible(true);
+        
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed

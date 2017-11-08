@@ -8,6 +8,7 @@ package sitemafamalog;
 import Controlador.InsumoBL;
 import Modelo.Insumo;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -49,7 +50,7 @@ public class RegistroNuevoInsumo extends javax.swing.JFrame {
         btnRegistrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro Nuevo Insumo");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de Insumo"));
