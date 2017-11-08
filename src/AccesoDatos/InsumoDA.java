@@ -7,8 +7,8 @@ package AccesoDatos;
 import java.util.ArrayList;
 import Modelo.Insumo;
 import java.sql.*;
-
-import com.mysql.jdbc.Connection;
+//import com.mysql.jdbc.Connection;
+import javax.swing.JOptionPane;
 /**
  *
  * @author HP
@@ -40,5 +40,26 @@ public class InsumoDA {
         else
             insumo=new Insumo();
         return insumo;
+    }
+    public boolean registrarInsumo (Insumo newInsumo){
+        try{
+            
+//            Class.forName("com.mysql.jdbc.Driver");
+//            String url = "jdbc:mysql://200.16.7.96/inf282g1";
+//            Connection con = DriverManager.getConnection(url,"inf282g1","BRXRKa3O5JUiqJWn");
+//            System.out.println(newInsumo.getCodigoInsumo());
+//            System.out.println(newInsumo.getNombreInsumo());
+//            CallableStatement cStmt = con.prepareCall("{call AÑADIR_NUEVO_INSUMO(?,?,?)}");
+            CallableStatement cStmt = Conexion.getConexion().prepareCall("{call AÑADIR_NUEVO_INSUMO(?,?,?)}");
+            cStmt.setInt(1, newInsumo.getCodigoInsumo());
+            cStmt.setString(2, newInsumo.getNombreInsumo());
+            cStmt.setString(3, newInsumo.getDescripcionInsumo());
+            cStmt.execute();
+            return true;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 }
