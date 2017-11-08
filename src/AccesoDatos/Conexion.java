@@ -56,27 +56,12 @@ public class Conexion {
                     try {
                         System.out.println("Database connected!");
                         conn = (Connection) DriverManager.getConnection(url, username, password);
+                        if (conn.isClosed()) {
+                            throw new SQLException("Connection closed");
+                        }
                     } catch (SQLException e) {
                         if(retries>=MAX_RETRY)
                             throw new IllegalStateException("Cannot connect the database!", e);
-                        else {
-                            retries ++;
-                            return getConexion();
-                        }
-                    }
-                    
-                    try {
-                        if (conn.isClosed()) {
-                            if(retries>=MAX_RETRY)
-                                throw new IllegalStateException("Cannot connect the database!", null);
-                            else {
-                                retries ++;
-                                return getConexion();
-                            }
-                        }
-                    } catch (SQLException ex) {
-                        if(retries>=MAX_RETRY)
-                            throw new IllegalStateException("Cannot connect the database!", ex);
                         else {
                             retries ++;
                             return getConexion();
