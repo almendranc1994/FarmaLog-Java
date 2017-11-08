@@ -33,7 +33,7 @@ public class Conexion {
     public static Connection getConexion() {
 
         try {
-            if(conn.isClosed()) conn = null;
+            if(conn!=null && conn.isClosed()) conn = null;
         } catch (SQLException ex) {
             conn = null;
         }
