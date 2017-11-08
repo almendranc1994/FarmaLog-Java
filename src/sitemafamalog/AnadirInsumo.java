@@ -143,6 +143,8 @@ public class AnadirInsumo extends javax.swing.JFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // TODO add your handling code here:
+        RegistroNuevoInsumo frmNewInsumo = new RegistroNuevoInsumo();
+        frmNewInsumo.setVisible(true);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed

@@ -24,4 +24,7 @@ public class InsumoBL {
     public Insumo BuscarInsumo(int idInsumo){
         return accesoDatos.BuscarInsumo(idInsumo);
     }
+    public boolean registrarInsumo(Insumo newInsumo){
+        return accesoDatos.registrarInsumo(newInsumo);
+    }
 }
