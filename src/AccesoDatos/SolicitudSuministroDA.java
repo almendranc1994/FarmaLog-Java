@@ -5,12 +5,10 @@
  */
 package AccesoDatos;
 import Modelo.SolicitudSuministro;
-import AccesoDatos.PrioridadDA;
 import Modelo.Prioridad;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,7 +17,6 @@ import java.util.Date;
  * @author HP
  */
 public class SolicitudSuministroDA {
-    private PrioridadDA accesoPrioridades;
     
     public ArrayList<SolicitudSuministro> obtenerListaSolicitudesSuministro(){
         ArrayList<SolicitudSuministro> lista = new ArrayList<SolicitudSuministro>();
@@ -55,8 +52,20 @@ public class SolicitudSuministroDA {
         
         return lista;
     }
-    public static void main(String[] args) {
-        SolicitudSuministroDA gestor = new SolicitudSuministroDA();
-        ArrayList<SolicitudSuministro> lista = gestor.obtenerListaSolicitudesSuministro();
+    
+    public void eliminarSolicitudSuministro(int id){
+        try{
+            Statement sentencia = Conexion.getConexion().createStatement();
+            String query = "DELETE FROM SolicitudSumnistros WHERE idSolicitudSumnistro = " + id;
+            int i = sentencia.executeUpdate(query);
+            Conexion.closeConexion();
+        }catch(Exception ex){
+            System.out.println();
+        }
     }
+    
+//    public static void main(String[] args) {
+//        SolicitudSuministroDA gestor = new SolicitudSuministroDA();
+//        ArrayList<SolicitudSuministro> lista = gestor.obtenerListaSolicitudesSuministro();
+//    }
 }

@@ -19,16 +19,17 @@ public class PrioridadDA {
     public String obtenerNombre(int id){
         try{
             Statement sentencia = Conexion.getConexion().createStatement();
-            ResultSet rs = sentencia.executeQuery("SELECT * FROM Prioridad" + "WHERE idPrioridad = '" + id + "'");
-            String nombre = rs.getString("nombre");
-//            
-//            while(rs.next()){
-//                int id_ = Integer.parseInt(rs.getString("idPrioridad"));
-//                if(id_ == id){
-//                    nombre = rs.getString("nombre");
-//                    break;
-//                }                
-//            }
+            String query = "SELECT * FROM Prioridad" + " WHERE " +  "idPrioridad = '" + id + "'";
+            ResultSet rs = sentencia.executeQuery(query);
+            String nombre = null;
+            
+            while(rs.next()){
+                int id_ = Integer.parseInt(rs.getString("idPrioridad"));
+                if(id_ == id){
+                    nombre = rs.getString("nombre");
+                    break;
+                }                
+            }
             Conexion.closeConexion();    
             return nombre;
         }catch(SQLException e){
@@ -37,4 +38,9 @@ public class PrioridadDA {
         }
     }
     
+//    public static void main(String[] args) {
+//        PrioridadDA gestor = new PrioridadDA();
+//        System.out.println(gestor.obtenerNombre(1));
+//        
+//    }
 }

@@ -7,6 +7,7 @@ package sitemafamalog;
 import Controlador.SolicitudSuministroBL;
 import Controlador.PrioridadBL;
 import Modelo.SolicitudSuministro;
+import Modelo.Prioridad;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
      */
     public ListaSolicitudesSuministro() {
         initComponents();
-        listaSolSuministro = gestorSolicudSuministro.obtenerListaSolicitudSuministro();
+        listaSolSuministro = gestorSolicudSuministro.obtenerListaSolicitudSuministro();        
         actualizarTabla();
     }
     
@@ -39,8 +40,8 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
             DateFormat formatter2 = new SimpleDateFormat("dd/MM/yyyy");
             String date2 = formatter2.format(listaSolSuministro.get(i).getFechaLimite());            
             fila[2] = date2;
-            //String nombrePrioridad = gestorPrioridad.obtenerNombre(listaSolSuministro.get(i).getPrioridad().getIdPrioridad());
-            fila[3] = listaSolSuministro.get(i).getPrioridad().getIdPrioridad();
+            String nombrePrioridad = gestorPrioridad.obtenerNombre(listaSolSuministro.get(i).getPrioridad().getIdPrioridad());
+            fila[3] = nombrePrioridad;
             fila[4] = listaSolSuministro.get(i).getInstitucion();
             modelo.addRow(fila);
         }
@@ -150,7 +151,16 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerSolicitudActionPerformed
 
     private void btnEliminarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarSolicitudActionPerformed
-        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) tableLstSolicitudesSuministro.getModel();
+        for (int i=0;i<model.getRowCount();i++) {
+              Boolean checked=(Boolean)model.getValueAt(i,5);
+              if (checked!=null && checked) {
+                   SolicitudSuministro s = listaSolSuministro.get(i);
+                   gestorSolicudSuministro.eliminarSolicitudSuministro(s.getCodigoSolicitudSuministro());
+                   model.removeRow(i);
+                   i--;
+              }
+        }
     }//GEN-LAST:event_btnEliminarSolicitudActionPerformed
 
     /**

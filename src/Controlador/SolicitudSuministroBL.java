@@ -21,4 +21,8 @@ public class SolicitudSuministroBL {
     public ArrayList<SolicitudSuministro> obtenerListaSolicitudSuministro(){
         return accesoDatos.obtenerListaSolicitudesSuministro();
     }
+    
+    public void eliminarSolicitudSuministro(int id){
+        accesoDatos.eliminarSolicitudSuministro(id);
+    }
 }
