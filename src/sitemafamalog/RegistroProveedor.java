@@ -72,7 +72,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
 
         jLabel7.setText("jLabel7");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro de Proveedores");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos proveedor"));
