@@ -68,7 +68,7 @@
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\User\Documents\PUCP\lp2\cloned github project\FarmaLog-Java\FarmaLog-Java\src\sitemafamalog\Farma-Log (1).jpg"/>
+              <Image iconType="3" name="/sitemafamalog/Farma-Log (1).jpg"/>
             </Property>
           </Properties>
         </Component>
@@ -89,21 +89,24 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jLabel1" alignment="1" pref="33" max="32767" attributes="0"/>
+              <Component id="labelCerrar" alignment="1" pref="33" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jLabel1" alignment="1" pref="30" max="32767" attributes="0"/>
+              <Component id="labelCerrar" alignment="1" pref="30" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="labelCerrar">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="X"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelCerrarMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
