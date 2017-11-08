@@ -4,20 +4,48 @@
  * and open the template in the editor.
  */
 package sitemafamalog;
-
+import Controlador.SolicitudSuministroBL;
+import Controlador.PrioridadBL;
+import Modelo.SolicitudSuministro;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Andre
  */
 public class ListaSolicitudesSuministro extends javax.swing.JFrame {
-
+    private SolicitudSuministroBL gestorSolicudSuministro = new SolicitudSuministroBL();
+    private PrioridadBL gestorPrioridad = new PrioridadBL();
+    private ArrayList<SolicitudSuministro> listaSolSuministro;
     /**
      * Creates new form ListaSolicitudesSuministro
      */
     public ListaSolicitudesSuministro() {
         initComponents();
+        listaSolSuministro = gestorSolicudSuministro.obtenerListaSolicitudSuministro();
+        actualizarTabla();
     }
-
+    
+    public void actualizarTabla(){
+        DefaultTableModel modelo = (DefaultTableModel)tableLstSolicitudesSuministro.getModel();
+        Object [] fila = new Object [6];
+        for(int i=0; i<listaSolSuministro.size(); i++){
+            fila[0] = listaSolSuministro.get(i).getCodigoSolicitudSuministro();
+            DateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
+            String date = formatter1.format(listaSolSuministro.get(i).getFechaPeticion());
+            fila[1] = date;
+            DateFormat formatter2 = new SimpleDateFormat("dd/MM/yyyy");
+            String date2 = formatter2.format(listaSolSuministro.get(i).getFechaLimite());            
+            fila[2] = date2;
+            //String nombrePrioridad = gestorPrioridad.obtenerNombre(listaSolSuministro.get(i).getPrioridad().getIdPrioridad());
+            fila[3] = listaSolSuministro.get(i).getPrioridad().getIdPrioridad();
+            fila[4] = listaSolSuministro.get(i).getInstitucion();
+            modelo.addRow(fila);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,9 +55,11 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableLstSolicitudesSuministro = new javax.swing.JTable();
+        btnEliminarSolicitud = new javax.swing.JButton();
         btnVerSolicitud = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,11 +70,42 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo Solicitud", "Fecha Peticion", "Fecha limite", "Prioridad", "Institucion"
+                "Codigo Solicitud", "Fecha Peticion", "Fecha limite", "Prioridad", "Institucion", ""
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         tableLstSolicitudesSuministro.setName("tableLstSolicitudesSuministro"); // NOI18N
         jScrollPane1.setViewportView(tableLstSolicitudesSuministro);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 11, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        btnEliminarSolicitud.setText("Eliminar Solicitud");
+        btnEliminarSolicitud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarSolicitudActionPerformed(evt);
+            }
+        });
 
         btnVerSolicitud.setText("Ver Solicitud");
         btnVerSolicitud.setName("btnVerSolicitud"); // NOI18N
@@ -54,44 +115,31 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVerSolicitud)
-                .addGap(32, 32, 32))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnVerSolicitud)
-                .addGap(7, 7, 7))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVerSolicitud)
+                .addGap(26, 26, 26)
+                .addComponent(btnEliminarSolicitud)
+                .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEliminarSolicitud)
+                    .addComponent(btnVerSolicitud))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pack();
@@ -100,6 +148,10 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
     private void btnVerSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerSolicitudActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVerSolicitudActionPerformed
+
+    private void btnEliminarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarSolicitudActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarSolicitudActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,7 +189,9 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEliminarSolicitud;
     private javax.swing.JButton btnVerSolicitud;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableLstSolicitudesSuministro;
