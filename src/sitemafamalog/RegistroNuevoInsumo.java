@@ -73,6 +73,11 @@ public class RegistroNuevoInsumo extends javax.swing.JFrame {
 
         cbUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbUnidad.setName("cboUnidad"); // NOI18N
+        cbUnidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbUnidadActionPerformed(evt);
+            }
+        });
 
         txtPU.setName("txtPU"); // NOI18N
 
@@ -191,6 +196,10 @@ public class RegistroNuevoInsumo extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void cbUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUnidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbUnidadActionPerformed
 
     /**
      * @param args the command line arguments

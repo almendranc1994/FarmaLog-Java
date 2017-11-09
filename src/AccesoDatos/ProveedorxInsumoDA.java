@@ -25,10 +25,7 @@ public class ProveedorxInsumoDA {
                 
         ArrayList<ProveedorxInsumo> listaInsumos = new ArrayList<ProveedorxInsumo>();
         try{    
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g1","inf282g1","BRXRKa3O5JUiqJWn");
-            Statement sentencia=con.createStatement();
-            
+            Statement sentencia=Conexion.getConexion().createStatement();
             ResultSet rs = sentencia.executeQuery("SELECT * FROM Insumo");
             int idInsumo=0;
             String nombre="";
@@ -55,7 +52,7 @@ public class ProveedorxInsumoDA {
             }
             System.out.println("id del insumo: "+idInsumo);
             System.out.println("holi0");
-            Statement sentencia2=con.createStatement();
+            Statement sentencia2=Conexion.getConexion().createStatement();
             ResultSet rs2 = sentencia2.executeQuery("SELECT * FROM ProveedorxInsumo");
             System.out.println("holi0");
                 
@@ -77,7 +74,7 @@ public class ProveedorxInsumoDA {
                     System.out.println("agregado a la lista");
                 }
             }
-            con.close();
+            Conexion.closeConexion();
         }
         catch (Exception e){
             // do something appropriate with the exception, *at least*:
