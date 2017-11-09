@@ -36,7 +36,7 @@ public class logueo extends javax.swing.JFrame {
         txtUsuario = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtContrasena = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        btnIngresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Logueo");
@@ -67,7 +67,7 @@ public class logueo extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 310, 425);
+        jPanel1.setBounds(0, 0, 308, 425);
 
         jPanel2.setBackground(new java.awt.Color(0, 155, 200));
 
@@ -131,19 +131,19 @@ public class logueo extends javax.swing.JFrame {
         getContentPane().add(txtContrasena);
         txtContrasena.setBounds(330, 270, 250, 30);
 
-        jButton1.setBackground(new java.awt.Color(0, 155, 200));
-        jButton1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Ingresar");
-        jButton1.setBorder(null);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnIngresar.setBackground(new java.awt.Color(0, 155, 200));
+        btnIngresar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
+        btnIngresar.setText("Ingresar");
+        btnIngresar.setBorder(null);
+        btnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnIngresarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(410, 330, 110, 40);
+        getContentPane().add(btnIngresar);
+        btnIngresar.setBounds(410, 330, 110, 40);
 
         setSize(new java.awt.Dimension(600, 425));
         setLocationRelativeTo(null);
@@ -162,14 +162,14 @@ public class logueo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtContrasenaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         if(txtUsuario.getText().equals("grupo1") && txtContrasena.getText().equals("1234")){
             JOptionPane.showMessageDialog(null,"Datos correctos");
         }
         else{
             JOptionPane.showMessageDialog(null,"Ingrese usuario y contraseña correctos");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnIngresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,7 +207,7 @@ public class logueo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnIngresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
