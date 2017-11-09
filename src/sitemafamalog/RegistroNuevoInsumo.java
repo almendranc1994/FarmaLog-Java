@@ -8,7 +8,6 @@ package sitemafamalog;
 import Controlador.InsumoBL;
 import Modelo.Insumo;
 import javax.swing.JOptionPane;
-import javax.swing.WindowConstants;
 
 /**
  *

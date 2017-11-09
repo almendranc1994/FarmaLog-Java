@@ -18,9 +18,9 @@ public class InsumoBL {
         accesoDatos = new InsumoDA();
     }
     
-    /*public ArrayList<Insumo> devolverLista(){
-        return accesoDatos.devolverLista();
-    }*/
+    public ArrayList<Insumo> devolverListaInsumo(String nombre){
+        return accesoDatos.devolverListaInsumo(nombre);
+    }
     public Insumo BuscarInsumo(int idInsumo){
         return accesoDatos.BuscarInsumo(idInsumo);
     }

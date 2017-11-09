@@ -10,6 +10,7 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -65,4 +66,28 @@ public class InsumoDA {
             return false;
         }
     }
+    public ArrayList<Insumo> devolverListaInsumo(String nombreInsumo){
+        System.out.println("Busquemos... "+nombreInsumo);
+                
+        ArrayList<Insumo> listaInsumos = new ArrayList<Insumo>();
+        try{    
+            Statement sentencia=Conexion.getConexion().createStatement();
+            ResultSet rs = sentencia.executeQuery("SELECT * FROM Insumo WHERE nombre LIKE  '%"+nombreInsumo+"%'");
+            while(rs.next()){
+                int idInsumo= Integer.parseInt(rs.getString("idInsumo"));
+                System.out.println("id: "+idInsumo);
+                String nombre= rs.getString("nombre");
+                String descripcion= rs.getString("descripcion");
+                System.out.println("nombre: "+nombre);
+                listaInsumos.add(new Insumo(idInsumo,nombre,descripcion));
+            }
+            System.out.println("así que sale del while");
+            Conexion.closeConexion();
+        }
+        catch (Exception e){
+            // do something appropriate with the exception, *at least*:
+            System.out.println(e.getMessage());
+        }
+        return listaInsumos;
+    } 
 }
