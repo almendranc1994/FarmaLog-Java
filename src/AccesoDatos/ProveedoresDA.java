@@ -2,6 +2,7 @@
 package AccesoDatos;
 import Modelo.Proveedor;
 import com.mysql.jdbc.Connection;
+import java.sql.CallableStatement;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,16 +10,25 @@ import java.sql.Statement;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 public class ProveedoresDA {
-    public void registrarProveedor(Proveedor p){
+    public boolean registrarProveedor(Proveedor p){
         try{
-            Statement sentencia = Conexion.getConexion().createStatement();
-            String instruccion = "INSERT INTO Proveedor (idProveedor,nombreEmpresa,nombres,apellidos,direccion,correo,telefono)" + 
-                    " values("+p.getCodigo() + ",'" + "PUCP" + p.getNombres() + p.getApellidos() + p.getDireccion() + p.getCorreo() + p.getTelefono()+"')";
-            sentencia.executeUpdate(instruccion);
-            
-        }catch(Exception ex){
-            System.out.println(ex.getMessage());
+            //IN ruc int, IN nombEmp varchar(300), IN nomb varchar(200), IN ape varchar(45), IN direc varchar(45), IN coreo varchar(45),IN telef varchar(45))
+            CallableStatement cStmt = Conexion.getConexion().prepareCall("{call AÑADIR_PROVEEDOR(?,?,?,?,?,?,?)}");
+            cStmt.setInt(1, p.getRuc());
+            cStmt.setString(2, p.getNombreEmpresa());
+            cStmt.setString(3, p.getNombres());
+            cStmt.setString(4, p.getApellidos());
+            cStmt.setString(5, p.getDireccion());
+            cStmt.setString(6, p.getCorreo());
+            cStmt.setString(7, p.getTelefono());
+            cStmt.execute();
+            return true;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println(e.getMessage());
+            return false;
         }
     }
     
