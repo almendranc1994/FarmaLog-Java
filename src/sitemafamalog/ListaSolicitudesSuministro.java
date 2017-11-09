@@ -41,6 +41,7 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
             String date2 = formatter2.format(listaSolSuministro.get(i).getFechaLimite());            
             fila[2] = date2;
             String nombrePrioridad = gestorPrioridad.obtenerNombre(listaSolSuministro.get(i).getPrioridad().getIdPrioridad());
+            listaSolSuministro.get(i).getPrioridad().setNombre(nombrePrioridad);
             fila[3] = nombrePrioridad;
             fila[4] = listaSolSuministro.get(i).getInstitucion();
             modelo.addRow(fila);
@@ -140,14 +141,19 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEliminarSolicitud)
                     .addComponent(btnVerSolicitud))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerSolicitudActionPerformed
-        // TODO add your handling code here:
+        int index = tableLstSolicitudesSuministro.getSelectedRow();
+        SolicitudSuministro seleccionado = listaSolSuministro.get(index);
+        VerSolicitudSuministro fmr = new VerSolicitudSuministro(seleccionado, this);
+        fmr.setSolicitud(seleccionado);
+        fmr.setVisible(true);
+        ListaSolicitudesSuministro.this.dispose();
     }//GEN-LAST:event_btnVerSolicitudActionPerformed
 
     private void btnEliminarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarSolicitudActionPerformed

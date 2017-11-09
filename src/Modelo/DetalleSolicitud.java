@@ -10,24 +10,36 @@ package Modelo;
  * @author Andre Pando
  */
 public class DetalleSolicitud {
-    private String descripcion;
+    private int codigoDetalleSolicitud;
+    private int codigoSolicitudSuministro;
+    private Insumo insumo;
     private double volumen;
+    private int stock;
     private String motivo;
+    private String estado;
     
-    public String getMotivo() {
-        return motivo;
+    public int getCodigoDetalleSolicitud() {
+        return codigoDetalleSolicitud;
     }
 
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
+    public void setCodigoDetalleSolicitud(int codigoDetalleSolicitud) {
+        this.codigoDetalleSolicitud = codigoDetalleSolicitud;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public int getCodigoSolicitudSuministro() {
+        return codigoSolicitudSuministro;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setCodigoSolicitudSuministro(int codigoSolicitudSuministro) {
+        this.codigoSolicitudSuministro = codigoSolicitudSuministro;
+    }
+
+    public Insumo getInsumo() {
+        return insumo;
+    }
+
+    public void setInsumo(Insumo insumo) {
+        this.insumo = insumo;
     }
 
     public double getVolumen() {
@@ -37,13 +49,29 @@ public class DetalleSolicitud {
     public void setVolumen(double volumen) {
         this.volumen = volumen;
     }
-    
-    public DetalleSolicitud(){
-        
+
+    public int getStock() {
+        return stock;
     }
-    public DetalleSolicitud(String desc, double vol, String mot){
-        descripcion = desc;
-        volumen = vol;
-        motivo = mot;
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
+
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+       
 }
