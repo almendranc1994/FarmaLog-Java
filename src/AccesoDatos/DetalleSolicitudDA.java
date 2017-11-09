@@ -49,6 +49,16 @@ public class DetalleSolicitudDA {
         return lista;
     }
     
-    
-    
+    public boolean atenderDetalleSolicitud(int codigo){
+        try{
+            Statement sentencia = Conexion.getConexion().createStatement();
+            String query = "UPDATE DetalleSolicitud SET estado = 'Atendido' WHERE idDetalleSolicitudSuministro = " + codigo;
+            int i = sentencia.executeUpdate(query);            
+            Conexion.closeConexion();
+            return true;
+        }catch(SQLException e){
+            e.printStackTrace();
+            return false;
+        }        
+    }    
 }

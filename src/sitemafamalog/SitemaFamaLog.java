@@ -16,7 +16,8 @@ public class SitemaFamaLog {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+        Home frmPrincipal = new Home();
+        frmPrincipal.setVisible(true);
     }
     
 }

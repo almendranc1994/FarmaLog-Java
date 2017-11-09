@@ -1,7 +1,8 @@
 package Modelo;
 
 public class Proveedor {
-    
+
+   
     private int codigo;
     private String nombreEmpresa;
     private String nombres;
@@ -10,6 +11,7 @@ public class Proveedor {
     private String Correo;
     private String telefono;
     private Boolean esNacional;
+    private int ruc;
     
     public Proveedor(){
         
@@ -33,6 +35,13 @@ public class Proveedor {
         Correo = null;
         nombres = null;
         apellidos = null;
+    }
+     public int getRuc() {
+        return ruc;
+    }
+
+    public void setRuc(int ruc) {
+        this.ruc = ruc;
     }
     
     public void setNombreEmpresa(String nombreEmpresa) {

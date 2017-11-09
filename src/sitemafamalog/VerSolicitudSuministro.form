@@ -105,7 +105,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="txtCodigo" max="32767" attributes="0"/>
-                              <Component id="dataChooserFechaPeticion" pref="133" max="32767" attributes="0"/>
+                              <Component id="txtFechaPeticion" pref="133" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -117,10 +117,10 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="DataChooserFechaLimite" pref="132" max="32767" attributes="0"/>
                               <Component id="txtPrioridad" max="32767" attributes="0"/>
                               <Component id="txtEstado" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtInstitucion" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtFechaLimite" alignment="0" pref="132" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -139,14 +139,14 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <Component id="dataChooserFechaPeticion" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtFechaPeticion" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <Component id="DataChooserFechaLimite" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtFechaLimite" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtPrioridad" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -197,13 +197,6 @@
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="dataChooserFechaPeticion">
-          <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="DataChooserFechaLimite">
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
             <Property name="text" type="java.lang.String" value="Estado:"/>
@@ -222,6 +215,13 @@
         <Component class="javax.swing.JTextField" name="txtInstitucion">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtFechaPeticion">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtFechaLimite">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jTextField2"/>
           </Properties>
         </Component>
       </SubComponents>

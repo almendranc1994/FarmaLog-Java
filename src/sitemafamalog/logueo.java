@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package sitemafamalog;
-
+import javax.swing.JOptionPane; 
 /**
  *
  * @author Karla Isabel Pedraza Salinas 20141056
@@ -32,7 +32,11 @@ public class logueo extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         labelCerrar = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtContrasena = new javax.swing.JPasswordField();
+        btnIngresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Logueo");
@@ -95,6 +99,11 @@ public class logueo extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(330, 70, 250, 40);
 
+        jLabel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jLabel1.setText("Contraseña:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(330, 240, 100, 17);
+
         txtUsuario.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         txtUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
         txtUsuario.setName("txtUsuario"); // NOI18N
@@ -106,18 +115,61 @@ public class logueo extends javax.swing.JFrame {
         getContentPane().add(txtUsuario);
         txtUsuario.setBounds(330, 190, 250, 30);
 
+        jLabel4.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jLabel4.setText("Usuario:");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(330, 160, 100, 17);
+
+        txtContrasena.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        txtContrasena.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        txtContrasena.setName("txtContrasena"); // NOI18N
+        txtContrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtContrasenaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtContrasena);
+        txtContrasena.setBounds(330, 270, 250, 30);
+
+        btnIngresar.setBackground(new java.awt.Color(0, 155, 200));
+        btnIngresar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
+        btnIngresar.setText("Ingresar");
+        btnIngresar.setBorder(null);
+        btnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnIngresar);
+        btnIngresar.setBounds(410, 330, 110, 40);
+
         setSize(new java.awt.Dimension(600, 425));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void labelCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCerrarMouseClicked
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_labelCerrarMouseClicked
+
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContrasenaActionPerformed
+
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        if(txtUsuario.getText().equals("grupo1") && txtContrasena.getText().equals("1234")){
+            JOptionPane.showMessageDialog(null,"Datos correctos");
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Ingrese usuario y contraseña correctos");
+        }
+    }//GEN-LAST:event_btnIngresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,11 +207,15 @@ public class logueo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnIngresar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel labelCerrar;
+    private javax.swing.JPasswordField txtContrasena;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

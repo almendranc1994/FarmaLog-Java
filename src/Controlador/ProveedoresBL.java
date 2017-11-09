@@ -17,8 +17,8 @@ public class ProveedoresBL {
         accesoDatos = new ProveedoresDA();
     }
     
-    public void registrarProveedor(Proveedor prov){
-        accesoDatos.registrarProveedor(prov);
+    public boolean registrarProveedor(Proveedor prov){
+        return accesoDatos.registrarProveedor(prov);
     }
     
     public Proveedor BuscarProveedor(int idProveedor){

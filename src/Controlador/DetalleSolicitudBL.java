@@ -22,8 +22,14 @@ public class DetalleSolicitudBL {
         return accesoDatos.obtenerListaSolicitudesSuministro(codigo);
     }
     
-    public boolean atenderInsumo(Deta){
-        
+    public boolean atenderInsumo(DetalleSolicitud detalle){
+        try{
+            accesoDatos.atenderDetalleSolicitud(detalle.getCodigoDetalleSolicitud());
+            return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
     
 }
