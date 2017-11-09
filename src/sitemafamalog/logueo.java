@@ -164,7 +164,8 @@ public class logueo extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         if(txtUsuario.getText().equals("grupo1") && txtContrasena.getText().equals("1234")){
-            JOptionPane.showMessageDialog(null,"Datos correctos");
+            Home frmHome=new Home();
+            frmHome.setVisible(true);
         }
         else{
             JOptionPane.showMessageDialog(null,"Ingrese usuario y contraseña correctos");
