@@ -67,7 +67,7 @@ public class logueo extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 308, 425);
+        jPanel1.setBounds(0, 0, 310, 425);
 
         jPanel2.setBackground(new java.awt.Color(0, 155, 200));
 
