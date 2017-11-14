@@ -1,16 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sitemafamalog;
+
+import AccesoDatos.ComprasDA;
+import java.sql.Date;
+import java.util.ArrayList;
+import Modelo.Proveedor;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author alulab14
  */
 public class ReporteProveedores extends javax.swing.JFrame {
-    private int[] seleccion = new int[6];
+
+    private ComprasDA accesoDatos = new ComprasDA();
+
     /**
      * Creates new form ReporteProveedores
      */
@@ -322,17 +325,16 @@ public class ReporteProveedores extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(27, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addGap(7, 7, 7)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
@@ -351,31 +353,37 @@ public class ReporteProveedores extends javax.swing.JFrame {
         int mesF = jComboBox5.getSelectedIndex() + 1;
         int anhoF = jComboBox6.getSelectedIndex() + 2000;
         boolean valido = false;
-        if(anhoF>=anhoI){
-            if(anhoF>anhoI){
+        if (anhoF >= anhoI) {
+            if (anhoF > anhoI) {
                 valido = true;
-            }else if(anhoI==anhoF){
-                if(mesF>=mesI){
-                    if(mesF>mesI){
+            } else if (anhoI == anhoF) {
+                if (mesF >= mesI) {
+                    if (mesF > mesI) {
                         valido = true;
-                    }else if(mesF==mesI){
-                        if(diaF>=diaI){
+                    } else if (mesF == mesI) {
+                        if (diaF >= diaI) {
                             valido = true;
                         }
                     }
                 }
             }
         }
-        if(valido){
+        if (valido) {
             this.jTextField1.setText("Aceptado");
-            this.seleccion[0]=diaI;
-            this.seleccion[1]=mesI;
-            this.seleccion[2]=anhoI;
-            this.seleccion[3]=diaF;
-            this.seleccion[4]=mesF;
-            this.seleccion[5]=anhoF;
-        }else{
-            this.jTextField1.setText("No es un rango válido de fechas");
+            Date fechaI = new Date(anhoI, mesI, diaI);
+            Date fechaF = new Date(anhoF, mesF, diaF);
+            ArrayList<Proveedor> lista = accesoDatos.obtenerListaProveedores(fechaI, fechaF);
+            DefaultTableModel tabla = (DefaultTableModel) this.jTable1.getModel();
+            Object[] fila = new Object[4];
+            for (int i = 0; i < lista.size(); i++) {
+                fila[0] = lista.get(i).getNombreEmpresa();
+                fila[1] = lista.get(i).getNombres();
+                fila[2] = lista.get(i).getApellidos();
+                fila[3] = lista.get(i).getTelefono();
+                tabla.insertRow(i, fila);
+            }
+        } else {
+            this.jTextField1.setText("Rango inválido");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
