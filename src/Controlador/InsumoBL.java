@@ -27,4 +27,8 @@ public class InsumoBL {
     public boolean registrarInsumo(Insumo newInsumo){
         return accesoDatos.registrarInsumo(newInsumo);
     }
+    
+    public ArrayList<Insumo> devolverAlertaInsumos(){
+        return accesoDatos.devolverAlertaInsumos();
+    }
 }
