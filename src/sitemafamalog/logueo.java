@@ -47,7 +47,7 @@ public class logueo extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 155, 200));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/Farma-Log (1).jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/Farma-Log (1).jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -67,7 +67,7 @@ public class logueo extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 310, 425);
+        jPanel1.setBounds(0, 0, 308, 425);
 
         jPanel2.setBackground(new java.awt.Color(0, 155, 200));
 
@@ -128,6 +128,11 @@ public class logueo extends javax.swing.JFrame {
                 txtContrasenaActionPerformed(evt);
             }
         });
+        txtContrasena.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtContrasenaKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtContrasena);
         txtContrasena.setBounds(330, 270, 250, 30);
 
@@ -136,7 +141,7 @@ public class logueo extends javax.swing.JFrame {
         btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
         btnIngresar.setText("Ingresar");
         btnIngresar.setBorder(null);
-        btnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresarActionPerformed(evt);
@@ -171,6 +176,18 @@ public class logueo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Ingrese usuario y contraseña correctos");
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void txtContrasenaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContrasenaKeyReleased
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            if(txtUsuario.getText().equals("grupo1") && txtContrasena.getText().equals("1234")){
+                Home frmHome=new Home();
+                frmHome.setVisible(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Ingrese usuario y contraseña correctos");
+            }
+        }
+    }//GEN-LAST:event_txtContrasenaKeyReleased
 
     /**
      * @param args the command line arguments

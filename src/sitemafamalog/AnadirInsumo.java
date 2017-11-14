@@ -6,6 +6,8 @@
 package sitemafamalog;
 import Controlador.InsumoBL;
 import Modelo.Insumo;
+import Modelo.Marca;
+import Controlador.MarcaBL;
 import Modelo.ProveedorxInsumo;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
@@ -17,12 +19,26 @@ import javax.swing.WindowConstants;
  */
 public class AnadirInsumo extends javax.swing.JFrame {
     ArrayList<Insumo> listaInsumos;
+    ArrayList<Marca> listaMarcas;
+    MarcaBL logNegMarca=new MarcaBL();
     /**
      * Creates new form AnadirInsumo
      */
     public AnadirInsumo() {
         initComponents();
         txtPrecio.setEnabled(false);
+        
+        try{
+            listaMarcas=logNegMarca.devolverLista();
+            System.out.println("marcas: "+listaMarcas.size());
+            for(int i=0;i<listaMarcas.size();i++){
+                cbMarca.addItem(listaMarcas.get(i).getNombre());
+            }
+        }
+        catch(Exception e){
+            
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -112,10 +128,6 @@ public class AnadirInsumo extends javax.swing.JFrame {
 
         jLabel5.setText("Stock:");
 
-        cbMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cbUniMed.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -167,7 +179,6 @@ public class AnadirInsumo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cbMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -177,7 +188,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                         .addComponent(btnAgregar)
                         .addGap(24, 24, 24))
                     .addGroup(layout.createSequentialGroup()
@@ -257,6 +268,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPrecioActionPerformed
     public void actualizarDatosTabla(){
         DefaultTableModel modelo = (DefaultTableModel)tablaInsumos.getModel();
+        modelo.setNumRows(0);
         Object[] fila = new Object[3];
         for(int i=0; i<listaInsumos.size();i++){
             fila[0] = listaInsumos.get(i).getCodigoInsumo();
