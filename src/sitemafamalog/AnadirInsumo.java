@@ -8,7 +8,9 @@ import Controlador.InsumoBL;
 import Modelo.Insumo;
 import Modelo.Marca;
 import Controlador.MarcaBL;
+import Controlador.UnidadMedidaBL;
 import Modelo.ProveedorxInsumo;
+import Modelo.UnidadMedida;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -20,19 +22,30 @@ import javax.swing.WindowConstants;
 public class AnadirInsumo extends javax.swing.JFrame {
     ArrayList<Insumo> listaInsumos;
     ArrayList<Marca> listaMarcas;
+    ArrayList<UnidadMedida> listaUniMed;
     MarcaBL logNegMarca=new MarcaBL();
+    UnidadMedidaBL logNegUniMed=new UnidadMedidaBL();
+    ProveedorxInsumo pxIns;
     /**
      * Creates new form AnadirInsumo
      */
     public AnadirInsumo() {
         initComponents();
         txtPrecio.setEnabled(false);
-        
+        cbMarca.setEnabled(false);
+        cbUniMed.setEnabled(false);
+        txtStock.setEnabled(false);
+        btnAgregar.setEnabled(false);
+        btnNuevo.setEnabled(false);
         try{
             listaMarcas=logNegMarca.devolverLista();
             System.out.println("marcas: "+listaMarcas.size());
             for(int i=0;i<listaMarcas.size();i++){
                 cbMarca.addItem(listaMarcas.get(i).getNombre());
+            }
+            listaUniMed=logNegUniMed.devolverLista();
+            for(int i=0;i<listaUniMed.size();i++){
+                cbUniMed.addItem(listaUniMed.get(i).getUnidad());
             }
         }
         catch(Exception e){
@@ -181,22 +194,23 @@ public class AnadirInsumo extends javax.swing.JFrame {
                     .addComponent(cbMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(cbUniMed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnAgregar)
                         .addGap(24, 24, 24))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbUniMed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addContainerGap(59, Short.MAX_VALUE))))
         );
 
         pack();
@@ -237,10 +251,22 @@ public class AnadirInsumo extends javax.swing.JFrame {
         return false;
     }
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        if(validarPrecio(txtPrecio.getText()) && validarStock(txtStock.getText())){
-            ProveedorxInsumo pxIns=new ProveedorxInsumo(1,Integer.parseInt(tablaInsumos.getModel().getValueAt(tablaInsumos.getSelectedRow(),1).toString()),cbUniMed.getSelectedItem().toString(),Integer.parseInt(txtStock.getText()),cbMarca.getSelectedItem().toString(),Double.parseDouble(txtPrecio.getText()));
+        System.out.println("holi 123");
+        System.out.println(1+"");
+        System.out.println(Integer.parseInt(tablaInsumos.getModel().getValueAt(tablaInsumos.getSelectedRow(),0).toString())+"");
+        System.out.println(cbUniMed.getSelectedItem().toString());
+        System.out.println(Double.parseDouble(txtPrecio.getText())); 
+        try{
+            if(!tablaInsumos.getSelectionModel().isSelectionEmpty() && validarPrecio(txtPrecio.getText()) && validarStock(txtStock.getText())){
+                      
+                pxIns=new ProveedorxInsumo(1,Integer.parseInt(tablaInsumos.getModel().getValueAt(tablaInsumos.getSelectedRow(),0).toString()),cbUniMed.getSelectedItem().toString(),Integer.parseInt(txtStock.getText()),cbMarca.getSelectedItem().toString(),Double.parseDouble(txtPrecio.getText()));
+            }
+            this.dispose();
         }
-            
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+        
     }//GEN-LAST:event_btnAgregarActionPerformed
     
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
@@ -257,6 +283,12 @@ public class AnadirInsumo extends javax.swing.JFrame {
         }
         if(listaInsumos!=null)
             actualizarDatosTabla();
+        txtPrecio.setEnabled(true);
+        cbMarca.setEnabled(true);
+        cbUniMed.setEnabled(true);
+        txtStock.setEnabled(true);
+        btnAgregar.setEnabled(true);
+        btnNuevo.setEnabled(true);
     }//GEN-LAST:event_btnBuscarMouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed

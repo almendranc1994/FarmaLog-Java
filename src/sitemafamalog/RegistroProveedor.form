@@ -116,22 +116,15 @@
                   </Group>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtEmpresa" min="-2" pref="174" max="-2" attributes="0"/>
-                              <Component id="txtRUC" min="-2" pref="174" max="-2" attributes="0"/>
-                              <Component id="txtApellido" min="-2" pref="174" max="-2" attributes="0"/>
-                              <Component id="txtNombre" min="-2" pref="174" max="-2" attributes="0"/>
-                              <Component id="txtCorreo" min="-2" pref="174" max="-2" attributes="0"/>
-                              <Component id="txtTelefono" min="-2" pref="174" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="txtDireccion" min="-2" pref="174" max="-2" attributes="0"/>
-                          <EmptySpace min="53" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="txtEmpresa" min="-2" pref="174" max="-2" attributes="0"/>
+                      <Component id="txtRUC" min="-2" pref="174" max="-2" attributes="0"/>
+                      <Component id="txtApellido" min="-2" pref="174" max="-2" attributes="0"/>
+                      <Component id="txtNombre" min="-2" pref="174" max="-2" attributes="0"/>
+                      <Component id="txtCorreo" min="-2" pref="174" max="-2" attributes="0"/>
+                      <Component id="txtTelefono" min="-2" pref="174" max="-2" attributes="0"/>
+                      <Component id="txtDireccion" alignment="0" min="-2" pref="174" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

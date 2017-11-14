@@ -362,7 +362,9 @@ public class RegistroProveedor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
-        new AnadirInsumo().setVisible(true);
+        AnadirInsumo addIns=new AnadirInsumo();
+        addIns.setVisible(true);
+        //addIns.getSelectedProvxInsumo();
     }//GEN-LAST:event_btnAñadirActionPerformed
 
     private void btnNuevoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_btnNuevoMenuSelected
@@ -431,7 +433,8 @@ public class RegistroProveedor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegistroProveedor().setVisible(true);
+                RegistroProveedor regProv=new RegistroProveedor();
+                regProv.setVisible(true);
             }
         });
     }
