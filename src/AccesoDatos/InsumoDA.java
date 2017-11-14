@@ -89,5 +89,28 @@ public class InsumoDA {
             System.out.println(e.getMessage());
         }
         return listaInsumos;
-    } 
+    }
+    
+    public ArrayList<Insumo> devolverAlertaInsumos(){
+        
+        ArrayList<Insumo> listaInsumos = new ArrayList<Insumo>();
+        try{
+            CallableStatement cStmt = Conexion.getConexion().prepareCall("{call BUSCAR_ALERTA_INSUMO}");
+            ResultSet rs = cStmt.executeQuery();
+            while(rs.next()){
+                int idInsumo= Integer.parseInt(rs.getString("idInsumo"));
+                String nombre= rs.getString("nombre");
+                String descripcion= rs.getString("descripcion");
+                double stk= Double.parseDouble(rs.getString("stock"));
+                double stkMin= Double.parseDouble(rs.getString("stockMinimo"));
+                listaInsumos.add(new Insumo(idInsumo,nombre,descripcion,stk,stkMin));
+            }           
+            Conexion.closeConexion();
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return listaInsumos;
+    }
+    
 }
