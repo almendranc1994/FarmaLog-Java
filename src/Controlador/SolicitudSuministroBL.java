@@ -18,6 +18,11 @@ public class SolicitudSuministroBL {
         accesoDatos = new SolicitudSuministroDA();
     }
     
+    public SolicitudSuministro obtenerSolicitudSuministro(int idSolicitudSuministro) {
+        // TODO
+        return null;
+    }
+    
     public ArrayList<SolicitudSuministro> obtenerListaSolicitudSuministro(){
         return accesoDatos.obtenerListaSolicitudesSuministro();
     }
