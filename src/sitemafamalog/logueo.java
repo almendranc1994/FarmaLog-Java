@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package sitemafamalog;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane; 
+import Modelo.Empleado;
+import Controlador.EmpleadoBL;
 /**
  *
  * @author Karla Isabel Pedraza Salinas 20141056
@@ -14,10 +17,14 @@ public class logueo extends javax.swing.JFrame {
     /**
      * Creates new form logueo
      */
+    
+    private EmpleadoBL empCtrl;
     public logueo() {
         initComponents();
+        
+        empCtrl = new EmpleadoBL();
     }
-
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,6 +50,11 @@ public class logueo extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
         setResizable(false);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(0, 155, 200));
@@ -67,7 +79,7 @@ public class logueo extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 310, 425);
+        jPanel1.setBounds(0, 0, 308, 425);
 
         jPanel2.setBackground(new java.awt.Color(0, 155, 200));
 
@@ -128,6 +140,11 @@ public class logueo extends javax.swing.JFrame {
                 txtContrasenaActionPerformed(evt);
             }
         });
+        txtContrasena.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContrasenaKeyPressed(evt);
+            }
+        });
         getContentPane().add(txtContrasena);
         txtContrasena.setBounds(330, 270, 250, 30);
 
@@ -136,7 +153,7 @@ public class logueo extends javax.swing.JFrame {
         btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
         btnIngresar.setText("Ingresar");
         btnIngresar.setBorder(null);
-        btnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresarActionPerformed(evt);
@@ -167,10 +184,43 @@ public class logueo extends javax.swing.JFrame {
             Home frmHome=new Home();
             frmHome.setVisible(true);
         }
-        else{
+        else{   
             JOptionPane.showMessageDialog(null,"Ingrese usuario y contraseña correctos");
         }
+
+        this.dispose();
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+      // Enter was pressed. Your code goes here.
+            if(txtUsuario.getText().equals("grupo1") && txtContrasena.getText().equals("1234")){
+                Home frmHome=new Home();
+                frmHome.setVisible(true);
+            }
+            else{   
+                JOptionPane.showMessageDialog(null,"Ingrese usuario y contraseña correctos");
+            }
+            
+            this.dispose();
+        }
+    }//GEN-LAST:event_formKeyPressed
+
+    private void txtContrasenaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContrasenaKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            // Enter was pressed. Your code goes here.
+            if(empCtrl.LogEmpleado(txtUsuario.getText(), txtContrasena.getText())){
+                Home frmHome=new Home();
+                frmHome.setVisible(true);
+            }
+            else{   
+                JOptionPane.showMessageDialog(null,"Ingrese usuario y contraseña correctos");
+            }
+            this.dispose();
+        }
+    }//GEN-LAST:event_txtContrasenaKeyPressed
 
     /**
      * @param args the command line arguments
