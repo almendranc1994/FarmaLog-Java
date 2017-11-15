@@ -1,6 +1,6 @@
 package sitemafamalog;
 
-import AccesoDatos.ComprasDA;
+import AccesoDatos.CompraDA;
 import java.sql.Date;
 import java.util.ArrayList;
 import Modelo.Proveedor;
@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ReporteProveedores extends javax.swing.JFrame {
 
-    private ComprasDA accesoDatos = new ComprasDA();
+    private CompraDA accesoDatos = new CompraDA();
 
     /**
      * Creates new form ReporteProveedores
