@@ -33,7 +33,7 @@ public class SolicitudesCompra extends javax.swing.JFrame {
         addListeners();
         
         // TODO
-        simulaDatos();
+        //simulaDatos();
     }
     
     private void cleanDatos() {
@@ -42,6 +42,7 @@ public class SolicitudesCompra extends javax.swing.JFrame {
         unselectCarrito();
     }
     
+    /* 
     public void simulaDatos() {
         Proveedor prov1 = new Proveedor("El proveedor!", true);
         Proveedor prov2 = new Proveedor("Proveyente", true);
@@ -81,6 +82,7 @@ public class SolicitudesCompra extends javax.swing.JFrame {
         
         for(int i=0;i<4;i++) addCarrito(carrito[i]);
     }
+    */
     
     public void addCarrito(Carrito carritoNuevo) {
         carritos.add(carritoNuevo);

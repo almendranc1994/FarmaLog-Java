@@ -17,6 +17,7 @@ public class Compra {
     private int id;
     // No puede existir compra sin proveedor
     private final Proveedor proveedor;
+    private EstadoCompra estado;
     
     private Date fechaCotizacion;
     private Date fechaCompra;
@@ -25,17 +26,26 @@ public class Compra {
     private double impuestos;
     private double total;
     
-    private ArrayList<DetalleCompra> detalles = new ArrayList<>();
+    private ArrayList<DetalleCompra> detalles = null;
     
     public Compra() {
+        id = -1;
         this.proveedor = null;
     }
     
     public Compra(Proveedor proveedor) {
+        id = -1;
         this.proveedor = proveedor;
+    }
+    
+    private void checkoutDetalles() {
+        if(id==-1) detalles = new ArrayList<>();
+        else {
+        }
     }
 
     public void addDetalle(DetalleCompra detalle) {
+        if(detalles==null) checkoutDetalles();
         detalles.add(detalle);
     }
     
@@ -134,6 +144,7 @@ public class Compra {
      * @return the detalles
      */
     public ArrayList<DetalleCompra> getDetalles() {
+        if(detalles==null) checkoutDetalles();
         return detalles;
     }
 
@@ -143,7 +154,29 @@ public class Compra {
     public void setDetalles(ArrayList<DetalleCompra> detalles) {
         this.detalles = detalles;
     }
+
+    /**
+     * @return the estado
+     */
+    public EstadoCompra getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(EstadoCompra estado) {
+        this.estado = estado;
+    }
     
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(int estado) {
+        for(EstadoCompra e: EstadoCompra.values())
+            if(e.getIdEstado()==estado)
+                this.estado = e;
+    }
     
     
 }
