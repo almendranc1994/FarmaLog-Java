@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class MarcaDA {
     public Marca BuscarMarcaporNombre(String nombreABuscar){
         try{    
+            System.out.println("BuscarMarcaporNombre");
             Statement sentencia=Conexion.getConexion().createStatement();
             ResultSet rs = sentencia.executeQuery("SELECT * FROM Marca WHERE nombre="+nombreABuscar);
             while(rs.next()){

@@ -29,6 +29,9 @@ public class AnadirInsumo extends javax.swing.JFrame {
     /**
      * Creates new form AnadirInsumo
      */
+    public ProveedorxInsumo getSelectedProvxInsumo(){
+        return pxIns;
+    }
     public AnadirInsumo() {
         initComponents();
         txtPrecio.setEnabled(false);
@@ -260,6 +263,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
             if(!tablaInsumos.getSelectionModel().isSelectionEmpty() && validarPrecio(txtPrecio.getText()) && validarStock(txtStock.getText())){
                       
                 pxIns=new ProveedorxInsumo(1,Integer.parseInt(tablaInsumos.getModel().getValueAt(tablaInsumos.getSelectedRow(),0).toString()),cbUniMed.getSelectedItem().toString(),Integer.parseInt(txtStock.getText()),cbMarca.getSelectedItem().toString(),Double.parseDouble(txtPrecio.getText()));
+                System.out.println("NI SIQUIERA PUDO");
             }
             this.dispose();
         }
