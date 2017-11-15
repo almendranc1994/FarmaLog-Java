@@ -37,7 +37,7 @@ public class EmpleadoDA {
                 Statement sentencia=Conexion.getConexion().createStatement();
                 ResultSet rs = sentencia.executeQuery("SELECT * FROM Empleado where idEmpleado="+adminU.getId());
                 if(rs.next()){
-                    System.out.println(rs.getString("idEmpleado"));
+                    
                 
                     return emp;
                 }
