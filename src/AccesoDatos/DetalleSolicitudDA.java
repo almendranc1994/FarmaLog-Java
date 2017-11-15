@@ -28,18 +28,19 @@ public class DetalleSolicitudDA {
         ArrayList<DetalleSolicitud> lista = new ArrayList<DetalleSolicitud>();
         try{
             Statement sentencia = Conexion.getConexion().createStatement();
-            String query = "SELECT * FROM DetalleSolicitud WHERE idDetalleSolicitudSuministro = " + codigoSolSuministro;
+            String query = "SELECT * FROM DetalleSolicitud";
             ResultSet rs = sentencia.executeQuery(query);
             while(rs.next()){
-                DetalleSolicitud s = new DetalleSolicitud();                
-                s.setCodigoDetalleSolicitud(Integer.parseInt(rs.getString("idDetalleSolicitudSuministro")));
-                Insumo i = new Insumo();
-                i.setCodigoInsumo(Integer.parseInt(rs.getString("idInsumo")));
-                s.setVolumen(Double.parseDouble(rs.getString("volumen")));
-                s.setStock(Integer.parseInt(rs.getString("stock")));
-                s.setMotivo(rs.getString("motivo"));
-                s.setEstado(rs.getString("estado"));
-                lista.add(s);
+                int id = Integer.parseInt(rs.getString("idSolicitudSumnistro"));
+                if(id == codigoSolSuministro){
+                    DetalleSolicitud s = new DetalleSolicitud();                
+                    Insumo i = new Insumo();
+                    i.setCodigoInsumo(Integer.parseInt(rs.getString("idInsumo")));
+                    s.setInsumo(i);
+                    s.setVolumen(Double.parseDouble(rs.getString("cantidad")));                
+                    s.setEstado(rs.getString("estado"));
+                    lista.add(s);                    
+                }                
             }
             Conexion.closeConexion();
         }catch(SQLException e){

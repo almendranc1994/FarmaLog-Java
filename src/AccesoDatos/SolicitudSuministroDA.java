@@ -62,6 +62,37 @@ public class SolicitudSuministroDA {
         }
     }
     
+    public SolicitudSuministro obtenerSolicitudSuministro(int id){
+        SolicitudSuministro s = new SolicitudSuministro();
+        try{
+            Statement sentencia = Conexion.getConexion().createStatement();
+            String query = "SELECT * FROM SolicitudSumnistros WHERE idSolicitudSumnistro = " + id;
+            ResultSet rs = sentencia.executeQuery("SELECT * FROM SolicitudSumnistros");
+            if(rs.next()){
+                s.setCodigoSolicitudSuministro(Integer.parseInt(rs.getString("idSolicitudSumnistro")));                
+                try{
+                    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+                    String dateString1 = rs.getString("fechaPeticion");
+                    Date date1 = sdf1.parse(dateString1);
+                    s.setFechaPeticion(date1);
+                }catch (Exception e){}
+                try{
+                    SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+                    String dateString2 = rs.getString("fechaLimite");
+                    Date date2 = sdf2.parse(dateString2);
+                    s.setFechaLimite(date2);
+                }catch (Exception e){}
+                s.setInstitucion(rs.getString("institucion"));                
+                s.setPrioridad(Integer.parseInt(rs.getString("prioridad")));
+            }
+            Conexion.closeConexion();
+        }catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+        return s;
+    }
+    
 //    public static void main(String[] args) {
 //        SolicitudSuministroDA gestor = new SolicitudSuministroDA();
 //        ArrayList<SolicitudSuministro> lista = gestor.obtenerListaSolicitudesSuministro();
