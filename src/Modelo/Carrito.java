@@ -15,7 +15,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class Carrito {
     
     private Proveedor proveedor;
-    private ArrayList<DetalleCompra> detalles = new ArrayList<>();
+    private ArrayList<SolicitudCompra> solicitudes = new ArrayList<>();
     
     public Carrito() {}
     
@@ -23,17 +23,13 @@ public class Carrito {
         this.proveedor = proveedor;
     }
     
-    public void addDetalle(DetalleCompra detalle) throws Exception {
-        if(detalle.getProveedor()!=proveedor) {
-            throw new Exception("Este carrito de compras le pertenece a otro proveedor!");
-        }
-        
-        detalles.add(detalle);
+    public void addSolicitud(SolicitudCompra solicitud) throws Exception {
+        solicitudes.add(solicitud);
     }
     
     
     public void addTreeStructure(DefaultMutableTreeNode parent) {
-        for(DetalleCompra detalle: detalles) {
+        for(SolicitudCompra detalle: solicitudes) {
             DefaultMutableTreeNode nodoDetalle = new DefaultMutableTreeNode(detalle);
             parent.add(nodoDetalle);
         }
