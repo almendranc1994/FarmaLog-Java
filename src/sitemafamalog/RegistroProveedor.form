@@ -26,10 +26,13 @@
             <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="btnGuardarMenuSelected"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu5">
+        <Menu class="javax.swing.JMenu" name="btnBuscarProveedor">
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
+          <Events>
+            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="btnBuscarProveedorMenuSelected"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
@@ -113,16 +116,18 @@
                       <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtEmpresa" min="-2" pref="174" max="-2" attributes="0"/>
-                      <Component id="txtRUC" min="-2" pref="174" max="-2" attributes="0"/>
-                      <Component id="txtApellido" min="-2" pref="174" max="-2" attributes="0"/>
-                      <Component id="txtNombre" min="-2" pref="174" max="-2" attributes="0"/>
-                      <Component id="txtCorreo" min="-2" pref="174" max="-2" attributes="0"/>
-                      <Component id="txtTelefono" min="-2" pref="174" max="-2" attributes="0"/>
-                      <Component id="txtDireccion" alignment="0" min="-2" pref="174" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="txtEmpresa" pref="174" max="32767" attributes="0"/>
+                      <Component id="txtRUC" pref="174" max="32767" attributes="0"/>
+                      <Component id="txtApellido" pref="174" max="32767" attributes="0"/>
+                      <Component id="txtNombre" pref="174" max="32767" attributes="0"/>
+                      <Component id="txtCorreo" pref="174" max="32767" attributes="0"/>
+                      <Component id="txtTelefono" pref="174" max="32767" attributes="0"/>
+                      <Component id="txtDireccion" alignment="0" pref="174" max="32767" attributes="0"/>
+                      <Component id="txtTipoInstitucion" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -152,11 +157,11 @@
                       <Component id="txtTelefono" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel6" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="txtDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="txtDireccion" max="32767" attributes="0"/>
+                      <Component id="jLabel6" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtRUC" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -166,7 +171,12 @@
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtTipoInstitucion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="15" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -241,7 +251,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="RUC"/>
+            <Property name="text" type="java.lang.String" value="RUC:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtRUC">
@@ -254,7 +264,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Empresa"/>
+            <Property name="text" type="java.lang.String" value="Empresa:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtEmpresa">
@@ -263,6 +273,16 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmpresaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel9">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Institucion:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtTipoInstitucion">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTipoInstitucionActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
