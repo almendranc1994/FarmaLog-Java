@@ -40,7 +40,7 @@ public class VerSolicitudSuministro extends javax.swing.JFrame {
         txtCodigo.setText(String.valueOf(solicitud.getCodigoSolicitudSuministro()));
         txtFechaPeticion.setText(solicitud.getFechaPeticion().toString());
         txtFechaLimite.setText(solicitud.getFechaLimite().toString());
-        txtPrioridad.setText(solicitud.getPrioridad().getNombre());
+        txtPrioridad.setText(String.valueOf(solicitud.getPrioridad()));
         txtInstitucion.setText(solicitud.getInstitucion());
         lista = gestorDetalleSolicitud.obtenerLista(solicitud.getCodigoSolicitudSuministro());
     }

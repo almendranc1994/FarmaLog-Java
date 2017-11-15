@@ -38,10 +38,8 @@ public class SolicitudSuministroDA {
                     Date date2 = sdf2.parse(dateString2);
                     s.setFechaLimite(date2);
                 }catch (Exception e){}
-                s.setInstitucion(rs.getString("institucion"));
-                Prioridad p = new Prioridad();
-                p.setIdPrioridad(Integer.parseInt(rs.getString("Prioridad_idPrioridad")));
-                s.setPrioridad(p);
+                s.setInstitucion(rs.getString("institucion"));                
+                s.setPrioridad(Integer.parseInt(rs.getString("prioridad")));
                 lista.add(s);
             }
             Conexion.closeConexion();
