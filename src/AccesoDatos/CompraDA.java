@@ -1,6 +1,6 @@
 package AccesoDatos;
 
-import Modelo.Compras;
+import Modelo.Compra;
 import Modelo.Proveedor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ import java.sql.Date;
  *
  * @author Milton
  */
-public class ComprasDA {
+public class CompraDA {
     public ArrayList<Proveedor> obtenerListaProveedores(Date fechaI,Date fechaF){
         ArrayList<Proveedor> lista = new ArrayList<Proveedor>();
         ProveedoresDA datosProveedor = new ProveedoresDA();
