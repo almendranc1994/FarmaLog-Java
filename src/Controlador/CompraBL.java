@@ -1,21 +1,21 @@
 package Controlador;
 import Modelo.Proveedor;
-import AccesoDatos.CompraDA;
+import AccesoDatos.ComprasDA;
 import java.util.ArrayList;
 import java.sql.Date;
 /**
  *
  * @author Milton
  */
-public class CompraBL {
-    private CompraDA accesoDatos;
+public class ComprasBL {
+    private ComprasDA accesoDatos;
     
-    public CompraBL(){
-        accesoDatos = new CompraDA();
+    public ComprasBL(){
+        accesoDatos = new ComprasDA();
     }
     
-    public ArrayList<Proveedor> obtenerListaCompras(Date fechaI,Date fechaF){
-        return accesoDatos.obtenerListaCompras(fechaI,fechaF);
+    public ArrayList<Proveedor> obtenerListaProveedores(Date fechaI,Date fechaF){
+        return accesoDatos.obtenerListaProveedores(fechaI,fechaF);
     }
     
 }
