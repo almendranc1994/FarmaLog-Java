@@ -15,7 +15,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class Carrito {
     
     private Proveedor proveedor;
-    private ArrayList<SolicitudCompra> solicitudes = new ArrayList<>();
+    private ArrayList<SolicitudCompra> solicitudes;
     
     public Carrito() {}
     

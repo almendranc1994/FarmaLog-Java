@@ -24,7 +24,7 @@ public class DetalleCompraDA {
     public void obtenerDetallesCompra(Compra compra) {
         ArrayList<DetalleCompra> detalles = new ArrayList<>();
         
-        String query = "SELECT (idSolicitudCompra, precioUnitario) FROM DetalleCompra WHERE idCompra=" + compra.getId();
+        String query = "SELECT idSolicitudCompra,precioUnitario FROM DetalleCompra WHERE idCompra=" + compra.getId();
         
         SolicitudCompraBL solcompBL = new SolicitudCompraBL();
         
