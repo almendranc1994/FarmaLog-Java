@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package sitemafamalog;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane; 
+import Modelo.Empleado;
+import Controlador.EmpleadoBL;
 /**
  *
  * @author Karla Isabel Pedraza Salinas 20141056
@@ -14,10 +17,14 @@ public class logueo extends javax.swing.JFrame {
     /**
      * Creates new form logueo
      */
+    
+    private EmpleadoBL empCtrl;
     public logueo() {
         initComponents();
+        
+        empCtrl = new EmpleadoBL();
     }
-
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,6 +50,11 @@ public class logueo extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
         setResizable(false);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(0, 155, 200));
@@ -129,8 +141,10 @@ public class logueo extends javax.swing.JFrame {
             }
         });
         txtContrasena.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtContrasenaKeyReleased(evt);
+
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContrasenaKeyPressed(evt);
+
             }
         });
         getContentPane().add(txtContrasena);
@@ -172,22 +186,47 @@ public class logueo extends javax.swing.JFrame {
             Home frmHome=new Home();
             frmHome.setVisible(true);
         }
-        else{
+        else{   
             JOptionPane.showMessageDialog(null,"Ingrese usuario y contraseña correctos");
         }
+
+        this.dispose();
     }//GEN-LAST:event_btnIngresarActionPerformed
 
-    private void txtContrasenaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContrasenaKeyReleased
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+      // Enter was pressed. Your code goes here.
+
             if(txtUsuario.getText().equals("grupo1") && txtContrasena.getText().equals("1234")){
                 Home frmHome=new Home();
                 frmHome.setVisible(true);
             }
-            else{
+
+            else{   
                 JOptionPane.showMessageDialog(null,"Ingrese usuario y contraseña correctos");
             }
+            
+            this.dispose();
         }
-    }//GEN-LAST:event_txtContrasenaKeyReleased
+    }//GEN-LAST:event_formKeyPressed
+
+    private void txtContrasenaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContrasenaKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            // Enter was pressed. Your code goes here.
+            if(empCtrl.LogEmpleado(txtUsuario.getText(), txtContrasena.getText())){
+                Home frmHome=new Home();
+                frmHome.setVisible(true);
+            }
+            else{   
+                JOptionPane.showMessageDialog(null,"Ingrese usuario y contraseña correctos");
+            }
+            this.dispose();
+        }
+    }//GEN-LAST:event_txtContrasenaKeyPressed
+
 
     /**
      * @param args the command line arguments
