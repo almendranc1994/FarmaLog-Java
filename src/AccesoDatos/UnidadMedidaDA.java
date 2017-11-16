@@ -23,7 +23,7 @@ public class UnidadMedidaDA {
     public UnidadMedida BuscarUnidadMedidaporNombre(String nombreABuscar){
         try{    
             Statement sentencia=Conexion.getConexion().createStatement();
-            ResultSet rs = sentencia.executeQuery("SELECT * FROM UnidadMedida WHERE nombre="+nombreABuscar);
+            ResultSet rs = sentencia.executeQuery("SELECT * FROM UnidadMedida WHERE nombre='"+nombreABuscar+"';");
             while(rs.next()){
                 int idIns= Integer.parseInt(rs.getString("idUnidadMedida"));
                 String nombre = rs.getString("nombre");
@@ -38,7 +38,7 @@ public class UnidadMedidaDA {
         }
         Conexion.closeConexion();
         return new UnidadMedida();
-
+    }
     public ArrayList<UnidadMedida> getMedidas(){
         ArrayList<UnidadMedida> listaMedidas = new ArrayList<UnidadMedida>();
         
