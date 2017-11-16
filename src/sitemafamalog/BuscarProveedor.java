@@ -23,6 +23,8 @@ public class BuscarProveedor extends javax.swing.JFrame {
     public ProveedoresBL logicaNegocio;
     public ArrayList<Proveedor> listaProveedores;
     public Proveedor proveedorSeleccionado;
+    public RegistroProveedor registro;
+    
     /**
      * Creates new form BuscarProveedor
      * @throws java.sql.SQLException
@@ -129,6 +131,7 @@ public class BuscarProveedor extends javax.swing.JFrame {
         // TODO add your handling code here:
         int index = tblProveedores.getSelectedRow();
         proveedorSeleccionado =   listaProveedores.get(index);
+        registro.setProveedor(proveedorSeleccionado);
         this.dispose();
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
