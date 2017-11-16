@@ -9,24 +9,32 @@ package Modelo;
  *
  * @author franco
  */
-public class Prioridad {
-    private int idPrioridad;
-    private String nombre;
+public enum Prioridad {
+    
+    ALTA (3, "Alta"),
+    MEDIA (2, "Media"),
+    BAJA (1, "Baja");
+    
+    private final int idPrioridad;
+    private final String prioridad;
+    
+    private Prioridad(int id, String nombre) {
+        this.idPrioridad = id;
+        this.prioridad = nombre;
+    }
     
     public int getIdPrioridad() {
         return idPrioridad;
     }
 
-    public void setIdPrioridad(int inPrioridad) {
-        this.idPrioridad = inPrioridad;
-    }
-
     public String getNombre() {
-        return nombre;
+        return prioridad;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public static Prioridad getPrioridad(int indice) {
+        for(Prioridad p: Prioridad.values()) {
+            if(p.getIdPrioridad()==indice) return p;
+        }
+        return null;
     }
-        
 }

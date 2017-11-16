@@ -6,10 +6,21 @@
 package Vista.CarritoCompras;
 
 import Controlador.CarritoBL;
+import Controlador.SolicitudCompraBL;
 import Modelo.Carrito;
+import Modelo.Insumo;
+import Modelo.Prioridad;
+import Modelo.SolicitudCompra;
+import Modelo.UnidadMedida;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -19,10 +30,18 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class SolicitudesCompra extends javax.swing.JFrame {
 
-    private CarritoBL carritoBL = new CarritoBL();
+    private final CarritoBL carritoBL = new CarritoBL();
+    private final SolicitudCompraBL solcompBL = new SolicitudCompraBL();
     
     private ArrayList<Carrito> carritos = new ArrayList<>();
+    private ArrayList<SolicitudCompra> solicitudes = new ArrayList<>();
+    private HashMap<Integer, ArrayList<SolicitudCompra>> mapSolicitudes = new HashMap<>();
     private Carrito selectedCarrito = null;
+    
+    private static final String[] COLUMNAS = {"Insumo", "Volumen", "Fecha Petición",
+        "Fecha límite", "Prioridad", "Proveedores"};
+    
+    private final SimpleDateFormat sdfr = new SimpleDateFormat("dd/MMM/yyyy");
     
     /**
      * Creates new form FiltrarInsumo
@@ -31,18 +50,68 @@ public class SolicitudesCompra extends javax.swing.JFrame {
         initComponents();
         cleanDatos();
         addListeners();
-        
-        carritos = carritoBL.obtenerCarritosActivos();
-        carritos.stream().forEach(carrito -> {
-            addCarrito(carrito);
-        });
-        
     }
     
     private void cleanDatos() {
         carritos.clear();
         ((DefaultMutableTreeNode)treeCarritos.getModel().getRoot()).removeAllChildren();
         unselectCarrito();
+        
+        carritos = carritoBL.obtenerCarritosActivos();
+        carritos.stream().forEach(carrito -> {
+            addCarrito(carrito);
+        });
+        
+        solicitudes = solcompBL.obtenerSolicitudesNoAsignadas();
+        System.out.println(solicitudes);
+        mapSolicitudes.clear();
+        for(SolicitudCompra sol: solicitudes) {
+            int codigoInsumo = sol.getInsumo().getCodigoInsumo();
+            if(!mapSolicitudes.containsKey(codigoInsumo))
+                mapSolicitudes.put(codigoInsumo, new ArrayList<>());
+            mapSolicitudes.get(codigoInsumo).add(sol);
+        }
+        
+        Object valores[][] = new Object[mapSolicitudes.size()][];
+        DefaultTableModel tableModel = new DefaultTableModel(valores, COLUMNAS);
+        
+        int counter = 0;
+        for(Map.Entry<Integer, ArrayList<SolicitudCompra>> entry: mapSolicitudes.entrySet()) {
+            Insumo insumo = entry.getValue().get(0).getInsumo();
+            UnidadMedida um = null; // TODO
+            double volumen = 0;
+            Date fechaPeticion = null;
+            Date fechaLimite = null;
+            Prioridad prioridad = Prioridad.BAJA;
+            int numProveedores = new Random().nextInt();// TODO
+            
+            for(SolicitudCompra sol: entry.getValue()) {
+                volumen += sol.getCantidad();
+                if(fechaPeticion==null) fechaPeticion = sol.getSolSuministro().getFechaPeticion();
+                else if(fechaPeticion.getTime() < sol.getSolSuministro().getFechaPeticion().getTime())
+                    fechaPeticion = sol.getSolSuministro().getFechaPeticion();
+                
+                if(fechaLimite==null) fechaLimite = sol.getSolSuministro().getFechaLimite();
+                else if(fechaLimite.getTime() > sol.getSolSuministro().getFechaLimite().getTime())
+                    fechaLimite = sol.getSolSuministro().getFechaLimite();
+                
+                if(prioridad.getIdPrioridad() < sol.getSolSuministro().getPrioridad()) {
+                    prioridad = Prioridad.getPrioridad(sol.getSolSuministro().getPrioridad());
+                }
+            }
+            
+            valores[counter] = new Object[6];
+            valores[counter][0] = insumo;
+            valores[counter][1] = volumen;
+            valores[counter][2] = sdfr.format(fechaPeticion);
+            valores[counter][3] = sdfr.format(fechaLimite);
+            valores[counter][4] = prioridad.getNombre();
+            valores[counter][5] = numProveedores;
+                    
+            counter ++;
+        }
+        
+        dgSolicitudes.setModel(tableModel);
     }
     
     /* 
@@ -160,8 +229,9 @@ public class SolicitudesCompra extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         dgSolicitudes = new javax.swing.JTable();
-        bSeleccionar = new javax.swing.JButton();
+        bSeleccionarSolicitud = new javax.swing.JButton();
         bCancelar = new javax.swing.JButton();
+        bActualizarSolicitudes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Solicitudes de compra");
@@ -249,23 +319,32 @@ public class SolicitudesCompra extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(dgSolicitudes);
 
-        bSeleccionar.setText("Seleccionar");
-        bSeleccionar.setEnabled(false);
+        bSeleccionarSolicitud.setText("Seleccionar");
+        bSeleccionarSolicitud.setEnabled(false);
 
         bCancelar.setText("Cancelar");
+
+        bActualizarSolicitudes.setText("Actualizar");
+        bActualizarSolicitudes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bActualizarSolicitudesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(bActualizarSolicitudes)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bSeleccionarSolicitud)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(bCancelar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bSeleccionar))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,8 +352,9 @@ public class SolicitudesCompra extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bActualizarSolicitudes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bCancelar)
-                    .addComponent(bSeleccionar)))
+                    .addComponent(bSeleccionarSolicitud)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -300,6 +380,11 @@ public class SolicitudesCompra extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bActualizarSolicitudesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActualizarSolicitudesActionPerformed
+        // TODO add your handling code here:
+        cleanDatos();
+    }//GEN-LAST:event_bActualizarSolicitudesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -338,10 +423,11 @@ public class SolicitudesCompra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bActualizarSolicitudes;
     private javax.swing.JButton bCancelar;
     private javax.swing.JButton bEliminarCarrito;
     private javax.swing.JButton bGenerarCompra;
-    private javax.swing.JButton bSeleccionar;
+    private javax.swing.JButton bSeleccionarSolicitud;
     private javax.swing.JButton bVerCarrito;
     private javax.swing.JTable dgSolicitudes;
     private javax.swing.JPanel jPanel1;

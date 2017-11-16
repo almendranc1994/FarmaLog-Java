@@ -66,10 +66,35 @@ public class SolicitudCompraDA {
             if(rs.next())
                 return getSolicitudCompra(rs, idSolicitudCompra);
         } catch (SQLException ex) {
+            Logger.getLogger(SolicitudCompraDA.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
         
         return null;
+    }
+    
+    public ArrayList<SolicitudCompra> obtenerSolicitudesCompraNoAsignadas() {
+        ArrayList<SolicitudCompra> solicitudes = new ArrayList<>();
+        String query = "SELECT idSolicitudCompra,idSolicitudSumnistro,idInsumo,idCarrito,cantidad,fechaSolicitud,fechaAtencion "
+                + "FROM SolicitudCompra WHERE idCarrito IS NULL";
+        
+        try {
+            Statement stmt = Conexion.getConexion().createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+            while(rs.next()) {
+                int idSolicitudCompra = rs.getInt("idSolicitudCompra");
+                SolicitudCompra solicitud = getSolicitudCompra(rs, idSolicitudCompra);
+                if(solicitud!=null) solicitudes.add(solicitud);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+            Logger.getLogger(SolicitudCompraDA.class.getName()).log(Level.SEVERE, null, ex);
+            return solicitudes;
+        }
+        
+        //System.out.println(solicitudes);
+        return solicitudes;
     }
     
     public ArrayList<SolicitudCompra> obtenerSolicitudesCarrito(int idCarrito) {
@@ -89,6 +114,7 @@ public class SolicitudCompraDA {
                 if(solicitud!=null) solicitudes.add(solicitud);
             }            
         } catch (SQLException ex) {
+            Logger.getLogger(SolicitudCompraDA.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
         
@@ -109,6 +135,7 @@ public class SolicitudCompraDA {
                 if(!rs.wasNull()) solicitudes.add(idSolicitudCompra);
             }            
         } catch (SQLException ex) {
+            Logger.getLogger(SolicitudCompraDA.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
         

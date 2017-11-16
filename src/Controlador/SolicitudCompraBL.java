@@ -56,4 +56,9 @@ public class SolicitudCompraBL {
         return SOLICITUDES_CARRITO.get(idCarrito);
     }
     
+    public ArrayList<SolicitudCompra> obtenerSolicitudesNoAsignadas() {
+        SolicitudCompraDA solcompDA = new SolicitudCompraDA();
+        return solcompDA.obtenerSolicitudesCompraNoAsignadas();
+    }
+    
 }
