@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,14 +16,16 @@ public class ProveedoresDA {
     public boolean registrarProveedor(Proveedor p){
         try{
             //IN ruc int, IN nombEmp varchar(300), IN nomb varchar(200), IN ape varchar(45), IN direc varchar(45), IN coreo varchar(45),IN telef varchar(45))
-            CallableStatement cStmt = Conexion.getConexion().prepareCall("{call AÑADIR_PROVEEDOR(?,?,?,?,?,?,?)}");
-            cStmt.setInt(1, p.getRuc());
-            cStmt.setString(2, p.getNombreEmpresa());
-            cStmt.setString(3, p.getNombres());
-            cStmt.setString(4, p.getApellidos());
-            cStmt.setString(5, p.getDireccion());
+            CallableStatement cStmt = Conexion.getConexion().prepareCall("{call AÑADIR_PROVEEDOR(?,?,?,?,?,?,?,?,?)}");
+            cStmt.setString(1, p.getNombreEmpresa());
+            cStmt.setString(2, p.getDireccion());
+            cStmt.setString(3, p.getTelefono());
+            cStmt.setString(4, p.getNombres());
+            cStmt.setString(5, p.getApellidos());
             cStmt.setString(6, p.getCorreo());
-            cStmt.setString(7, p.getTelefono());
+            cStmt.setBoolean(7, p.getEsNacional());
+            cStmt.setString(8, p.getInstitucion());
+            cStmt.setString(9, p.getRuc());
             cStmt.execute();
             return true;
         }catch(Exception e){
@@ -78,5 +81,29 @@ public class ProveedoresDA {
             return proveedor;
         }
         return null;
+    }
+    
+    public ArrayList<Proveedor> devolverProveedores() throws SQLException{
+        ArrayList<Proveedor> lista = new ArrayList<Proveedor>();
+        CallableStatement cStmt = Conexion.getConexion().prepareCall("{call LISTAR_PROVEEDORES()}");
+        ResultSet rs = cStmt.executeQuery();
+        while(rs.next()){
+            Proveedor pr = new Proveedor();
+            //cl.setID_CLIENTE(rs.getInt("ID_CLIENTE"));
+            //,,,,,,,,,
+            pr.setIdProveedor(rs.getInt("idProveedor"));
+            pr.setNombreEmpresa(rs.getString("nombreEmpresa"));
+            pr.setDireccion(rs.getString("direccion"));
+            pr.setTelefono(rs.getString("telefono"));
+            pr.setNombres(rs.getString("nombres"));
+            pr.setApellidos(rs.getString("apellidos"));
+            pr.setCorreo(rs.getString("correo"));
+            pr.setEsNacional(rs.getBoolean("esNacional"));
+            pr.setInstitucion(rs.getString("institucion"));
+            pr.setRuc(rs.getString("ruc"));
+            
+            lista.add(pr);
+        }
+        return lista;
     }
 }

@@ -6,6 +6,8 @@
 package Controlador;
 import Modelo.Proveedor;
 import AccesoDatos.ProveedoresDA;
+import java.sql.SQLException;
+import java.util.ArrayList;
 /**
  *
  * @author Andre Pando
@@ -23,5 +25,9 @@ public class ProveedoresBL {
     
     public Proveedor BuscarProveedor(int idProveedor){
         return accesoDatos.BuscarProveedor(idProveedor);
+    }
+    
+    public ArrayList<Proveedor> devolverProveedores() throws SQLException{
+        return accesoDatos.devolverProveedores();
     }
 }

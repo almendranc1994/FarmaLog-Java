@@ -11,10 +11,11 @@ public class Proveedor {
     private String Correo;
     private String telefono;
     private Boolean esNacional;
-    private int ruc;
+    private String institucion;
+    private String ruc;
     
     public Proveedor(){
-        
+        this.esNacional = true;
     }
     public Proveedor(String nombreEmpresa, Boolean esNac){
         //codigo = idProv;
@@ -36,11 +37,11 @@ public class Proveedor {
         nombres = null;
         apellidos = null;
     }
-     public int getRuc() {
+     public String getRuc() {
         return ruc;
     }
 
-    public void setRuc(int ruc) {
+    public void setRuc(String ruc) {
         this.ruc = ruc;
     }
     
@@ -110,6 +111,20 @@ public class Proveedor {
 
     public void setEsNacional(Boolean esNacional) {
         this.esNacional = esNacional;
+    }
+    
+    /**
+     * @return the institucion
+     */
+    public String getInstitucion() {
+        return institucion;
+    }
+
+    /**
+     * @param institucion the institucion to set
+     */
+    public void setInstitucion(String institucion) {
+        this.institucion = institucion;
     }
     
 }

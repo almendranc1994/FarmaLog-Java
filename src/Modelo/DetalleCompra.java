@@ -13,51 +13,46 @@ import java.util.ArrayList;
  */
 public class DetalleCompra {
     
-    private Insumo insumo;
-    private Proveedor proveedor;
-    private double volumen;
+    private final Compra compra;
+    private final SolicitudCompra solicitud;
     private double precioUnitario;
-    private UnidadMedida um;
-    private ArrayList<SolicitudSuministro> solicitudesRelacionadas = new ArrayList<>();
     
-    public DetalleCompra() {}
-    
-    public DetalleCompra(Insumo insumo, Proveedor prov) {
-        this.insumo = insumo;
-        this.proveedor = prov;
-    }
-    
-    public void setVolumen(double vol) {
-        this.volumen = vol;
-    }
-    
-    public double getVolumen() {
-        return volumen;
-    }
-    
-    public void setPrecioUnitario(double pu) {
-        this.precioUnitario = pu;
-    }
-    
-    public double getPrecioUnitario() {
-        return precioUnitario;
-    }
-    
-    public void setUnidadMedida(UnidadMedida um) {
-        this.um = um;
-    }
-    
-    public UnidadMedida getUnidadMedida() {
-        return um;
-    }
-    
-    public Proveedor getProveedor() {
-        return proveedor;
+    public DetalleCompra(Compra compra, SolicitudCompra solicitud) {
+        this.compra = compra;
+        this.solicitud = solicitud;
     }
     
     @Override
     public String toString() {
-        return insumo.getNombreInsumo();
+        return getSolicitud().getInsumo().getNombreInsumo();
+    }
+
+    /**
+     * @return the compra
+     */
+    public Compra getCompra() {
+        return compra;
+    }
+
+    /**
+     * @return the solicitud
+     */
+    public SolicitudCompra getSolicitud() {
+        return solicitud;
+    }
+
+    /**
+     * @return the precioUnitario
+     */
+    public double getPrecioUnitario() {
+        return precioUnitario;
+    }
+
+    /**
+     * @param precioUnitario the precioUnitario to set
+     */
+    public void setPrecioUnitario(double precioUnitario) {
+        this.precioUnitario = precioUnitario;
     }
     
 }

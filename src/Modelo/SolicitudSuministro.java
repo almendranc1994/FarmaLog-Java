@@ -16,7 +16,7 @@ public class SolicitudSuministro {
     private Date fechaPeticion;
     private Date fechaLimite;
     private String institucion;
-    private Prioridad prioridad; 
+    private int prioridad; 
     
     public int getCodigoSolicitudSuministro() {
         return codigoSolicitudSuministro;
@@ -50,11 +50,11 @@ public class SolicitudSuministro {
         this.institucion = institucion;
     }
 
-    public Prioridad getPrioridad() {
+    public int getPrioridad() {
         return prioridad;
     }
 
-    public void setPrioridad(Prioridad prioridad) {
+    public void setPrioridad(int prioridad) {
         this.prioridad = prioridad;
     }
     

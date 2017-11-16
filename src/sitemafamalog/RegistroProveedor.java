@@ -7,7 +7,12 @@ package sitemafamalog;
 
 import Modelo.Proveedor;
 import Controlador.ProveedoresBL;
+import Modelo.ProveedorxInsumo;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Andre
@@ -16,13 +21,15 @@ public class RegistroProveedor extends javax.swing.JFrame {
     
     private Proveedor prov;
     private ProveedoresBL logNegProv;
+    public BuscarProveedor busqueda;
+            
     /**
      * Creates new form RegistroProveedor
      */
     public RegistroProveedor() {
         initComponents();
         
-        prov = new Proveedor();
+        //prov = new Proveedor();
         logNegProv = new ProveedoresBL();
         
         txtNombre.setEnabled(false);
@@ -36,6 +43,18 @@ public class RegistroProveedor extends javax.swing.JFrame {
         btnEliminar.setEnabled(false);
         txtRUC.setEnabled(false);
         txtEmpresa.setEnabled(false);
+        txtTipoInstitucion.setEnabled(false);
+    }
+    
+    public void setProveedor(Proveedor P){
+        txtNombre.setText(P.getNombres());
+        txtApellido.setText(P.getApellidos());
+        txtCorreo.setText(P.getCorreo());
+        txtTelefono.setText(P.getTelefono());
+        txtDireccion.setText(P.getDireccion());
+        txtRUC.setText(P.getRuc());
+        txtEmpresa.setText(P.getNombreEmpresa());
+        txtTipoInstitucion.setText(P.getInstitucion());
     }
 
     /**
@@ -63,6 +82,8 @@ public class RegistroProveedor extends javax.swing.JFrame {
         txtRUC = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtEmpresa = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txtTipoInstitucion = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableInsumosAsociados = new javax.swing.JTable();
@@ -72,7 +93,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         btnNuevo = new javax.swing.JMenu();
         btnGuardar = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        btnBuscarProveedor = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
@@ -95,6 +116,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
         jLabel6.setToolTipText("");
         jLabel6.setName(""); // NOI18N
 
+        txtApellido.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtApellido.setName("txtApellido"); // NOI18N
         txtApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,6 +124,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
             }
         });
 
+        txtNombre.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtNombre.setName("txtNombre"); // NOI18N
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +132,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
             }
         });
 
+        txtCorreo.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtCorreo.setName("txtCorreo"); // NOI18N
         txtCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,6 +140,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
             }
         });
 
+        txtDireccion.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtDireccion.setName("txtDireccion"); // NOI18N
         txtDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,6 +148,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
             }
         });
 
+        txtTelefono.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtTelefono.setName("txtTelefono"); // NOI18N
         txtTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,8 +156,9 @@ public class RegistroProveedor extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("RUC");
+        jLabel1.setText("RUC:");
 
+        txtRUC.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtRUC.setName("txtDireccion"); // NOI18N
         txtRUC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,12 +166,22 @@ public class RegistroProveedor extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setText("Empresa");
+        jLabel8.setText("Empresa:");
 
+        txtEmpresa.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtEmpresa.setName("txtDireccion"); // NOI18N
         txtEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmpresaActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Institucion:");
+
+        txtTipoInstitucion.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtTipoInstitucion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTipoInstitucionActionPerformed(evt);
             }
         });
 
@@ -161,21 +198,19 @@ public class RegistroProveedor extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel5)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
                 .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtRUC, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                    .addComponent(txtRUC, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                    .addComponent(txtTipoInstitucion))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,10 +232,10 @@ public class RegistroProveedor extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtDireccion)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtRUC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -208,7 +243,11 @@ public class RegistroProveedor extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtTipoInstitucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Insumos asociados"));
@@ -216,10 +255,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
 
         tableInsumosAsociados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Código", "Nombre", "U. Medida", "Marca"
@@ -302,8 +338,17 @@ public class RegistroProveedor extends javax.swing.JFrame {
         });
         jMenuBar2.add(btnGuardar);
 
-        jMenu5.setText("Buscar");
-        jMenuBar2.add(jMenu5);
+        btnBuscarProveedor.setText("Buscar");
+        btnBuscarProveedor.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                btnBuscarProveedorMenuSelected(evt);
+            }
+        });
+        jMenuBar2.add(btnBuscarProveedor);
 
         jMenu1.setText("Eliminar");
         jMenuBar2.add(jMenu1);
@@ -362,15 +407,34 @@ public class RegistroProveedor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
-        new AnadirInsumo().setVisible(true);
+        AnadirInsumo addIns=new AnadirInsumo();
+        addIns.setVisible(true);
+        ProveedorxInsumo pxi=addIns.getSelectedProvxInsumo();
+        System.out.println("SE ASIGNÓ");
+        if(pxi!=null){
+            DefaultTableModel modelo = (DefaultTableModel)tableInsumosAsociados.getModel();
+            Object[] fila = new Object[4];         
+            fila[0] = pxi.getInsumo().getCodigoInsumo();
+            fila[1] = pxi.getInsumo().getNombreInsumo();
+            fila[2] = pxi.getUniMed().getUnidad();
+            fila[3] = pxi.getMarca().getNombre();         
+            modelo.addRow(fila);
+        }
+        if(pxi==null){
+            System.out.println("EL PXI ES NULOOOO");
+        }
+        addIns.setVisible(true);
     }//GEN-LAST:event_btnAñadirActionPerformed
 
     private void btnNuevoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_btnNuevoMenuSelected
+        prov = new Proveedor();
         txtNombre.setEnabled(true);txtNombre.setText("");
         txtApellido.setEnabled(true);txtApellido.setText("");
         txtCorreo.setEnabled(true);txtCorreo.setText("");
         txtTelefono.setEnabled(true);txtTelefono.setText("");
         txtDireccion.setEnabled(true);txtDireccion.setText("");
+        txtEmpresa.setEnabled(true); txtEmpresa.setText("");
+        txtTipoInstitucion.setEnabled(true); txtTipoInstitucion.setText("");
         tableInsumosAsociados.setEnabled(true);
         tableInsumosAsociados.removeAll();
         btnAñadir.setEnabled(true);
@@ -388,7 +452,8 @@ public class RegistroProveedor extends javax.swing.JFrame {
         prov.setDireccion(txtDireccion.getText());
         prov.setTelefono(txtTelefono.getText());
         prov.setNombreEmpresa(txtEmpresa.getText());
-        prov.setRuc(Integer.parseInt(txtRUC.getText()));
+        prov.setRuc(txtRUC.getText());
+        prov.setInstitucion(txtTipoInstitucion.getText());
         if(logNegProv.registrarProveedor(prov))
             JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente!");
     }//GEN-LAST:event_btnGuardarMenuSelected
@@ -400,6 +465,21 @@ public class RegistroProveedor extends javax.swing.JFrame {
     private void txtEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpresaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmpresaActionPerformed
+
+    private void txtTipoInstitucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTipoInstitucionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTipoInstitucionActionPerformed
+
+    private void btnBuscarProveedorMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_btnBuscarProveedorMenuSelected
+        try {
+            // TODO add your handling code here:
+            busqueda = new BuscarProveedor();
+            busqueda.registro = this;
+            busqueda.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(RegistroProveedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnBuscarProveedorMenuSelected
 
     /**
      * @param args the command line arguments
@@ -431,13 +511,15 @@ public class RegistroProveedor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegistroProveedor().setVisible(true);
+                RegistroProveedor regProv=new RegistroProveedor();
+                regProv.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAñadir;
+    private javax.swing.JMenu btnBuscarProveedor;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JMenu btnGuardar;
     private javax.swing.JButton btnModificar;
@@ -450,9 +532,9 @@ public class RegistroProveedor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -465,5 +547,6 @@ public class RegistroProveedor extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtRUC;
     private javax.swing.JTextField txtTelefono;
+    private javax.swing.JTextField txtTipoInstitucion;
     // End of variables declaration//GEN-END:variables
 }

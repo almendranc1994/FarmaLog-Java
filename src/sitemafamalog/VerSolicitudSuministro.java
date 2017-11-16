@@ -8,6 +8,8 @@ package sitemafamalog;
 import Modelo.DetalleSolicitud;
 import Modelo.SolicitudSuministro;
 import Controlador.DetalleSolicitudBL;
+import Controlador.InsumoBL;
+import Modelo.Insumo;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,6 +23,7 @@ public class VerSolicitudSuministro extends javax.swing.JFrame {
     private ArrayList<DetalleSolicitud> lista;
     private DetalleSolicitudBL gestorDetalleSolicitud;
     private DetalleSolicitud detalleSolicitud;
+    private InsumoBL gestorInsumo;
     
     public SolicitudSuministro getSolicitud() {
         return solicitud;
@@ -40,22 +43,24 @@ public class VerSolicitudSuministro extends javax.swing.JFrame {
         txtCodigo.setText(String.valueOf(solicitud.getCodigoSolicitudSuministro()));
         txtFechaPeticion.setText(solicitud.getFechaPeticion().toString());
         txtFechaLimite.setText(solicitud.getFechaLimite().toString());
-        txtPrioridad.setText(solicitud.getPrioridad().getNombre());
-        txtInstitucion.setText(solicitud.getInstitucion());
+        txtPrioridad.setText(String.valueOf(solicitud.getPrioridad()));
+        txtInstitucion.setText(solicitud.getInstitucion());        
+        gestorDetalleSolicitud = new DetalleSolicitudBL();
         lista = gestorDetalleSolicitud.obtenerLista(solicitud.getCodigoSolicitudSuministro());
+        System.out.println(lista.size());
+        gestorInsumo = new InsumoBL();
+        actualizarTabla();
     }
     
     public void actualizarTabla(){
         DefaultTableModel modelo = (DefaultTableModel)tableInsumosSuministro.getModel();
-        Object [] fila = new Object [7];
+        Object [] fila = new Object [3];
         for(int i=0; i<lista.size(); i++){
-            fila[0] = lista.get(i).getCodigoDetalleSolicitud();
-            fila[1] = lista.get(i).getInsumo().getNombreInsumo();
-            fila[2] = lista.get(i).getInsumo().getDescripcionInsumo();
-            fila[3] = lista.get(i).getVolumen();
-            fila[4] = lista.get(i).getStock();
-            fila[5] = lista.get(i).getMotivo();
-            fila[6] = lista.get(i).getEstado();
+            int id = lista.get(i).getInsumo().getCodigoInsumo();
+            Insumo insu = gestorInsumo.BuscarInsumo(id);
+            fila[0] = insu.getNombreInsumo();
+            fila[1] = lista.get(i).getVolumen();
+            fila[2] = lista.get(i).getEstado();            
             modelo.addRow(fila);
         }
     }
@@ -135,8 +140,6 @@ public class VerSolicitudSuministro extends javax.swing.JFrame {
 
         txtInstitucion.setEditable(false);
 
-        txtFechaLimite.setText("jTextField2");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -198,12 +201,10 @@ public class VerSolicitudSuministro extends javax.swing.JFrame {
 
         tableInsumosSuministro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Código", "Nombre Insumo", "Descripción", "Volumen", "Stock", "Motivo", "Estado"
+                "Nombre Insumo", "Cantidad", "Estado"
             }
         ));
         jScrollPane2.setViewportView(tableInsumosSuministro);

@@ -5,6 +5,7 @@
  */
 package AccesoDatos;
 
+import Modelo.Marca;
 import Modelo.UnidadMedida;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,7 +38,7 @@ public class UnidadMedidaDA {
         }
         Conexion.closeConexion();
         return new UnidadMedida();
-    }
+
     public ArrayList<UnidadMedida> getMedidas(){
         ArrayList<UnidadMedida> listaMedidas = new ArrayList<UnidadMedida>();
         
@@ -55,5 +56,26 @@ public class UnidadMedidaDA {
             System.out.println(ex.getMessage());
         }
         return listaMedidas;
+    }
+    
+    public ArrayList<UnidadMedida> devolverLista(){
+        ArrayList<UnidadMedida> listaUniMed=new ArrayList<UnidadMedida>();   
+        try{    
+            Statement sentencia=Conexion.getConexion().createStatement();
+            ResultSet rs = sentencia.executeQuery("SELECT * FROM UnidadMedida");
+            while(rs.next()){
+                int id= Integer.parseInt(rs.getString("idUnidadMedida"));
+                String nombre = rs.getString("nombre");
+                String abrev = rs.getString("abrev");
+                listaUniMed.add(new UnidadMedida(id,nombre,abrev));
+            }
+        }
+        catch (SQLException e){
+            // do something appropriate with the exception, *at least*:
+            e.printStackTrace();
+        }
+        Conexion.closeConexion();
+        return listaUniMed;
+
     }
 }

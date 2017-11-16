@@ -25,4 +25,8 @@ public class SolicitudSuministroBL {
     public void eliminarSolicitudSuministro(int id){
         accesoDatos.eliminarSolicitudSuministro(id);
     }
+    
+    public SolicitudSuministro obtenerSolicitudSuministro(int id){
+        return accesoDatos.obtenerSolicitudSuministro(id);
+    }
 }
