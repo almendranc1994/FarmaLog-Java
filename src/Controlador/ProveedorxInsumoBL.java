@@ -25,4 +25,9 @@ public class ProveedorxInsumoBL {
         System.out.println("Busquemos... "+nombre);
         return accesoDatos.devolverListaInsumo(nombre);
     }
+    
+    public boolean registrarProveedorxInsumo (ProveedorxInsumo PxI){
+        return accesoDatos.registrarProveedorxInsumo(PxI);
+    }    
+    
 }
