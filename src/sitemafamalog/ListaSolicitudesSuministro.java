@@ -39,10 +39,8 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
             fila[1] = date;
             DateFormat formatter2 = new SimpleDateFormat("dd/MM/yyyy");
             String date2 = formatter2.format(listaSolSuministro.get(i).getFechaLimite());            
-            fila[2] = date2;
-            String nombrePrioridad = gestorPrioridad.obtenerNombre(listaSolSuministro.get(i).getPrioridad().getIdPrioridad());
-            listaSolSuministro.get(i).getPrioridad().setNombre(nombrePrioridad);
-            fila[3] = nombrePrioridad;
+            fila[2] = date2;            
+            fila[3] = listaSolSuministro.get(i).getPrioridad();;
             fila[4] = listaSolSuministro.get(i).getInstitucion();
             modelo.addRow(fila);
         }

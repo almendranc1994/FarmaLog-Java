@@ -5,10 +5,8 @@
  */
 package Vista.CarritoCompras;
 
+import Controlador.CarritoBL;
 import Modelo.Carrito;
-import Modelo.DetalleCompra;
-import Modelo.Insumo;
-import Modelo.Proveedor;
 import java.util.ArrayList;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -21,6 +19,8 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class SolicitudesCompra extends javax.swing.JFrame {
 
+    private CarritoBL carritoBL = new CarritoBL();
+    
     private ArrayList<Carrito> carritos = new ArrayList<>();
     private Carrito selectedCarrito = null;
     
@@ -32,8 +32,11 @@ public class SolicitudesCompra extends javax.swing.JFrame {
         cleanDatos();
         addListeners();
         
-        // TODO
-        simulaDatos();
+        carritos = carritoBL.obtenerCarritosActivos();
+        carritos.stream().forEach(carrito -> {
+            addCarrito(carrito);
+        });
+        
     }
     
     private void cleanDatos() {
@@ -42,6 +45,7 @@ public class SolicitudesCompra extends javax.swing.JFrame {
         unselectCarrito();
     }
     
+    /* 
     public void simulaDatos() {
         Proveedor prov1 = new Proveedor("El proveedor!", true);
         Proveedor prov2 = new Proveedor("Proveyente", true);
@@ -81,6 +85,7 @@ public class SolicitudesCompra extends javax.swing.JFrame {
         
         for(int i=0;i<4;i++) addCarrito(carrito[i]);
     }
+    */
     
     public void addCarrito(Carrito carritoNuevo) {
         carritos.add(carritoNuevo);

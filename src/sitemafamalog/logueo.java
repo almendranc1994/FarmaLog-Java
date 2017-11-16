@@ -59,7 +59,7 @@ public class logueo extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 155, 200));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/Farma-Log (1).jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/Farma-Log (1).jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -141,8 +141,10 @@ public class logueo extends javax.swing.JFrame {
             }
         });
         txtContrasena.addKeyListener(new java.awt.event.KeyAdapter() {
+
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtContrasenaKeyPressed(evt);
+
             }
         });
         getContentPane().add(txtContrasena);
@@ -191,14 +193,17 @@ public class logueo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnIngresarActionPerformed
 
+
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
       // Enter was pressed. Your code goes here.
+
             if(txtUsuario.getText().equals("grupo1") && txtContrasena.getText().equals("1234")){
                 Home frmHome=new Home();
                 frmHome.setVisible(true);
             }
+
             else{   
                 JOptionPane.showMessageDialog(null,"Ingrese usuario y contraseña correctos");
             }
@@ -221,6 +226,7 @@ public class logueo extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_txtContrasenaKeyPressed
+
 
     /**
      * @param args the command line arguments

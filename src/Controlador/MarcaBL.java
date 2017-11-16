@@ -7,14 +7,18 @@ package Controlador;
 
 import AccesoDatos.MarcaDA;
 import Modelo.Marca;
+import java.util.ArrayList;
 
 /**
  *
  * @author Karla Isabel Pedraza Salinas 20141056
  */
 public class MarcaBL {
-    private MarcaDA accesoDatos;
+    private MarcaDA accesoDatos=new MarcaDA();
     public Marca BuscarMarcaporNombre(String nombre){
         return accesoDatos.BuscarMarcaporNombre(nombre);
+    }
+    public ArrayList<Marca> devolverLista(){
+        return accesoDatos.devolverLista();
     }
 }
