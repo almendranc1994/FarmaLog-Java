@@ -17,6 +17,9 @@ import java.util.ArrayList;
  * @author Karla Isabel Pedraza Salinas 20141056
  */
 public class UnidadMedidaDA {
+    public UnidadMedidaDA(){
+        
+    }
     public UnidadMedida BuscarUnidadMedidaporNombre(String nombreABuscar){
         try{    
             Statement sentencia=Conexion.getConexion().createStatement();
@@ -35,6 +38,24 @@ public class UnidadMedidaDA {
         }
         Conexion.closeConexion();
         return new UnidadMedida();
+
+    public ArrayList<UnidadMedida> getMedidas(){
+        ArrayList<UnidadMedida> listaMedidas = new ArrayList<UnidadMedida>();
+        
+        try{
+            Statement sentencia = Conexion.getConexion().createStatement();
+            ResultSet rs = sentencia.executeQuery("SELECT * FROM UnidadMedida");
+            while(rs.next()){
+                System.out.println(rs.getString("nombre"));
+                listaMedidas.add(new UnidadMedida(Integer.parseInt(rs.getString("idUnidadMedida")), rs.getString("nombre"), rs.getString("abrev")));
+                
+            }
+            Conexion.closeConexion();
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return listaMedidas;
     }
     
     public ArrayList<UnidadMedida> devolverLista(){
@@ -55,5 +76,6 @@ public class UnidadMedidaDA {
         }
         Conexion.closeConexion();
         return listaUniMed;
+
     }
 }

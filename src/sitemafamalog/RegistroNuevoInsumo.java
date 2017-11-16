@@ -6,7 +6,10 @@
 package sitemafamalog;
 
 import Controlador.InsumoBL;
+import Controlador.UnidadMedidaBL;
 import Modelo.Insumo;
+import Modelo.UnidadMedida;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,10 +23,14 @@ public class RegistroNuevoInsumo extends javax.swing.JFrame {
      */
     private Insumo newInsumo;
     private InsumoBL logNegInsumo;
+    private UnidadMedidaBL medidasCtrl;
+        
     public RegistroNuevoInsumo() {
+        medidasCtrl = new UnidadMedidaBL();
         initComponents();
         newInsumo = new Insumo();
         logNegInsumo = new InsumoBL();
+        
     }
 
     /**
@@ -70,7 +77,7 @@ public class RegistroNuevoInsumo extends javax.swing.JFrame {
 
         txtDescripcion.setName("txtDescripcion"); // NOI18N
 
-        cbUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbUnidad.setModel(new javax.swing.DefaultComboBoxModel(medidasCtrl.getMedidas().toArray()));
         cbUnidad.setName("cboUnidad"); // NOI18N
         cbUnidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,7 +245,7 @@ public class RegistroNuevoInsumo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRegistrar;
-    private javax.swing.JComboBox<String> cbUnidad;
+    public javax.swing.JComboBox<String> cbUnidad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
