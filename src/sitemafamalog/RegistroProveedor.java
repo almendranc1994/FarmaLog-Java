@@ -21,6 +21,8 @@ public class RegistroProveedor extends javax.swing.JFrame {
     
     private Proveedor prov;
     private ProveedoresBL logNegProv;
+    public BuscarProveedor busqueda;
+            
     /**
      * Creates new form RegistroProveedor
      */
@@ -42,6 +44,17 @@ public class RegistroProveedor extends javax.swing.JFrame {
         txtRUC.setEnabled(false);
         txtEmpresa.setEnabled(false);
         txtTipoInstitucion.setEnabled(false);
+    }
+    
+    public void setProveedor(Proveedor P){
+        txtNombre.setText(P.getNombres());
+        txtApellido.setText(P.getApellidos());
+        txtCorreo.setText(P.getCorreo());
+        txtTelefono.setText(P.getTelefono());
+        txtDireccion.setText(P.getDireccion());
+        txtRUC.setText(P.getRuc());
+        txtEmpresa.setText(P.getNombreEmpresa());
+        txtTipoInstitucion.setText(P.getInstitucion());
     }
 
     /**
@@ -103,6 +116,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
         jLabel6.setToolTipText("");
         jLabel6.setName(""); // NOI18N
 
+        txtApellido.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtApellido.setName("txtApellido"); // NOI18N
         txtApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,6 +124,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
             }
         });
 
+        txtNombre.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtNombre.setName("txtNombre"); // NOI18N
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +132,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
             }
         });
 
+        txtCorreo.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtCorreo.setName("txtCorreo"); // NOI18N
         txtCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,6 +140,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
             }
         });
 
+        txtDireccion.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtDireccion.setName("txtDireccion"); // NOI18N
         txtDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,6 +148,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
             }
         });
 
+        txtTelefono.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtTelefono.setName("txtTelefono"); // NOI18N
         txtTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +158,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
 
         jLabel1.setText("RUC:");
 
+        txtRUC.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtRUC.setName("txtDireccion"); // NOI18N
         txtRUC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,6 +168,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
 
         jLabel8.setText("Empresa:");
 
+        txtEmpresa.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtEmpresa.setName("txtDireccion"); // NOI18N
         txtEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,6 +178,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
 
         jLabel9.setText("Institucion:");
 
+        txtTipoInstitucion.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtTipoInstitucion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTipoInstitucionActionPerformed(evt);
@@ -452,7 +473,9 @@ public class RegistroProveedor extends javax.swing.JFrame {
     private void btnBuscarProveedorMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_btnBuscarProveedorMenuSelected
         try {
             // TODO add your handling code here:
-            new BuscarProveedor().setVisible(true);
+            busqueda = new BuscarProveedor();
+            busqueda.registro = this;
+            busqueda.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(RegistroProveedor.class.getName()).log(Level.SEVERE, null, ex);
         }

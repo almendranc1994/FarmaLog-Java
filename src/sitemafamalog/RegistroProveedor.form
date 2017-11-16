@@ -211,6 +211,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtApellido">
           <Properties>
+            <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="33" red="33" type="rgb"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="txtApellido" noResource="true"/>
           </Properties>
           <Events>
@@ -219,6 +222,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtNombre">
           <Properties>
+            <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="33" red="33" type="rgb"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="txtNombre" noResource="true"/>
           </Properties>
           <Events>
@@ -227,6 +233,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtCorreo">
           <Properties>
+            <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="33" red="33" type="rgb"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="txtCorreo" noResource="true"/>
           </Properties>
           <Events>
@@ -235,6 +244,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtDireccion">
           <Properties>
+            <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="33" red="33" type="rgb"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="txtDireccion" noResource="true"/>
           </Properties>
           <Events>
@@ -243,6 +255,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtTelefono">
           <Properties>
+            <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="33" red="33" type="rgb"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="txtTelefono" noResource="true"/>
           </Properties>
           <Events>
@@ -256,6 +271,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtRUC">
           <Properties>
+            <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="33" red="33" type="rgb"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="txtDireccion" noResource="true"/>
           </Properties>
           <Events>
@@ -269,6 +287,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtEmpresa">
           <Properties>
+            <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="33" red="33" type="rgb"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="txtDireccion" noResource="true"/>
           </Properties>
           <Events>
@@ -281,6 +302,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtTipoInstitucion">
+          <Properties>
+            <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="33" red="33" type="rgb"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTipoInstitucionActionPerformed"/>
           </Events>
