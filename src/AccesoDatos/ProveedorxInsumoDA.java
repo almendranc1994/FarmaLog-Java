@@ -82,4 +82,24 @@ public class ProveedorxInsumoDA {
         }
         return listaInsumos;
     } 
+    
+    public boolean registrarProveedorxInsumo (ProveedorxInsumo PxI){
+        try{           
+            Statement sentencia=Conexion.getConexion().createStatement();
+            String query = "INSERT INTO ProveedorxInsumo VALUES(";
+            query += PxI.getProveedor().getCodigo();
+            query += "," + PxI.getInsumo().getCodigoInsumo();
+            query += "," + PxI.getPrecio();
+            query += "," + PxI.getMarca().getIdMarca() + ");";
+            System.out.println(query);
+            sentencia.executeUpdate(query);
+            Conexion.closeConexion();
+            return true;           
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("No lo agrego");
+            Conexion.closeConexion();
+            return false;
+        }
+    }   
 }
