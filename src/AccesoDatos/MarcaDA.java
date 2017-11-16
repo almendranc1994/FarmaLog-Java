@@ -20,7 +20,7 @@ public class MarcaDA {
         try{    
             System.out.println("BuscarMarcaporNombre");
             Statement sentencia=Conexion.getConexion().createStatement();
-            ResultSet rs = sentencia.executeQuery("SELECT * FROM Marca WHERE nombre="+nombreABuscar);
+            ResultSet rs = sentencia.executeQuery("SELECT * FROM Marca WHERE nombre='"+nombreABuscar+"';");
             while(rs.next()){
                 int idIns= Integer.parseInt(rs.getString("idMarca"));
                 String nombre = rs.getString("nombre");
