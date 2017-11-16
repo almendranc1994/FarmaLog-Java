@@ -14,8 +14,16 @@ import java.util.ArrayList;
  * @author Karla Isabel Pedraza Salinas 20141056
  */
 public class UnidadMedidaBL {
+    
+    
     private UnidadMedidaDA accesoDatos;
+    public UnidadMedidaBL(){
+        accesoDatos = new UnidadMedidaDA();
+    }
     public UnidadMedida BuscarUnidadMedidaporNombre(String nombre){
         return accesoDatos.BuscarUnidadMedidaporNombre(nombre);
+    }
+    public ArrayList<UnidadMedida> getMedidas(){
+        return accesoDatos.getMedidas();
     }
 }

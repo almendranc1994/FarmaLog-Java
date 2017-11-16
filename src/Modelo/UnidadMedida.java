@@ -36,6 +36,11 @@ public class UnidadMedida {
     public String getAbrev() {
         return abrev;
     }
+    
+    @Override
+        public String toString() {
+            return getUnidad();
+        } 
 
     /**
      * @param abrev the abrev to set

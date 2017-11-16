@@ -5,6 +5,8 @@
  */
 package sitemafamalog;
 
+import Controlador.UnidadMedidaBL;
+
 /**
  *
  * @author Karla Isabel Pedraza Salinas 20141056
@@ -14,7 +16,10 @@ public class CompraDeInsumos extends javax.swing.JFrame {
     /**
      * Creates new form CompraDeInsumos
      */
+    private UnidadMedidaBL medidasCtrl;
     public CompraDeInsumos() {
+        medidasCtrl = new UnidadMedidaBL();
+        
         initComponents();
     }
 
@@ -48,6 +53,7 @@ public class CompraDeInsumos extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Gestion Compra de Insumos");
         setName("Compra de insumos"); // NOI18N
 
         jLabel1.setText("Nombre:");

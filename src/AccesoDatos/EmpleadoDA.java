@@ -24,7 +24,7 @@ public class EmpleadoDA {
         
     }
     public Empleado buscarEmpleado(String username, String password){
-        Empleado emp = new Empleado();
+        Empleado emp;
         
         
         AdministradorBL adminCtrl;
@@ -37,8 +37,9 @@ public class EmpleadoDA {
                 Statement sentencia=Conexion.getConexion().createStatement();
                 ResultSet rs = sentencia.executeQuery("SELECT * FROM Empleado where idEmpleado="+adminU.getId());
                 if(rs.next()){
+                    emp = new Empleado(Integer.parseInt(rs.getString("idEmpleado")),Integer.parseInt(rs.getString("idArea")),
+                rs.getString("nombres"),rs.getString("apellidos"),rs.getString("correo"),rs.getString("telefono"));
                     
-                
                     return emp;
                 }
             }

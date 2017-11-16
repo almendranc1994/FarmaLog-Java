@@ -180,9 +180,12 @@ public class logueo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtContrasenaActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        if(txtUsuario.getText().equals("grupo1") && txtContrasena.getText().equals("1234")){
+        Empleado emp = empCtrl.LogEmpleado(txtUsuario.getText(), txtContrasena.getText());
+        if(emp != null){
+            this.dispose();
             Home frmHome=new Home();
             frmHome.setVisible(true);
+            JOptionPane.showMessageDialog(null,"Bienvenido "+emp.getNombres() + " "+emp.getApellidos());
         }
         else{   
             JOptionPane.showMessageDialog(null,"Ingrese usuario y contraseña correctos");
@@ -195,9 +198,12 @@ public class logueo extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
       // Enter was pressed. Your code goes here.
-            if(txtUsuario.getText().equals("grupo1") && txtContrasena.getText().equals("1234")){
+            Empleado emp = empCtrl.LogEmpleado(txtUsuario.getText(), txtContrasena.getText());
+            if(emp != null){
+                this.dispose();
                 Home frmHome=new Home();
                 frmHome.setVisible(true);
+                JOptionPane.showMessageDialog(null,"Bienvenido "+emp.getNombres() + " "+emp.getApellidos());
             }
             else{   
                 JOptionPane.showMessageDialog(null,"Ingrese usuario y contraseña correctos");
@@ -211,14 +217,16 @@ public class logueo extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
             // Enter was pressed. Your code goes here.
-            if(empCtrl.LogEmpleado(txtUsuario.getText(), txtContrasena.getText())){
+            Empleado emp = empCtrl.LogEmpleado(txtUsuario.getText(), txtContrasena.getText());
+            if(emp != null){
+                this.dispose();
                 Home frmHome=new Home();
                 frmHome.setVisible(true);
+                JOptionPane.showMessageDialog(null,"Bienvenido "+emp.getNombres() + " "+emp.getApellidos());
             }
             else{   
                 JOptionPane.showMessageDialog(null,"Ingrese usuario y contraseña correctos");
             }
-            this.dispose();
         }
     }//GEN-LAST:event_txtContrasenaKeyPressed
 
