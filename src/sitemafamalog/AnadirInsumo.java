@@ -4,34 +4,40 @@
  * and open the template in the editor.
  */
 package sitemafamalog;
+
 import Controlador.InsumoBL;
 import Modelo.Insumo;
 import Modelo.Marca;
+import Modelo.UnidadMedida;
 import Controlador.MarcaBL;
 import Controlador.UnidadMedidaBL;
+import Controlador.ProveedorxInsumoBL;
 import Modelo.ProveedorxInsumo;
 import Modelo.UnidadMedida;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
+
 /**
  *
  * @author Karla Isabel Pedraza Salinas 20141056
  */
 public class AnadirInsumo extends javax.swing.JFrame {
+
     ArrayList<Insumo> listaInsumos;
     ArrayList<Marca> listaMarcas;
     ArrayList<UnidadMedida> listaUniMed;
-    MarcaBL logNegMarca=new MarcaBL();
-    UnidadMedidaBL logNegUniMed=new UnidadMedidaBL();
+    MarcaBL logNegMarca = new MarcaBL();
+    UnidadMedidaBL logNegUniMed = new UnidadMedidaBL();
+    InsumoBL logicaInsumo = new InsumoBL();
     ProveedorxInsumo pxIns;
+    ProveedorxInsumoBL pxILogica = new ProveedorxInsumoBL();
+    public RegistroProveedor registro;
+
     /**
      * Creates new form AnadirInsumo
      */
-    public ProveedorxInsumo getSelectedProvxInsumo(){
-        return pxIns;
-    }
     public AnadirInsumo() {
         initComponents();
         txtPrecio.setEnabled(false);
@@ -40,19 +46,18 @@ public class AnadirInsumo extends javax.swing.JFrame {
         txtStock.setEnabled(false);
         btnAgregar.setEnabled(false);
         btnNuevo.setEnabled(false);
-        try{
-            listaMarcas=logNegMarca.devolverLista();
-            System.out.println("marcas: "+listaMarcas.size());
-            for(int i=0;i<listaMarcas.size();i++){
+        try {
+            listaMarcas = logNegMarca.devolverLista();
+            System.out.println("marcas: " + listaMarcas.size());
+            for (int i = 0; i < listaMarcas.size(); i++) {
                 cbMarca.addItem(listaMarcas.get(i).getNombre());
             }
-            listaUniMed=logNegUniMed.devolverLista();
-            for(int i=0;i<listaUniMed.size();i++){
+            listaUniMed = logNegUniMed.devolverLista();
+            for (int i = 0; i < listaUniMed.size(); i++) {
                 cbUniMed.addItem(listaUniMed.get(i).getUnidad());
             }
-        }
-        catch(Exception e){
-            
+        } catch (Exception e) {
+
             System.out.println(e.getMessage());
         }
     }
@@ -223,70 +228,76 @@ public class AnadirInsumo extends javax.swing.JFrame {
         // TODO add your handling code here:
         RegistroNuevoInsumo frmNewInsumo = new RegistroNuevoInsumo();
         frmNewInsumo.setVisible(true);
-        
+
     }//GEN-LAST:event_btnNuevoActionPerformed
-    public  boolean validarPrecio(String p){
+    public boolean validarPrecio(String p) {
         double precio;
-        try{
-            precio=Double.parseDouble(p);
-        }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Ingrese un número válido en precio");
+        try {
+            precio = Double.parseDouble(p);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ingrese un número válido en precio");
             return false;
         }
-        if(precio>0)
+        if (precio > 0) {
             return true;
-        JOptionPane.showMessageDialog(null,"Ingrese un número positivo en precio");
+        }
+        JOptionPane.showMessageDialog(null, "Ingrese un número positivo en precio");
         return false;
     }
-    public  boolean validarStock(String s){
+
+    public boolean validarStock(String s) {
         int stock;
-        try{
-            stock=Integer.parseInt(s);
-        }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Ingrese un número válido en stock");
+        try {
+            stock = Integer.parseInt(s);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ingrese un número válido en stock");
             return false;
         }
-        if(stock>0)
+        if (stock > 0) {
             return true;
-        JOptionPane.showMessageDialog(null,"Ingrese un número positivo en stock");
+        }
+        JOptionPane.showMessageDialog(null, "Ingrese un número positivo en stock");
         return false;
     }
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        System.out.println("holi 123");
-        System.out.println(1+"");
-        System.out.println(Integer.parseInt(tablaInsumos.getModel().getValueAt(tablaInsumos.getSelectedRow(),0).toString())+"");
+        System.out.println(Integer.parseInt(tablaInsumos.getModel().getValueAt(tablaInsumos.getSelectedRow(), 0).toString()) + "");
         System.out.println(cbUniMed.getSelectedItem().toString());
-        System.out.println(Double.parseDouble(txtPrecio.getText())); 
-        try{
-            if(!tablaInsumos.getSelectionModel().isSelectionEmpty() && validarPrecio(txtPrecio.getText()) && validarStock(txtStock.getText())){
-                      
-                pxIns=new ProveedorxInsumo(1,Integer.parseInt(tablaInsumos.getModel().getValueAt(tablaInsumos.getSelectedRow(),0).toString()),cbUniMed.getSelectedItem().toString(),Integer.parseInt(txtStock.getText()),cbMarca.getSelectedItem().toString(),Double.parseDouble(txtPrecio.getText()));
-                System.out.println("NI SIQUIERA PUDO");
+        System.out.println(Double.parseDouble(txtPrecio.getText()));
+        try {
+            if (!tablaInsumos.getSelectionModel().isSelectionEmpty() && validarPrecio(txtPrecio.getText()) && validarStock(txtStock.getText())) {
+                UnidadMedida uniMed = (new UnidadMedidaBL()).BuscarUnidadMedidaporNombre(cbUniMed.getSelectedItem().toString());
+                Marca marca = (new MarcaBL()).BuscarMarcaporNombre(cbMarca.getSelectedItem().toString());
+                Insumo I = logicaInsumo.BuscarInsumo(Integer.parseInt(tablaInsumos.getModel().getValueAt(tablaInsumos.getSelectedRow(), 0).toString()));
+                int stock = Integer.parseInt(txtStock.getText());
+                double precio = Double.parseDouble(txtPrecio.getText());
+                pxIns = new ProveedorxInsumo(registro.prov.getCodigo(), I.getCodigoInsumo(), uniMed.getUnidad(), stock, marca.getNombre(), precio);
+                System.out.println("todo bien hasta aqui");
+                pxILogica.registrarProveedorxInsumo(pxIns);
+
+                registro.anadirInsumo(I, cbUniMed.getSelectedItem().toString(), cbMarca.getSelectedItem().toString());
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
             this.dispose();
         }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null,e.getMessage());
-        }
-        
+        this.dispose();
     }//GEN-LAST:event_btnAgregarActionPerformed
-    
+
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
-        System.out.println("Botón apretado o: "+txtNombreInsumo.getText());
-        InsumoBL logNegIns=new InsumoBL();
+        System.out.println("Botón apretado o: " + txtNombreInsumo.getText());
+        InsumoBL logNegIns = new InsumoBL();
         System.out.println("bl creado");
-        try{
+        try {
             System.out.println("dentro del try");
             listaInsumos = logNegIns.devolverListaInsumo(txtNombreInsumo.getText());
-            System.out.println("a punto de salir del try, tamaño de lista Insumos= "+listaInsumos.size());
-        }
-        catch(Exception e){
+            System.out.println("a punto de salir del try, tamaño de lista Insumos= " + listaInsumos.size());
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        if(listaInsumos!=null)
+        if (listaInsumos != null) {
             actualizarDatosTabla();
+        }
         txtPrecio.setEnabled(true);
         cbMarca.setEnabled(true);
         cbUniMed.setEnabled(true);
@@ -296,23 +307,24 @@ public class AnadirInsumo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarMouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecioActionPerformed
-    public void actualizarDatosTabla(){
-        DefaultTableModel modelo = (DefaultTableModel)tablaInsumos.getModel();
+    public void actualizarDatosTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) tablaInsumos.getModel();
         modelo.setNumRows(0);
         Object[] fila = new Object[3];
-        for(int i=0; i<listaInsumos.size();i++){
+        for (int i = 0; i < listaInsumos.size(); i++) {
             fila[0] = listaInsumos.get(i).getCodigoInsumo();
             fila[1] = listaInsumos.get(i).getNombreInsumo();
             fila[2] = listaInsumos.get(i).getDescripcionInsumo();
             modelo.addRow(fila);
         }
     }
+
     /**
      * @param args the command line arguments
      */
