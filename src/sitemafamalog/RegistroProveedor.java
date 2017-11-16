@@ -6,6 +6,9 @@
 package sitemafamalog;
 
 import Modelo.Proveedor;
+import Modelo.Insumo;
+import Modelo.Marca;
+import Modelo.UnidadMedida;
 import Controlador.ProveedoresBL;
 import Modelo.ProveedorxInsumo;
 import java.sql.SQLException;
@@ -13,25 +16,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Andre
  */
 public class RegistroProveedor extends javax.swing.JFrame {
-    
-    private Proveedor prov;
+
+    public Proveedor prov;
     private ProveedoresBL logNegProv;
     public BuscarProveedor busqueda;
-            
+    public AnadirInsumo anadir;
+
     /**
      * Creates new form RegistroProveedor
      */
     public RegistroProveedor() {
         initComponents();
-        
+
         //prov = new Proveedor();
         logNegProv = new ProveedoresBL();
-        
+
         txtNombre.setEnabled(false);
         txtApellido.setEnabled(false);
         txtCorreo.setEnabled(false);
@@ -45,8 +50,8 @@ public class RegistroProveedor extends javax.swing.JFrame {
         txtEmpresa.setEnabled(false);
         txtTipoInstitucion.setEnabled(false);
     }
-    
-    public void setProveedor(Proveedor P){
+
+    public void setProveedor(Proveedor P) {
         txtNombre.setText(P.getNombres());
         txtApellido.setText(P.getApellidos());
         txtCorreo.setText(P.getCorreo());
@@ -55,6 +60,19 @@ public class RegistroProveedor extends javax.swing.JFrame {
         txtRUC.setText(P.getRuc());
         txtEmpresa.setText(P.getNombreEmpresa());
         txtTipoInstitucion.setText(P.getInstitucion());
+        btnAñadir.setEnabled(true);
+        btnModificar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+    }
+
+    public void anadirInsumo(Insumo I, String Unidad, String Marca) {
+        DefaultTableModel modelo = (DefaultTableModel) tableInsumosAsociados.getModel();
+        Object[] fila = new Object[4];
+        fila[0] = I.getCodigoInsumo();
+        fila[1] = I.getNombreInsumo();
+        fila[2] = Unidad;
+        fila[3] = Marca;
+        modelo.addRow(fila);
     }
 
     /**
@@ -407,55 +425,51 @@ public class RegistroProveedor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
-        AnadirInsumo addIns=new AnadirInsumo();
-        addIns.setVisible(true);
-        ProveedorxInsumo pxi=addIns.getSelectedProvxInsumo();
-        System.out.println("SE ASIGNÓ");
-        if(pxi!=null){
-            DefaultTableModel modelo = (DefaultTableModel)tableInsumosAsociados.getModel();
-            Object[] fila = new Object[4];         
-            fila[0] = pxi.getInsumo().getCodigoInsumo();
-            fila[1] = pxi.getInsumo().getNombreInsumo();
-            fila[2] = pxi.getUniMed().getUnidad();
-            fila[3] = pxi.getMarca().getNombre();         
-            modelo.addRow(fila);
-        }
-        if(pxi==null){
-            System.out.println("EL PXI ES NULOOOO");
-        }
-        addIns.setVisible(true);
+        anadir = new AnadirInsumo();
+        anadir.registro = this;
+        anadir.setVisible(true);
     }//GEN-LAST:event_btnAñadirActionPerformed
 
     private void btnNuevoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_btnNuevoMenuSelected
         prov = new Proveedor();
-        txtNombre.setEnabled(true);txtNombre.setText("");
-        txtApellido.setEnabled(true);txtApellido.setText("");
-        txtCorreo.setEnabled(true);txtCorreo.setText("");
-        txtTelefono.setEnabled(true);txtTelefono.setText("");
-        txtDireccion.setEnabled(true);txtDireccion.setText("");
-        txtEmpresa.setEnabled(true); txtEmpresa.setText("");
-        txtTipoInstitucion.setEnabled(true); txtTipoInstitucion.setText("");
+        txtNombre.setEnabled(true);
+        txtNombre.setText("");
+        txtApellido.setEnabled(true);
+        txtApellido.setText("");
+        txtCorreo.setEnabled(true);
+        txtCorreo.setText("");
+        txtTelefono.setEnabled(true);
+        txtTelefono.setText("");
+        txtDireccion.setEnabled(true);
+        txtDireccion.setText("");
+        txtEmpresa.setEnabled(true);
+        txtEmpresa.setText("");
+        txtTipoInstitucion.setEnabled(true);
+        txtTipoInstitucion.setText("");
         tableInsumosAsociados.setEnabled(true);
         tableInsumosAsociados.removeAll();
         btnAñadir.setEnabled(true);
         btnModificar.setEnabled(true);
-        btnEliminar.setEnabled(true); 
+        btnEliminar.setEnabled(true);
         txtRUC.setEnabled(true);
         txtEmpresa.setEnabled(true);
     }//GEN-LAST:event_btnNuevoMenuSelected
 
     private void btnGuardarMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_btnGuardarMenuSelected
         // TODO add your handling code here:
-        prov.setNombres(txtNombre.getText());
-        prov.setApellidos(txtApellido.getText());
-        prov.setCorreo(txtCorreo.getText());
-        prov.setDireccion(txtDireccion.getText());
-        prov.setTelefono(txtTelefono.getText());
-        prov.setNombreEmpresa(txtEmpresa.getText());
-        prov.setRuc(txtRUC.getText());
-        prov.setInstitucion(txtTipoInstitucion.getText());
-        if(logNegProv.registrarProveedor(prov))
-            JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente!");
+        if (txtNombre.getText() != "") {
+            prov.setNombres(txtNombre.getText());
+            prov.setApellidos(txtApellido.getText());
+            prov.setCorreo(txtCorreo.getText());
+            prov.setDireccion(txtDireccion.getText());
+            prov.setTelefono(txtTelefono.getText());
+            prov.setNombreEmpresa(txtEmpresa.getText());
+            prov.setRuc(txtRUC.getText());
+            prov.setInstitucion(txtTipoInstitucion.getText());
+            if (logNegProv.registrarProveedor(prov)) {
+                JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente!");
+            }
+        }
     }//GEN-LAST:event_btnGuardarMenuSelected
 
     private void txtRUCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRUCActionPerformed
@@ -511,7 +525,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                RegistroProveedor regProv=new RegistroProveedor();
+                RegistroProveedor regProv = new RegistroProveedor();
                 regProv.setVisible(true);
             }
         });
