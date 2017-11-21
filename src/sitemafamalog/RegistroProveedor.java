@@ -278,7 +278,15 @@ public class RegistroProveedor extends javax.swing.JFrame {
             new String [] {
                 "Código", "Nombre", "U. Medida", "Marca"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         tableInsumosAsociados.setName("tableInsumosAsociados"); // NOI18N
         jScrollPane1.setViewportView(tableInsumosAsociados);
 
