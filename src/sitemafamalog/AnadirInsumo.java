@@ -38,6 +38,9 @@ public class AnadirInsumo extends javax.swing.JFrame {
     /**
      * Creates new form AnadirInsumo
      */
+    public ProveedorxInsumo getProveedorxInsumo(){
+        return pxIns;
+    }
     public AnadirInsumo() {
         initComponents();
         txtPrecio.setEnabled(false);
@@ -272,16 +275,16 @@ public class AnadirInsumo extends javax.swing.JFrame {
                 double precio = Double.parseDouble(txtPrecio.getText());
                 System.out.println(""+registro.prov.getCodigo()+I.getCodigoInsumo()+uniMed.getUnidad()+stock+marca.getNombre()+precio);
                 pxIns = new ProveedorxInsumo(registro.prov.getCodigo(), I.getCodigoInsumo(), uniMed.getUnidad(), stock, marca.getNombre(), precio);
-                pxILogica.registrarProveedorxInsumo(pxIns);
-
-                registro.anadirInsumo(I, cbUniMed.getSelectedItem().toString(), cbMarca.getSelectedItem().toString());
+                registro.anadirInsumo(I, cbUniMed.getSelectedItem().toString(),cbMarca.getSelectedItem().toString(),stock,precio);
+                registro.agregarPxI(pxIns);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
+            //pxIns=new ProveedorxInsumo();
         } finally {
-            this.dispose();
+            //this.dispose();
         }
-        this.dispose();
+        //this.dispose();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
