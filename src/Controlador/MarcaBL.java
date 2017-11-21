@@ -21,4 +21,9 @@ public class MarcaBL {
     public ArrayList<Marca> devolverLista(){
         return accesoDatos.devolverLista();
     }
+    
+    public Marca BuscarMarcaporCodigo(int codigo){
+        return accesoDatos.BuscarMarcaporCodigo(codigo);
+    }
+    
 }
