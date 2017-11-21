@@ -106,4 +106,17 @@ public class ProveedoresDA {
         }
         return lista;
     }
+    public int devolverUltimoId(){
+        int id=0;
+        try{
+            CallableStatement cStmt = Conexion.getConexion().prepareCall("{call LISTAR_PROVEEDORES()}");
+            ResultSet rs = cStmt.executeQuery();
+            while(rs.next())
+               id=rs.getInt("idProveedor");
+            return id;
+        }
+        catch(SQLException e){
+            return -1;
+        }
+    }
 }

@@ -10,8 +10,10 @@ import Modelo.Insumo;
 import Modelo.Marca;
 import Modelo.UnidadMedida;
 import Controlador.ProveedoresBL;
+import Controlador.ProveedorxInsumoBL;
 import Modelo.ProveedorxInsumo;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -27,7 +29,9 @@ public class RegistroProveedor extends javax.swing.JFrame {
     private ProveedoresBL logNegProv;
     public BuscarProveedor busqueda;
     public AnadirInsumo anadir;
-
+    private ProveedorxInsumoBL logNegProvxIns;
+    private ArrayList<ProveedorxInsumo> listaProveedorxInsumo;
+    
     /**
      * Creates new form RegistroProveedor
      */
@@ -65,13 +69,16 @@ public class RegistroProveedor extends javax.swing.JFrame {
         btnEliminar.setEnabled(true);
     }
 
-    public void anadirInsumo(Insumo I, String Unidad, String Marca) {
+    public void anadirInsumo(Insumo I, String Unidad, String Marca,int stock, double precio) {
         DefaultTableModel modelo = (DefaultTableModel) tableInsumosAsociados.getModel();
-        Object[] fila = new Object[4];
+        Object[] fila = new Object[6];
         fila[0] = I.getCodigoInsumo();
         fila[1] = I.getNombreInsumo();
         fila[2] = Unidad;
         fila[3] = Marca;
+        fila[4]=stock;
+        fila[5]=precio;
+        
         modelo.addRow(fila);
     }
 
@@ -221,12 +228,12 @@ public class RegistroProveedor extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                    .addComponent(txtRUC, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                    .addComponent(txtRUC)
+                    .addComponent(txtApellido)
+                    .addComponent(txtNombre)
+                    .addComponent(txtCorreo)
+                    .addComponent(txtTelefono)
+                    .addComponent(txtDireccion)
                     .addComponent(txtTipoInstitucion))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -276,11 +283,11 @@ public class RegistroProveedor extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Nombre", "U. Medida", "Marca"
+                "Código", "Nombre", "U. Medida", "Marca", "Stock", "Precio Unitario"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -314,17 +321,17 @@ public class RegistroProveedor extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,25 +348,17 @@ public class RegistroProveedor extends javax.swing.JFrame {
 
         btnNuevo.setText("Nuevo");
         btnNuevo.setName("btnNuevo"); // NOI18N
-        btnNuevo.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                btnNuevoMenuSelected(evt);
+        btnNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNuevoMouseClicked(evt);
             }
         });
         jMenuBar2.add(btnNuevo);
 
         btnGuardar.setText("Guardar");
-        btnGuardar.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                btnGuardarMenuSelected(evt);
+        btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseClicked(evt);
             }
         });
         jMenuBar2.add(btnGuardar);
@@ -390,10 +389,10 @@ public class RegistroProveedor extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -437,49 +436,9 @@ public class RegistroProveedor extends javax.swing.JFrame {
         anadir.registro = this;
         anadir.setVisible(true);
     }//GEN-LAST:event_btnAñadirActionPerformed
-
-    private void btnNuevoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_btnNuevoMenuSelected
-        prov = new Proveedor();
-        txtNombre.setEnabled(true);
-        txtNombre.setText("");
-        txtApellido.setEnabled(true);
-        txtApellido.setText("");
-        txtCorreo.setEnabled(true);
-        txtCorreo.setText("");
-        txtTelefono.setEnabled(true);
-        txtTelefono.setText("");
-        txtDireccion.setEnabled(true);
-        txtDireccion.setText("");
-        txtEmpresa.setEnabled(true);
-        txtEmpresa.setText("");
-        txtTipoInstitucion.setEnabled(true);
-        txtTipoInstitucion.setText("");
-        tableInsumosAsociados.setEnabled(true);
-        tableInsumosAsociados.removeAll();
-        btnAñadir.setEnabled(true);
-        btnModificar.setEnabled(true);
-        btnEliminar.setEnabled(true);
-        txtRUC.setEnabled(true);
-        txtEmpresa.setEnabled(true);
-    }//GEN-LAST:event_btnNuevoMenuSelected
-
-    private void btnGuardarMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_btnGuardarMenuSelected
-        // TODO add your handling code here:
-        if (txtNombre.getText() != "") {
-            prov.setNombres(txtNombre.getText());
-            prov.setApellidos(txtApellido.getText());
-            prov.setCorreo(txtCorreo.getText());
-            prov.setDireccion(txtDireccion.getText());
-            prov.setTelefono(txtTelefono.getText());
-            prov.setNombreEmpresa(txtEmpresa.getText());
-            prov.setRuc(txtRUC.getText());
-            prov.setInstitucion(txtTipoInstitucion.getText());
-            if (logNegProv.registrarProveedor(prov)) {
-                JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente!");
-            }
-        }
-    }//GEN-LAST:event_btnGuardarMenuSelected
-
+    public void agregarPxI(ProveedorxInsumo pxi){
+        listaProveedorxInsumo.add(pxi);
+    }
     private void txtRUCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRUCActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRUCActionPerformed
@@ -502,6 +461,61 @@ public class RegistroProveedor extends javax.swing.JFrame {
             Logger.getLogger(RegistroProveedor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnBuscarProveedorMenuSelected
+
+    private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
+        prov = new Proveedor();
+        txtNombre.setEnabled(true);
+        txtNombre.setText("");
+        txtApellido.setEnabled(true);
+        txtApellido.setText("");
+        txtCorreo.setEnabled(true);
+        txtCorreo.setText("");
+        txtTelefono.setEnabled(true);
+        txtTelefono.setText("");
+        txtDireccion.setEnabled(true);
+        txtDireccion.setText("");
+        txtEmpresa.setEnabled(true);
+        txtEmpresa.setText("");
+        txtTipoInstitucion.setEnabled(true);
+        txtTipoInstitucion.setText("");
+        tableInsumosAsociados.setEnabled(true);
+        tableInsumosAsociados.removeAll();
+        btnAñadir.setEnabled(true);
+        btnModificar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+        txtRUC.setEnabled(true);
+        txtEmpresa.setEnabled(true);
+        btnNuevo.setSelected(false);
+        listaProveedorxInsumo=new ArrayList<ProveedorxInsumo>();
+    }//GEN-LAST:event_btnNuevoMouseClicked
+
+    private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
+        // TODO add your handling code here:
+        if (!txtEmpresa.getText().equals("")&& !txtRUC.getText().equals("")&& !txtTelefono.getText().equals("")) {
+            prov.setNombres(txtNombre.getText());
+            prov.setApellidos(txtApellido.getText());
+            prov.setCorreo(txtCorreo.getText());
+            prov.setDireccion(txtDireccion.getText());
+            prov.setTelefono(txtTelefono.getText());
+            prov.setNombreEmpresa(txtEmpresa.getText());
+            prov.setRuc(txtRUC.getText());
+            prov.setInstitucion(txtTipoInstitucion.getText());
+
+            if (logNegProv.registrarProveedor(prov)) {
+                JOptionPane.showMessageDialog(null, listaProveedorxInsumo.size());
+                System.out.println(listaProveedorxInsumo.size());
+                for (ProveedorxInsumo proveedorxInsumo : listaProveedorxInsumo) {
+                    logNegProvxIns.registrarProveedorxInsumo(proveedorxInsumo);
+                }
+                JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente!");
+            }
+            listaProveedorxInsumo=new ArrayList<ProveedorxInsumo>();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Debe ingresar obligatoriamente: Nombre de la empresa, RUC y teléfono");
+        }
+        btnGuardar.setSelected(false);
+    }//GEN-LAST:event_btnGuardarMouseClicked
 
     /**
      * @param args the command line arguments

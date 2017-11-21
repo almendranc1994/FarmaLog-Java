@@ -15,7 +15,7 @@
             <Property name="name" type="java.lang.String" value="btnNuevo" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="btnNuevoMenuSelected"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnNuevoMouseClicked"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="btnGuardar">
@@ -23,7 +23,7 @@
             <Property name="text" type="java.lang.String" value="Guardar"/>
           </Properties>
           <Events>
-            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="btnGuardarMenuSelected"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnGuardarMouseClicked"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="btnBuscarProveedor">
@@ -73,11 +73,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jPanel1" max="32767" attributes="0"/>
                   <Component id="jPanel2" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="47" max="32767" attributes="0"/>
+              <EmptySpace pref="24" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -121,12 +121,12 @@
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="txtEmpresa" pref="174" max="32767" attributes="0"/>
-                      <Component id="txtRUC" pref="174" max="32767" attributes="0"/>
-                      <Component id="txtApellido" pref="174" max="32767" attributes="0"/>
-                      <Component id="txtNombre" pref="174" max="32767" attributes="0"/>
-                      <Component id="txtCorreo" pref="174" max="32767" attributes="0"/>
-                      <Component id="txtTelefono" pref="174" max="32767" attributes="0"/>
-                      <Component id="txtDireccion" alignment="0" pref="174" max="32767" attributes="0"/>
+                      <Component id="txtRUC" max="32767" attributes="0"/>
+                      <Component id="txtApellido" max="32767" attributes="0"/>
+                      <Component id="txtNombre" max="32767" attributes="0"/>
+                      <Component id="txtCorreo" max="32767" attributes="0"/>
+                      <Component id="txtTelefono" max="32767" attributes="0"/>
+                      <Component id="txtDireccion" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtTipoInstitucion" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -327,18 +327,19 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btnAñadir" min="-2" pref="75" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnModificar" min="-2" pref="75" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnEliminar" min="-2" pref="75" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="btnAñadir" min="-2" pref="75" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnModificar" min="-2" pref="75" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="btnEliminar" min="-2" pref="75" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jScrollPane1" alignment="0" pref="494" max="32767" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="471" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -369,15 +370,27 @@
             <Component class="javax.swing.JTable" name="tableInsumosAsociados">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="0">
+                  <Table columnCount="6" rowCount="0">
                     <Column editable="true" title="C&#xf3;digo" type="java.lang.String"/>
                     <Column editable="true" title="Nombre" type="java.lang.String"/>
                     <Column editable="true" title="U. Medida" type="java.lang.String"/>
                     <Column editable="true" title="Marca" type="java.lang.String"/>
+                    <Column editable="true" title="Stock" type="java.lang.Integer"/>
+                    <Column editable="true" title="Precio Unitario" type="java.lang.Double"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>

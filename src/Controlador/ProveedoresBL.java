@@ -30,4 +30,7 @@ public class ProveedoresBL {
     public ArrayList<Proveedor> devolverProveedores() throws SQLException{
         return accesoDatos.devolverProveedores();
     }
+    public int devolverUltimoId(){
+        return accesoDatos.devolverUltimoId();
+    }
 }
