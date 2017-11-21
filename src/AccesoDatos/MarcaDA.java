@@ -20,7 +20,7 @@ public class MarcaDA {
         try{    
             System.out.println("BuscarMarcaporNombre");
             Statement sentencia=Conexion.getConexion().createStatement();
-            ResultSet rs = sentencia.executeQuery("SELECT * FROM Marca WHERE nombre='"+nombreABuscar+"';");
+            ResultSet rs = sentencia.executeQuery("SELECT * FROM Marca WHERE nombre='"+nombreABuscar+"'");
             while(rs.next()){
                 int idIns= Integer.parseInt(rs.getString("idMarca"));
                 String nombre = rs.getString("nombre");
@@ -35,6 +35,28 @@ public class MarcaDA {
         Conexion.closeConexion();
         return new Marca();
     }
+    
+    public Marca BuscarMarcaporCodigo(int codigo){
+        try{    
+            System.out.println("BuscarMarcaporNombre");
+            Statement sentencia=Conexion.getConexion().createStatement();
+            ResultSet rs = sentencia.executeQuery("SELECT * FROM Marca WHERE idMarca="+codigo+";");
+            while(rs.next()){
+                int idIns= Integer.parseInt(rs.getString("idMarca"));
+                String nombre = rs.getString("nombre");
+                Conexion.closeConexion();
+                return (new Marca(idIns,nombre));
+            }
+        }
+        catch (SQLException e){
+            // do something appropriate with the exception, *at least*:
+            e.printStackTrace();
+        }
+        Conexion.closeConexion();
+        return new Marca();
+    }
+    
+    
     public ArrayList<Marca> devolverLista(){
         
         ArrayList<Marca> listaMarca=new ArrayList<Marca>();
