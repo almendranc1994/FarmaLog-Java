@@ -270,8 +270,8 @@ public class AnadirInsumo extends javax.swing.JFrame {
                 Insumo I = logicaInsumo.BuscarInsumo(Integer.parseInt(tablaInsumos.getModel().getValueAt(tablaInsumos.getSelectedRow(), 0).toString()));
                 int stock = Integer.parseInt(txtStock.getText());
                 double precio = Double.parseDouble(txtPrecio.getText());
+                System.out.println(""+registro.prov.getCodigo()+I.getCodigoInsumo()+uniMed.getUnidad()+stock+marca.getNombre()+precio);
                 pxIns = new ProveedorxInsumo(registro.prov.getCodigo(), I.getCodigoInsumo(), uniMed.getUnidad(), stock, marca.getNombre(), precio);
-                System.out.println("todo bien hasta aqui");
                 pxILogica.registrarProveedorxInsumo(pxIns);
 
                 registro.anadirInsumo(I, cbUniMed.getSelectedItem().toString(), cbMarca.getSelectedItem().toString());
