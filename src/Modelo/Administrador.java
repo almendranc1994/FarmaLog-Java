@@ -10,7 +10,20 @@ package Modelo;
  * @author Gonzalo
  */
 public class Administrador {
-
+    private int id;
+    private String username;
+    private String password;
+    private String ip;
+    
+    public Administrador(int id, String username, String password, String ip){
+        this.id= id;
+        this.ip = ip;
+        this.username = username;
+        this.password = password;
+    }
+    public Administrador(){
+        
+    }
     /**
      * @return the id
      */
@@ -66,19 +79,4 @@ public class Administrador {
     public void setIp(String ip) {
         this.ip = ip;
     }
-    private int id;
-    private String username;
-    private String password;
-    private String ip;
-    
-    public Administrador(int id, String username, String password, String ip){
-        this.id= id;
-        this.ip = ip;
-        this.username = username;
-        this.password = password;
-    }
-    public Administrador(){
-        
-    }
-    
 }

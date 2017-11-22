@@ -1,7 +1,9 @@
 package Modelo;
 
 public class UnidadMedida {
-
+    private int id;
+    private String unidad;
+    private String abrev;
     /**
      * @return the id
      */
@@ -48,9 +50,7 @@ public class UnidadMedida {
     public void setAbrev(String abrev) {
         this.abrev = abrev;
     }
-    private int id;
-    private String unidad;
-    private String abrev;
+    
     public UnidadMedida(){
         
     }

@@ -10,10 +10,26 @@ package Modelo;
  * @author Gonzalo
  */
 public class Empleado {
-
-    /**
-     * @return the id
-     */
+    
+    private int id;
+    private int idArea;
+    private String nombres;
+    private String apellidos;
+    private String correo;
+    private String telefono;
+    
+    public Empleado(int id, int idArea, String nombres, String apellidos,
+            String correo, String telefono){
+        this.id = id;
+        this.idArea = idArea;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.correo = correo;
+        this.telefono = telefono;
+    }
+    public Empleado(){
+        
+    }
     public int getId() {
         return id;
     }
@@ -94,26 +110,4 @@ public class Empleado {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    private int id;
-    private int idArea;
-    private String nombres;
-    private String apellidos;
-    private String correo;
-    private String telefono;
-    
-    public Empleado(int id, int idArea, String nombres, String apellidos,
-            String correo, String telefono){
-        this.id = id;
-        this.idArea = idArea;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.correo = correo;
-        this.telefono = telefono;
-        
-        
-    }
-    public Empleado(){
-        
-    }
-    
 }
