@@ -21,11 +21,10 @@ public class logueo extends javax.swing.JFrame {
     private EmpleadoBL empCtrl;
     public logueo() {
         initComponents();
-<<<<<<< OURS
-=======
+
         
         empCtrl = new EmpleadoBL();
->>>>>>> THEIRS
+
     }
         
     /**
@@ -195,11 +194,10 @@ public class logueo extends javax.swing.JFrame {
         else{   
             JOptionPane.showMessageDialog(null,"Ingrese usuario y contraseña correctos");
         }
-<<<<<<< OURS
-=======
+
 
         this.dispose();
->>>>>>> THEIRS
+
     }//GEN-LAST:event_btnIngresarActionPerformed
 
 
