@@ -31,5 +31,9 @@ public class ProveedorxInsumoBL {
     public ArrayList<ProveedorxInsumo> devolverListaInsumodeProv(int codigoProv){
         return accesoDatos.devolverListaInsumodeProv(codigoProv);
     }
+
+    public void eliminarRastroDelProveedor(int codigo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

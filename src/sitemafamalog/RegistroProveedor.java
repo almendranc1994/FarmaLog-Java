@@ -591,6 +591,11 @@ public class RegistroProveedor extends javax.swing.JFrame {
 
         btnEliminarProv.setText("Eliminar");
         btnEliminarProv.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        btnEliminarProv.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarProvMouseClicked(evt);
+            }
+        });
         jMenuBar2.add(btnEliminarProv);
 
         btnCancelarProv.setText("Cancelar");
@@ -817,6 +822,12 @@ public class RegistroProveedor extends javax.swing.JFrame {
         modelo.setNumRows(0);
         listaProveedorxInsumo=new ArrayList<ProveedorxInsumo>();
     }//GEN-LAST:event_btnCancelarProvMouseClicked
+
+    private void btnEliminarProvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarProvMouseClicked
+        // TODO add your handling code here:
+        logNegProv.eliminarProveedor(prov.getCodigo());
+        logNegProvxIns.eliminarRastroDelProveedor(prov.getCodigo());
+    }//GEN-LAST:event_btnEliminarProvMouseClicked
 
     /**
      * @param args the command line arguments

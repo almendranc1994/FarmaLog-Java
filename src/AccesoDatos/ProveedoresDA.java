@@ -118,4 +118,8 @@ public class ProveedoresDA {
             return -1;
         }
     }
+
+    public void eliminarProveedor(int codigo) {
+        //HOLIII
+    }
 }

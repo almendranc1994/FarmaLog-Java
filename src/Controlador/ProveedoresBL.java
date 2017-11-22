@@ -33,4 +33,8 @@ public class ProveedoresBL {
     public int devolverUltimoId(){
         return accesoDatos.devolverUltimoId();
     }
+
+    public void eliminarProveedor(int codigo) {
+        accesoDatos.eliminarProveedor(codigo);
+    }
 }
