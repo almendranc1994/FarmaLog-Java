@@ -192,8 +192,6 @@ public class logueo extends javax.swing.JFrame {
         else{   
             JOptionPane.showMessageDialog(null,"Ingrese usuario y contraseña correctos");
         }
-
-        this.dispose();
     }//GEN-LAST:event_btnIngresarActionPerformed
 
 
