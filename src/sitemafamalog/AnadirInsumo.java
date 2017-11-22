@@ -279,7 +279,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
                 registro.agregarPxI(pxIns);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error?");
             //pxIns=new ProveedorxInsumo();
         } finally {
             //this.dispose();
