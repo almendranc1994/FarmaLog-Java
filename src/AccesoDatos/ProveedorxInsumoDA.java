@@ -10,6 +10,7 @@ import Modelo.Insumo;
 import Modelo.ProveedorxInsumo;
 import Controlador.MarcaBL;
 import com.mysql.jdbc.Connection;
+import java.sql.CallableStatement;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -80,17 +81,17 @@ public class ProveedorxInsumoDA {
     }
     public boolean registrarProveedorxInsumo(ProveedorxInsumo PxI) {
         try {
-            System.out.println("PxI.getInsumo().getNombreInsumo() "+PxI.getInsumo().getNombreInsumo());
-            System.out.println("siiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+            /*System.out.println("PxI.getInsumo().getNombreInsumo() "+PxI.getInsumo().getNombreInsumo());
+            System.out.println("siiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");*/
             Statement sentencia = Conexion.getConexion().createStatement();
-            System.out.println("noooooooooooooooooooooooooooooooooooooooooooooooo");
+//            System.out.println("noooooooooooooooooooooooooooooooooooooooooooooooo");
             String query = "INSERT INTO ProveedorxInsumo VALUES(";
-            System.out.println("PxI.getInsumo().getCodigoInsumo() "+PxI.getInsumo().getCodigoInsumo());
-            System.out.println("PxI.getPrecio() "+PxI.getPrecio());
-            System.out.println("PxI.getMarca().getIdMarca() "+PxI.getMarca().getIdMarca());
-            System.out.println("PxI.getProveedor().getCodigo() "+PxI.getProveedor().getCodigo());           
-            System.out.println("PxI.getUniMed().getId() "+PxI.getUniMed().getId());           
-            System.out.println("PxI.getStock() "+PxI.getStock());           
+//            System.out.println("PxI.getInsumo().getCodigoInsumo() "+PxI.getInsumo().getCodigoInsumo());
+//            System.out.println("PxI.getPrecio() "+PxI.getPrecio());
+//            System.out.println("PxI.getMarca().getIdMarca() "+PxI.getMarca().getIdMarca());
+//            System.out.println("PxI.getProveedor().getCodigo() "+PxI.getProveedor().getCodigo());           
+//            System.out.println("PxI.getUniMed().getId() "+PxI.getUniMed().getId());           
+//            System.out.println("PxI.getStock() "+PxI.getStock());           
             
             
             
@@ -110,6 +111,17 @@ public class ProveedorxInsumoDA {
             System.out.println("No lo agrego");
             Conexion.closeConexion();
             return false;
+        }
+    }
+
+    public void eliminarRastroDelProveedor(int codigo) {
+        try{
+            CallableStatement cStmt = Conexion.getConexion().prepareCall("{call ELIMINAR_PROVEEDOR_EN_PROVXINS(?)}");
+            cStmt.setInt(1, codigo);
+            cStmt.execute();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 }

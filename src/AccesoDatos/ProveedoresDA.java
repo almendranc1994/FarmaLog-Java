@@ -120,6 +120,13 @@ public class ProveedoresDA {
     }
 
     public void eliminarProveedor(int codigo) {
-        //HOLIII
+        try{
+            CallableStatement cStmt = Conexion.getConexion().prepareCall("{call ELIMINAR_PROVEEDOR(?)}");
+            cStmt.setInt(1, codigo);
+            cStmt.execute();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println(e.getMessage());
+        }
     }
 }

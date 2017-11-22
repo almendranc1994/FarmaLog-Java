@@ -775,6 +775,10 @@ public class RegistroProveedor extends javax.swing.JFrame {
 
     private void pnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnModificarMouseClicked
         // TODO add your handling code here:
+        if(!tableInsumosAsociados.getSelectionModel().isSelectionEmpty()){
+            anadir.setVisible(true);
+        }
+        
     }//GEN-LAST:event_pnModificarMouseClicked
 
     private void pnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnEliminarMouseClicked
@@ -825,8 +829,12 @@ public class RegistroProveedor extends javax.swing.JFrame {
 
     private void btnEliminarProvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarProvMouseClicked
         // TODO add your handling code here:
+        logNegProv=new ProveedoresBL();
+        logNegProvxIns=new ProveedorxInsumoBL();
+        System.out.println(prov.getCodigo());
         logNegProv.eliminarProveedor(prov.getCodigo());
         logNegProvxIns.eliminarRastroDelProveedor(prov.getCodigo());
+        
     }//GEN-LAST:event_btnEliminarProvMouseClicked
 
     /**
