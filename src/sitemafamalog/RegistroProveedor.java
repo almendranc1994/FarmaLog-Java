@@ -37,7 +37,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
      */
     public RegistroProveedor() {
         initComponents();
-
+        
         //prov = new Proveedor();
         logNegProv = new ProveedoresBL();
 
@@ -69,7 +69,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
         btnEliminar.setEnabled(true);
     }
 
-    public void anadirInsumo(Insumo I, String Unidad, String Marca,int stock, double precio) {
+    public void anadirInsumoEnTabla(Insumo I, String Unidad, String Marca,int stock, double precio) {
         DefaultTableModel modelo = (DefaultTableModel) tableInsumosAsociados.getModel();
         Object[] fila = new Object[6];
         fila[0] = I.getCodigoInsumo();
@@ -464,6 +464,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
 
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
         prov = new Proveedor();
+        prov.setCodigo(logNegProv.devolverUltimoId()+1);
         txtNombre.setEnabled(true);
         txtNombre.setText("");
         txtApellido.setEnabled(true);
@@ -500,9 +501,9 @@ public class RegistroProveedor extends javax.swing.JFrame {
             prov.setNombreEmpresa(txtEmpresa.getText());
             prov.setRuc(txtRUC.getText());
             prov.setInstitucion(txtTipoInstitucion.getText());
-
+            logNegProvxIns=new ProveedorxInsumoBL();
             if (logNegProv.registrarProveedor(prov)) {
-                JOptionPane.showMessageDialog(null, listaProveedorxInsumo.size());
+                JOptionPane.showMessageDialog(null, listaProveedorxInsumo.size()+" codigo del proveedor: "+prov.getCodigo());
                 System.out.println(listaProveedorxInsumo.size());
                 for (ProveedorxInsumo proveedorxInsumo : listaProveedorxInsumo) {
                     logNegProvxIns.registrarProveedorxInsumo(proveedorxInsumo);

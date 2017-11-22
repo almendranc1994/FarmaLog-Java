@@ -51,34 +51,33 @@ public class ProveedoresDA {
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g1","inf282g1","BRXRKa3O5JUiqJWn");
             Statement sentencia=con.createStatement();
             ResultSet rs = sentencia.executeQuery("SELECT * FROM Proveedor WHERE idProveedor="+idProveedor);
-            while(rs.next()){
+            if(rs.next()){
                 System.out.println("guuuuu");
+                Proveedor proveedor = new Proveedor(idProv,nombreEmpresa,esNacional);
                 idProv= Integer.parseInt(rs.getString("idProveedor"));
                 nombreEmpresa = rs.getString("nombreEmpresa");
                 nombres = rs.getString("nombres");
                 apellidos = rs.getString("apellidos");
                 correo=rs.getString("correo");
                 telefono=rs.getString("telefono");
-                
-                if(idProv==idProveedor) break;
+                proveedor.setCodigo(idProveedor);
+                System.out.println("El código es "+idProveedor);
+                proveedor.setNombres(nombres);
+                proveedor.setNombreEmpresa(nombreEmpresa);
+                proveedor.setApellidos(apellidos);
+                proveedor.setDireccion(direccion);
+                proveedor.setCorreo(correo);
+                proveedor.setTelefono(telefono);
+                return proveedor;
+            }
+            else{
+                System.out.println("no guuuuu");
             }
             
         } catch (Exception e){
             System.out.println(e.getMessage());
             // Retornar null si no se pudo acceder a la db
             return null;
-        }
-        
-        if(idProv == idProveedor) {
-            
-            Proveedor proveedor = new Proveedor(idProv,nombreEmpresa,esNacional);
-            proveedor.setNombres(nombres);
-            proveedor.setApellidos(apellidos);
-            proveedor.setDireccion(direccion);
-            proveedor.setCorreo(correo);
-            proveedor.setTelefono(telefono);
-            
-            return proveedor;
         }
         return null;
     }

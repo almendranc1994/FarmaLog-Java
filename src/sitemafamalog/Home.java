@@ -73,9 +73,9 @@ public class Home extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(24, 47, 139));
+        jPanel2.setBackground(new java.awt.Color(0, 155, 200));
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Global Mix Farma");
 
@@ -88,7 +88,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel24.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Sistema FarmaLogs");
 
@@ -96,31 +96,31 @@ public class Home extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(699, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(976, Short.MAX_VALUE)
                 .addComponent(exit)
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(64, 64, 64)
-                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(689, Short.MAX_VALUE)))
+                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(480, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(exit)
-                .addGap(94, 94, 94)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addComponent(jLabel15)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addGap(68, 68, 68))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                    .addContainerGap(93, Short.MAX_VALUE)
-                    .addComponent(jLabel24)
+                    .addContainerGap(53, Short.MAX_VALUE)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(88, 88, 88)))
         );
 
@@ -141,11 +141,11 @@ public class Home extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/icons8-Agregar a carrito de compras-26.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel2.setForeground(new java.awt.Color(0, 155, 200));
         jLabel2.setText("Gestión Compra");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel3.setForeground(new java.awt.Color(0, 155, 200));
         jLabel3.setText("Insumos");
 
         javax.swing.GroupLayout pnlCompraInsumoLayout = new javax.swing.GroupLayout(pnlCompraInsumo);
@@ -194,12 +194,12 @@ public class Home extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/icons8-Carretilla elevadora-50.png"))); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel5.setForeground(new java.awt.Color(0, 155, 200));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Gestión");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel6.setForeground(new java.awt.Color(0, 155, 200));
         jLabel6.setText("Insumos");
 
         javax.swing.GroupLayout pnlGestionInsumosLayout = new javax.swing.GroupLayout(pnlGestionInsumos);
@@ -244,12 +244,12 @@ public class Home extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/icons8-Proveedor-50.png"))); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel8.setForeground(new java.awt.Color(0, 155, 200));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Gestión");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel9.setForeground(new java.awt.Color(0, 155, 200));
         jLabel9.setText("Proveedores");
 
         javax.swing.GroupLayout pnlProveedorLayout = new javax.swing.GroupLayout(pnlProveedor);
@@ -296,12 +296,12 @@ public class Home extends javax.swing.JFrame {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/icons8-Hoja de papel-50.png"))); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel11.setForeground(new java.awt.Color(0, 155, 200));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Gestión");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel12.setForeground(new java.awt.Color(0, 155, 200));
         jLabel12.setText("Solicitudes");
 
         javax.swing.GroupLayout pnlGestionSolicitudesLayout = new javax.swing.GroupLayout(pnlGestionSolicitudes);
@@ -349,12 +349,12 @@ public class Home extends javax.swing.JFrame {
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/icons8-Carrito de la compra cargado-50.png"))); // NOI18N
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel14.setForeground(new java.awt.Color(0, 155, 200));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("Carrito");
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel21.setForeground(new java.awt.Color(0, 155, 200));
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setText("Compras");
 
@@ -399,12 +399,12 @@ public class Home extends javax.swing.JFrame {
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/icons8-Orden de compra-50.png"))); // NOI18N
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel18.setForeground(new java.awt.Color(0, 155, 200));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("Gestión");
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel22.setForeground(new java.awt.Color(0, 155, 200));
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setText("Sol. Compras");
 
@@ -449,12 +449,12 @@ public class Home extends javax.swing.JFrame {
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/icons8-Historial de pedidos-50.png"))); // NOI18N
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel20.setForeground(new java.awt.Color(0, 155, 200));
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setText("Compras");
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel23.setForeground(new java.awt.Color(0, 155, 200));
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setText("Históricas");
 

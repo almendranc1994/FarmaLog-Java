@@ -17,6 +17,7 @@ import java.sql.Statement;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -50,8 +51,18 @@ public class ProveedorxInsumoDA {
 
     public boolean registrarProveedorxInsumo(ProveedorxInsumo PxI) {
         try {
+            System.out.println("PxI.getInsumo().getNombreInsumo() "+PxI.getInsumo().getNombreInsumo());
+            System.out.println("siiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
             Statement sentencia = Conexion.getConexion().createStatement();
+            System.out.println("noooooooooooooooooooooooooooooooooooooooooooooooo");
             String query = "INSERT INTO ProveedorxInsumo VALUES(";
+            System.out.println("PxI.getInsumo().getCodigoInsumo() "+PxI.getInsumo().getCodigoInsumo());
+            System.out.println("PxI.getPrecio() "+PxI.getPrecio());
+            System.out.println("PxI.getMarca().getIdMarca() "+PxI.getMarca().getIdMarca());
+            System.out.println("PxI.getProveedor().getCodigo() "+PxI.getProveedor().getCodigo());           
+            
+            
+            
             query += PxI.getProveedor().getCodigo();
             query += "," + PxI.getInsumo().getCodigoInsumo();
             query += "," + PxI.getPrecio();

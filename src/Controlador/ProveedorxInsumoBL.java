@@ -25,6 +25,7 @@ public class ProveedorxInsumoBL {
     }
     
     public boolean registrarProveedorxInsumo (ProveedorxInsumo PxI){
+        System.out.println(PxI.getInsumo().getNombreInsumo());
         return accesoDatos.registrarProveedorxInsumo(PxI);
     }    
     

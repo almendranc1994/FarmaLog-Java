@@ -275,7 +275,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
                 double precio = Double.parseDouble(txtPrecio.getText());
                 System.out.println(""+registro.prov.getCodigo()+I.getCodigoInsumo()+uniMed.getUnidad()+stock+marca.getNombre()+precio);
                 pxIns = new ProveedorxInsumo(registro.prov.getCodigo(), I.getCodigoInsumo(), uniMed.getUnidad(), stock, marca.getNombre(), precio);
-                registro.anadirInsumo(I, cbUniMed.getSelectedItem().toString(),cbMarca.getSelectedItem().toString(),stock,precio);
+                registro.anadirInsumoEnTabla(I, cbUniMed.getSelectedItem().toString(),cbMarca.getSelectedItem().toString(),stock,precio);
                 registro.agregarPxI(pxIns);
             }
         } catch (Exception e) {
