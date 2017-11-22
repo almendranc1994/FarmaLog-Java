@@ -64,7 +64,41 @@ public class AnadirInsumo extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }
-
+    void setValues() {
+        System.out.println("SET VALUEEEEES "+registro.isAdd());
+        if(registro.isAdd()==true){
+            txtPrecio.setEnabled(false);
+            cbMarca.setEnabled(false);
+            cbUniMed.setEnabled(false);
+            txtStock.setEnabled(false);
+            btnAgregar.setEnabled(false);
+            btnNuevo.setEnabled(false);
+        }
+        else{
+            txtPrecio.setEnabled(true);
+            cbMarca.setEnabled(true);
+            cbUniMed.setEnabled(true);
+            txtStock.setEnabled(true);
+            btnAgregar.setEnabled(true);
+            btnNuevo.setEnabled(true);
+            InsumoBL logNegIns=new InsumoBL();
+            try{
+                listaInsumos = logNegIns.devolverListaInsumo(registro.getCurrentfila()[1].toString());   
+            }
+            catch(Exception e){
+                listaInsumos=null;
+            }
+            if (listaInsumos != null) {
+                actualizarDatosTabla();
+            }
+            tablaInsumos.setRowSelectionInterval(0, 0);
+            cbMarca.setSelectedItem(registro.getCurrentfila()[3]);
+            cbUniMed.setSelectedItem(registro.getCurrentfila()[2]);
+            txtPrecio.setText(""+registro.getCurrentfila()[5]);
+            txtStock.setText(""+registro.getCurrentfila()[4]);
+            
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -263,9 +297,9 @@ public class AnadirInsumo extends javax.swing.JFrame {
         return false;
     }
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        System.out.println(Integer.parseInt(tablaInsumos.getModel().getValueAt(tablaInsumos.getSelectedRow(), 0).toString()) + "");
-        System.out.println(cbUniMed.getSelectedItem().toString());
-        System.out.println(Double.parseDouble(txtPrecio.getText()));
+//        System.out.println(Integer.parseInt(tablaInsumos.getModel().getValueAt(tablaInsumos.getSelectedRow(), 0).toString()) + "");
+//        System.out.println(cbUniMed.getSelectedItem().toString());
+//        System.out.println(Double.parseDouble(txtPrecio.getText()));
         try {
             if (!tablaInsumos.getSelectionModel().isSelectionEmpty() && validarPrecio(txtPrecio.getText()) && validarStock(txtStock.getText())) {
                 UnidadMedida uniMed = (new UnidadMedidaBL()).BuscarUnidadMedidaporNombre(cbUniMed.getSelectedItem().toString());
@@ -273,10 +307,16 @@ public class AnadirInsumo extends javax.swing.JFrame {
                 Insumo I = logicaInsumo.BuscarInsumo(Integer.parseInt(tablaInsumos.getModel().getValueAt(tablaInsumos.getSelectedRow(), 0).toString()));
                 int stock = Integer.parseInt(txtStock.getText());
                 double precio = Double.parseDouble(txtPrecio.getText());
-                System.out.println(""+registro.prov.getCodigo()+I.getCodigoInsumo()+uniMed.getUnidad()+stock+marca.getNombre()+precio);
-                pxIns = new ProveedorxInsumo(registro.prov.getCodigo(), I.getCodigoInsumo(), uniMed.getUnidad(), stock, marca.getNombre(), precio);
-                registro.anadirInsumoEnTabla(I, cbUniMed.getSelectedItem().toString(),cbMarca.getSelectedItem().toString(),stock,precio);
-                registro.agregarPxI(pxIns);
+                System.out.println(""+registro.getProv().getCodigo()+I.getCodigoInsumo()+uniMed.getUnidad()+stock+marca.getNombre()+precio);
+                pxIns = new ProveedorxInsumo(registro.getProv().getCodigo(), I.getCodigoInsumo(), uniMed.getUnidad(), stock, marca.getNombre(), precio);
+                if(registro.isAdd()){
+                    registro.anadirInsumoEnTabla(I, cbUniMed.getSelectedItem().toString(),cbMarca.getSelectedItem().toString(),stock,precio);
+                    registro.agregarPxI(pxIns);
+                }
+                else{
+                    registro.modificarTabla(I, cbUniMed.getSelectedItem().toString(),cbMarca.getSelectedItem().toString(),stock,precio);
+                    registro.modificarPxIenLista(pxIns);
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error?");
@@ -284,7 +324,8 @@ public class AnadirInsumo extends javax.swing.JFrame {
         } finally {
             //this.dispose();
         }
-        //this.dispose();
+        if(registro.isAdd()==false)
+            this.dispose();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
@@ -380,4 +421,6 @@ public class AnadirInsumo extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
+
+    
 }
