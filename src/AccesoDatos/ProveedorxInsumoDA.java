@@ -48,7 +48,30 @@ public class ProveedorxInsumoDA {
         }
         return listaInsumos;
     }
+    public ArrayList<ProveedorxInsumo> devolverListaInsumodeProv(int codigoProv) {
 
+        ArrayList<ProveedorxInsumo> listaInsumos = new ArrayList<ProveedorxInsumo>();
+        try {
+            Statement sentencia = Conexion.getConexion().createStatement();
+            ResultSet rs = sentencia.executeQuery("SELECT * FROM ProveedorxInsumo WHERE IdInsumo = " + codigoProv+";");
+
+            while (rs.next()) {
+                ProveedorxInsumo provxIns;
+                MarcaBL logicaM = new MarcaBL();
+                int idIns= Integer.parseInt(rs.getString("idInsumo"));
+                String nombreUnidad = rs.getString("nombreUnidad");
+                //int stock=rs.getString("stock");
+                int idMarca=Integer.parseInt(rs.getString("idMarca"));
+                double precio=Double.parseDouble(rs.getString("precioUnitario"));
+                provxIns = new ProveedorxInsumo(codigoProv, idIns, nombreUnidad, 0, (logicaM.BuscarMarcaporCodigo(idMarca)).getNombre(), precio);
+                listaInsumos.add(provxIns);
+            }
+            Conexion.closeConexion();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return listaInsumos;
+    }
     public boolean registrarProveedorxInsumo(ProveedorxInsumo PxI) {
         try {
             System.out.println("PxI.getInsumo().getNombreInsumo() "+PxI.getInsumo().getNombreInsumo());

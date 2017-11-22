@@ -28,5 +28,8 @@ public class ProveedorxInsumoBL {
         System.out.println(PxI.getInsumo().getNombreInsumo());
         return accesoDatos.registrarProveedorxInsumo(PxI);
     }    
+    public ArrayList<ProveedorxInsumo> devolverListaInsumodeProv(int codigoProv){
+        return accesoDatos.devolverListaInsumodeProv(codigoProv);
+    }
     
 }

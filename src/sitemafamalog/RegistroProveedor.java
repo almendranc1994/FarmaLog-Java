@@ -34,6 +34,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
     
     /**
      * Creates new form RegistroProveedor
+     * @return 
      */
     public RegistroProveedor() {
         initComponents();
@@ -81,7 +82,20 @@ public class RegistroProveedor extends javax.swing.JFrame {
         
         modelo.addRow(fila);
     }
-
+    public void actualizarDatosTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) tableInsumosAsociados.getModel();
+        modelo.setNumRows(0);
+        Object[] fila = new Object[6];
+        for (int i = 0; i < listaProveedorxInsumo.size(); i++) {
+            fila[0] = listaProveedorxInsumo.get(i).getInsumo().getCodigoInsumo();
+            fila[1] = listaProveedorxInsumo.get(i).getInsumo().getNombreInsumo();
+            fila[2] = listaProveedorxInsumo.get(i).getUniMed().getUnidad();
+            fila[3] = listaProveedorxInsumo.get(i).getMarca().getNombre();
+            fila[4] = listaProveedorxInsumo.get(i).getStock();
+            fila[5] = listaProveedorxInsumo.get(i).getPrecio();
+            modelo.addRow(fila);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -364,13 +378,9 @@ public class RegistroProveedor extends javax.swing.JFrame {
         jMenuBar2.add(btnGuardar);
 
         btnBuscarProveedor.setText("Buscar");
-        btnBuscarProveedor.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                btnBuscarProveedorMenuSelected(evt);
+        btnBuscarProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarProveedorMouseClicked(evt);
             }
         });
         jMenuBar2.add(btnBuscarProveedor);
@@ -405,6 +415,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
@@ -451,17 +462,6 @@ public class RegistroProveedor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTipoInstitucionActionPerformed
 
-    private void btnBuscarProveedorMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_btnBuscarProveedorMenuSelected
-        try {
-            // TODO add your handling code here:
-            busqueda = new BuscarProveedor();
-            busqueda.registro = this;
-            busqueda.setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(RegistroProveedor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnBuscarProveedorMenuSelected
-
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
         prov = new Proveedor();
         prov.setCodigo(logNegProv.devolverUltimoId()+1);
@@ -506,6 +506,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, listaProveedorxInsumo.size()+" codigo del proveedor: "+prov.getCodigo());
                 System.out.println(listaProveedorxInsumo.size());
                 for (ProveedorxInsumo proveedorxInsumo : listaProveedorxInsumo) {
+                    proveedorxInsumo.setProveedor((new ProveedoresBL()).BuscarProveedor(prov.getCodigo()));
                     logNegProvxIns.registrarProveedorxInsumo(proveedorxInsumo);
                 }
                 JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente!");
@@ -517,6 +518,21 @@ public class RegistroProveedor extends javax.swing.JFrame {
         }
         btnGuardar.setSelected(false);
     }//GEN-LAST:event_btnGuardarMouseClicked
+    public void cargarInsumosAsociados(int codigo){
+        listaProveedorxInsumo=logNegProvxIns.devolverListaInsumodeProv(codigo);
+        actualizarDatosTabla();
+    }
+    private void btnBuscarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarProveedorMouseClicked
+        try {
+            // TODO add your handling code here:
+            busqueda = new BuscarProveedor();
+            busqueda.registro = this;
+            busqueda.setVisible(true);
+            //System.out.println("El codigo es "+prov.getNombreEmpresa());
+        } catch (SQLException ex) {
+            Logger.getLogger(RegistroProveedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnBuscarProveedorMouseClicked
 
     /**
      * @param args the command line arguments

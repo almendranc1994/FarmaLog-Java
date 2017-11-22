@@ -234,9 +234,12 @@ public class BuscarProveedor extends javax.swing.JFrame {
         int index = tblProveedores.getSelectedRow();
         proveedorSeleccionado =   listaProveedores.get(index);
         registro.setProveedor(proveedorSeleccionado);
+        registro.cargarInsumosAsociados(proveedorSeleccionado.getCodigo());
         this.dispose();
     }//GEN-LAST:event_btnSeleccionarActionPerformed
-
+    public int obtenerCodigo(){
+        return proveedorSeleccionado.getCodigo();
+    }
     /**
      * @param args the command line arguments
      */
