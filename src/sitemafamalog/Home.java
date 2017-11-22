@@ -442,15 +442,31 @@ public class Home extends javax.swing.JFrame {
         JPanel p = new JPanel();
         p.setLayout(new FlowLayout());
         
+        
+        
         JInternalFrame internalFrame = new JInternalFrame();
         internalFrame.setContentPane(frmNewProveedor.getContentPane());
         internalFrame.pack();
         
-        internalFrame.setBounds(280, 90, 560, 589);
-        dp.add(internalFrame);
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(internalFrame.getContentPane());
+        internalFrame.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(internalFrame, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 560, 589));
+
+        
+//        internalFrame.setBounds(280, 90, 560, 589);
+//        dp.add(internalFrame);
         
         internalFrame.setVisible(true);
-        this.add(internalFrame);
+//        this.add(internalFrame);
     }//GEN-LAST:event_pnlProveedorMousePressed
 
     private void pnlCompraInsumoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlCompraInsumoMousePressed
