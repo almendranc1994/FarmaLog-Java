@@ -78,4 +78,23 @@ public class UnidadMedidaDA {
         return listaUniMed;
 
     }
+
+    public UnidadMedida BuscarUnidadMedidaporId(int idUnidad) {
+        try{    
+            Statement sentencia=Conexion.getConexion().createStatement();
+            ResultSet rs = sentencia.executeQuery("SELECT * FROM UnidadMedida WHERE idUnidadMedida="+idUnidad+";");
+            while(rs.next()){
+                String nombre = rs.getString("nombre");
+                String abrev = rs.getString("abrev");
+                Conexion.closeConexion();
+                return (new UnidadMedida(idUnidad,nombre,abrev));
+            }
+        }
+        catch (SQLException e){
+            // do something appropriate with the exception, *at least*:
+            e.printStackTrace();
+        }
+        Conexion.closeConexion();
+        return new UnidadMedida();
+    }
 }

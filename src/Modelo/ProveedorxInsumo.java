@@ -24,9 +24,17 @@ public class ProveedorxInsumo {
     }
 
     public ProveedorxInsumo(int idProveedor,int idInsumo,String nombreUnidad,int stock,String nombreMarca,double precio){
-        this.proveedor=(new ProveedoresBL()).BuscarProveedor(idProveedor);
+        //this.proveedor=(new ProveedoresBL()).BuscarProveedor(idProveedor);
         this.insumo=(new InsumoBL()).BuscarInsumo(idInsumo);
         this.uniMed=(new UnidadMedidaBL()).BuscarUnidadMedidaporNombre(nombreUnidad);
+        this.stock=stock;
+        this.marca=(new MarcaBL()).BuscarMarcaporNombre(nombreMarca);
+        this.precio=precio;
+    }
+    public ProveedorxInsumo(int idProveedor,int idInsumo,int idUnidad,int stock,String nombreMarca,double precio){
+        this.proveedor=(new ProveedoresBL()).BuscarProveedor(idProveedor);
+        this.insumo=(new InsumoBL()).BuscarInsumo(idInsumo);
+        this.uniMed=(new UnidadMedidaBL()).BuscarUnidadMedidaporId(idUnidad);
         this.stock=stock;
         this.marca=(new MarcaBL()).BuscarMarcaporNombre(nombreMarca);
         this.precio=precio;

@@ -34,10 +34,11 @@ public class RegistroProveedor extends javax.swing.JFrame {
     
     /**
      * Creates new form RegistroProveedor
+     * @return 
      */
     public RegistroProveedor() {
         initComponents();
-
+        
         //prov = new Proveedor();
         logNegProv = new ProveedoresBL();
 
@@ -47,12 +48,19 @@ public class RegistroProveedor extends javax.swing.JFrame {
         txtTelefono.setEnabled(false);
         txtDireccion.setEnabled(false);
         tableInsumosAsociados.setEnabled(false);
-        btnAñadir.setEnabled(false);
-        btnModificar.setEnabled(false);
-        btnEliminar.setEnabled(false);
+        pnAnadir.setEnabled(false);
+        pnModificar.setEnabled(false);
+        pnEliminar.setEnabled(false);
         txtRUC.setEnabled(false);
         txtEmpresa.setEnabled(false);
         txtTipoInstitucion.setEnabled(false);
+        
+        btnNuevo.setEnabled(true);
+        btnGuardar.setEnabled(false);
+        btnBuscarProveedor.setEnabled(true);
+        btnActualizar.setEnabled(false);
+        btnEliminarProv.setEnabled(false);
+        btnCancelarProv.setEnabled(false);
     }
 
     public void setProveedor(Proveedor P) {
@@ -64,12 +72,12 @@ public class RegistroProveedor extends javax.swing.JFrame {
         txtRUC.setText(P.getRuc());
         txtEmpresa.setText(P.getNombreEmpresa());
         txtTipoInstitucion.setText(P.getInstitucion());
-        btnAñadir.setEnabled(true);
-        btnModificar.setEnabled(true);
-        btnEliminar.setEnabled(true);
+        pnAnadir.setEnabled(true);
+        pnModificar.setEnabled(true);
+        pnEliminar.setEnabled(true);
     }
 
-    public void anadirInsumo(Insumo I, String Unidad, String Marca,int stock, double precio) {
+    public void anadirInsumoEnTabla(Insumo I, String Unidad, String Marca,int stock, double precio) {
         DefaultTableModel modelo = (DefaultTableModel) tableInsumosAsociados.getModel();
         Object[] fila = new Object[6];
         fila[0] = I.getCodigoInsumo();
@@ -81,7 +89,24 @@ public class RegistroProveedor extends javax.swing.JFrame {
         
         modelo.addRow(fila);
     }
-
+    public void actualizarDatosTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) tableInsumosAsociados.getModel();
+        modelo.setNumRows(0);
+        Object[] fila = new Object[6];
+        if(listaProveedorxInsumo==null){
+            System.out.println("No hay nadaaa");
+            return;
+        }
+        for (int i = 0; i < listaProveedorxInsumo.size(); i++) {
+            fila[0] = listaProveedorxInsumo.get(i).getInsumo().getCodigoInsumo();
+            fila[1] = listaProveedorxInsumo.get(i).getInsumo().getNombreInsumo();
+            fila[2] = listaProveedorxInsumo.get(i).getUniMed().getUnidad();
+            fila[3] = listaProveedorxInsumo.get(i).getMarca().getNombre();
+            fila[4] = listaProveedorxInsumo.get(i).getStock();
+            fila[5] = listaProveedorxInsumo.get(i).getPrecio();
+            modelo.addRow(fila);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -92,6 +117,10 @@ public class RegistroProveedor extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel7 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -109,34 +138,86 @@ public class RegistroProveedor extends javax.swing.JFrame {
         txtEmpresa = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtTipoInstitucion = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableInsumosAsociados = new javax.swing.JTable();
-        btnEliminar = new javax.swing.JButton();
-        btnModificar = new javax.swing.JButton();
-        btnAñadir = new javax.swing.JButton();
+        pnAnadir = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        pnModificar = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        pnEliminar = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         btnNuevo = new javax.swing.JMenu();
         btnGuardar = new javax.swing.JMenu();
         btnBuscarProveedor = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        btnActualizar = new javax.swing.JMenu();
+        btnEliminarProv = new javax.swing.JMenu();
+        btnCancelarProv = new javax.swing.JMenu();
 
         jLabel7.setText("jLabel7");
 
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro de Proveedores");
+        setBackground(new java.awt.Color(255, 255, 255));
+        setUndecorated(true);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos proveedor"));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Datos proveedor", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 1, 14))); // NOI18N
+        jPanel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel2.setText("Apellidos:");
 
+        jLabel3.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel3.setText("Nombres:");
 
+        jLabel4.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel4.setText("Correo:");
 
+        jLabel5.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel5.setText("Teléfono:");
 
+        jLabel6.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel6.setText("Dirección:");
         jLabel6.setToolTipText("");
         jLabel6.setName(""); // NOI18N
@@ -181,6 +262,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel1.setText("RUC:");
 
         txtRUC.setDisabledTextColor(new java.awt.Color(51, 51, 51));
@@ -191,6 +273,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel8.setText("Empresa:");
 
         txtEmpresa.setDisabledTextColor(new java.awt.Color(51, 51, 51));
@@ -201,7 +284,8 @@ public class RegistroProveedor extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setText("Institucion:");
+        jLabel9.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jLabel9.setText("Institución:");
 
         txtTipoInstitucion.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtTipoInstitucion.addActionListener(new java.awt.event.ActionListener() {
@@ -235,7 +319,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
                     .addComponent(txtTelefono)
                     .addComponent(txtDireccion)
                     .addComponent(txtTipoInstitucion))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,12 +356,18 @@ public class RegistroProveedor extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtTipoInstitucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Insumos asociados"));
+        jLabel14.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+        jLabel14.setText("Registro de Proveedor");
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Insumos asociados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 1, 14))); // NOI18N
+        jPanel2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jPanel2.setName("Insumos asociados"); // NOI18N
 
+        tableInsumosAsociados.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         tableInsumosAsociados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -297,56 +387,178 @@ public class RegistroProveedor extends javax.swing.JFrame {
         tableInsumosAsociados.setName("tableInsumosAsociados"); // NOI18N
         jScrollPane1.setViewportView(tableInsumosAsociados);
 
-        btnEliminar.setText("Eliminar");
-        btnEliminar.setName("btnEliminar"); // NOI18N
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
+        pnAnadir.setBackground(new java.awt.Color(0, 155, 200));
+        pnAnadir.setName("panelAnadir"); // NOI18N
+        pnAnadir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnAnadirMouseClicked(evt);
             }
         });
 
-        btnModificar.setText("Modificar");
-        btnModificar.setName("btnModificar"); // NOI18N
+        jLabel11.setBackground(new java.awt.Color(0, 155, 200));
+        jLabel11.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("Añadir");
+        jLabel11.setName("pnAnadir"); // NOI18N
 
-        btnAñadir.setText("Añadir");
-        btnAñadir.setName("btnAñadir"); // NOI18N
-        btnAñadir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAñadirActionPerformed(evt);
+        javax.swing.GroupLayout pnAnadirLayout = new javax.swing.GroupLayout(pnAnadir);
+        pnAnadir.setLayout(pnAnadirLayout);
+        pnAnadirLayout.setHorizontalGroup(
+            pnAnadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+        );
+        pnAnadirLayout.setVerticalGroup(
+            pnAnadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pnModificar.setBackground(new java.awt.Color(0, 155, 200));
+        pnModificar.setName("pnModificar"); // NOI18N
+        pnModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnModificarMouseClicked(evt);
             }
         });
+
+        jLabel12.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("Modificar");
+
+        javax.swing.GroupLayout pnModificarLayout = new javax.swing.GroupLayout(pnModificar);
+        pnModificar.setLayout(pnModificarLayout);
+        pnModificarLayout.setHorizontalGroup(
+            pnModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+        );
+        pnModificarLayout.setVerticalGroup(
+            pnModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pnEliminar.setBackground(new java.awt.Color(0, 155, 200));
+        pnEliminar.setName("pnEliminar"); // NOI18N
+        pnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnEliminarMouseClicked(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Eliminar");
+
+        javax.swing.GroupLayout pnEliminarLayout = new javax.swing.GroupLayout(pnEliminar);
+        pnEliminar.setLayout(pnEliminarLayout);
+        pnEliminarLayout.setHorizontalGroup(
+            pnEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+        );
+        pnEliminarLayout.setVerticalGroup(
+            pnEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pnAnadir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnModificar)
-                    .addComponent(btnAñadir))
-                .addGap(304, 304, 304))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnAnadir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5))
         );
 
+        jPanel6.setBackground(new java.awt.Color(204, 0, 0));
+        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel6MouseClicked(evt);
+            }
+        });
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("X");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jLabel10.setText("jLabel10");
+
+        jMenuBar2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+        jMenuBar2.setAlignmentY(0.5F);
+        jMenuBar2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jMenuBar2.setMaximumSize(new java.awt.Dimension(259, 19));
+
         btnNuevo.setText("Nuevo");
+        btnNuevo.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         btnNuevo.setName("btnNuevo"); // NOI18N
         btnNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -356,6 +568,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
         jMenuBar2.add(btnNuevo);
 
         btnGuardar.setText("Guardar");
+        btnGuardar.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnGuardarMouseClicked(evt);
@@ -364,22 +577,30 @@ public class RegistroProveedor extends javax.swing.JFrame {
         jMenuBar2.add(btnGuardar);
 
         btnBuscarProveedor.setText("Buscar");
-        btnBuscarProveedor.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                btnBuscarProveedorMenuSelected(evt);
+        btnBuscarProveedor.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        btnBuscarProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarProveedorMouseClicked(evt);
             }
         });
         jMenuBar2.add(btnBuscarProveedor);
 
-        jMenu1.setText("Eliminar");
-        jMenuBar2.add(jMenu1);
+        btnActualizar.setText("Actualizar");
+        btnActualizar.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jMenuBar2.add(btnActualizar);
 
-        jMenu2.setText("Cancelar");
-        jMenuBar2.add(jMenu2);
+        btnEliminarProv.setText("Eliminar");
+        btnEliminarProv.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jMenuBar2.add(btnEliminarProv);
+
+        btnCancelarProv.setText("Cancelar");
+        btnCancelarProv.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        btnCancelarProv.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCancelarProvMouseClicked(evt);
+            }
+        });
+        jMenuBar2.add(btnCancelarProv);
 
         setJMenuBar(jMenuBar2);
 
@@ -387,24 +608,15 @@ public class RegistroProveedor extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(24, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
@@ -426,16 +638,6 @@ public class RegistroProveedor extends javax.swing.JFrame {
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefonoActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
-        anadir = new AnadirInsumo();
-        anadir.registro = this;
-        anadir.setVisible(true);
-    }//GEN-LAST:event_btnAñadirActionPerformed
     public void agregarPxI(ProveedorxInsumo pxi){
         listaProveedorxInsumo.add(pxi);
     }
@@ -451,19 +653,17 @@ public class RegistroProveedor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTipoInstitucionActionPerformed
 
-    private void btnBuscarProveedorMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_btnBuscarProveedorMenuSelected
-        try {
-            // TODO add your handling code here:
-            busqueda = new BuscarProveedor();
-            busqueda.registro = this;
-            busqueda.setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(RegistroProveedor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnBuscarProveedorMenuSelected
-
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
         prov = new Proveedor();
+        
+        btnNuevo.setEnabled(false);
+        btnGuardar.setEnabled(true);
+        btnBuscarProveedor.setEnabled(false);
+        btnActualizar.setEnabled(false);
+        btnEliminarProv.setEnabled(false);
+        btnCancelarProv.setEnabled(true);
+        
+        prov.setCodigo(logNegProv.devolverUltimoId()+1);
         txtNombre.setEnabled(true);
         txtNombre.setText("");
         txtApellido.setEnabled(true);
@@ -480,12 +680,14 @@ public class RegistroProveedor extends javax.swing.JFrame {
         txtTipoInstitucion.setText("");
         tableInsumosAsociados.setEnabled(true);
         tableInsumosAsociados.removeAll();
-        btnAñadir.setEnabled(true);
-        btnModificar.setEnabled(true);
-        btnEliminar.setEnabled(true);
+        pnAnadir.setEnabled(true);
+        txtRUC.setText("");
+        pnModificar.setEnabled(true);
+        pnEliminar.setEnabled(true);
         txtRUC.setEnabled(true);
         txtEmpresa.setEnabled(true);
-        btnNuevo.setSelected(false);
+        DefaultTableModel modelo = (DefaultTableModel) tableInsumosAsociados.getModel();
+        modelo.setNumRows(0);
         listaProveedorxInsumo=new ArrayList<ProveedorxInsumo>();
     }//GEN-LAST:event_btnNuevoMouseClicked
 
@@ -500,11 +702,12 @@ public class RegistroProveedor extends javax.swing.JFrame {
             prov.setNombreEmpresa(txtEmpresa.getText());
             prov.setRuc(txtRUC.getText());
             prov.setInstitucion(txtTipoInstitucion.getText());
-
+            logNegProvxIns=new ProveedorxInsumoBL();
             if (logNegProv.registrarProveedor(prov)) {
-                JOptionPane.showMessageDialog(null, listaProveedorxInsumo.size());
+                JOptionPane.showMessageDialog(null, listaProveedorxInsumo.size()+" codigo del proveedor: "+prov.getCodigo());
                 System.out.println(listaProveedorxInsumo.size());
                 for (ProveedorxInsumo proveedorxInsumo : listaProveedorxInsumo) {
+                    proveedorxInsumo.setProveedor((new ProveedoresBL()).BuscarProveedor(prov.getCodigo()));
                     logNegProvxIns.registrarProveedorxInsumo(proveedorxInsumo);
                 }
                 JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente!");
@@ -516,6 +719,104 @@ public class RegistroProveedor extends javax.swing.JFrame {
         }
         btnGuardar.setSelected(false);
     }//GEN-LAST:event_btnGuardarMouseClicked
+    public void cargarInsumosAsociados(int codigo){
+        try{
+            logNegProvxIns=new ProveedorxInsumoBL();
+            listaProveedorxInsumo=logNegProvxIns.devolverListaInsumodeProv(codigo);
+        }
+        catch(Exception e){
+            
+        }
+        actualizarDatosTabla();
+    }
+    private void btnBuscarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarProveedorMouseClicked
+        try {
+            // TODO add your handling code here:
+            busqueda = new BuscarProveedor();
+            busqueda.registro = this;
+            busqueda.setVisible(true);
+            //System.out.println("El codigo es "+prov.getNombreEmpresa());
+        } catch (SQLException ex) {
+            Logger.getLogger(RegistroProveedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        txtNombre.setEnabled(false);
+        txtApellido.setEnabled(false);
+        txtCorreo.setEnabled(false);
+        txtTelefono.setEnabled(false);
+        txtDireccion.setEnabled(false);
+        txtEmpresa.setEnabled(false);
+        txtTipoInstitucion.setEnabled(false);
+        tableInsumosAsociados.setEnabled(true);
+        pnAnadir.setEnabled(true);
+        pnModificar.setEnabled(true);
+        pnEliminar.setEnabled(true);
+        txtRUC.setEnabled(false);
+        txtEmpresa.setEnabled(false);
+        
+        
+        btnNuevo.setEnabled(false);
+        btnGuardar.setEnabled(false);
+        btnBuscarProveedor.setEnabled(false);
+        btnActualizar.setEnabled(true);
+        btnEliminarProv.setEnabled(true);
+        btnCancelarProv.setEnabled(true);
+    }//GEN-LAST:event_btnBuscarProveedorMouseClicked
+
+    private void pnAnadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnAnadirMouseClicked
+        anadir = new AnadirInsumo();
+        anadir.registro = this;
+        anadir.setVisible(true);
+    }//GEN-LAST:event_pnAnadirMouseClicked
+
+    private void pnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnModificarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pnModificarMouseClicked
+
+    private void pnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnEliminarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pnEliminarMouseClicked
+
+    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jPanel6MouseClicked
+
+    private void btnCancelarProvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarProvMouseClicked
+        // TODO add your handling code here:
+        btnNuevo.setEnabled(true);
+        btnGuardar.setEnabled(false);
+        btnBuscarProveedor.setEnabled(true);
+        btnActualizar.setEnabled(false);
+        btnEliminarProv.setEnabled(false);
+        btnCancelarProv.setEnabled(false);
+        
+        prov.setCodigo(logNegProv.devolverUltimoId()+1);
+        txtNombre.setEnabled(false);
+        txtNombre.setText("");
+        txtApellido.setEnabled(false);
+        txtApellido.setText("");
+        txtCorreo.setEnabled(false);
+        txtCorreo.setText("");
+        txtTelefono.setEnabled(false);
+        txtTelefono.setText("");
+        txtDireccion.setEnabled(false);
+        txtDireccion.setText("");
+        txtEmpresa.setEnabled(false);
+        txtEmpresa.setText("");
+        txtTipoInstitucion.setEnabled(false);
+        txtTipoInstitucion.setText("");
+        tableInsumosAsociados.setEnabled(false);
+        tableInsumosAsociados.removeAll();
+        pnAnadir.setEnabled(false);
+        txtRUC.setText("");
+        pnModificar.setEnabled(false);
+        pnEliminar.setEnabled(false);
+        txtRUC.setEnabled(false);
+        txtEmpresa.setEnabled(false);
+        DefaultTableModel modelo = (DefaultTableModel) tableInsumosAsociados.getModel();
+        modelo.setNumRows(0);
+        listaProveedorxInsumo=new ArrayList<ProveedorxInsumo>();
+    }//GEN-LAST:event_btnCancelarProvMouseClicked
 
     /**
      * @param args the command line arguments
@@ -554,13 +855,19 @@ public class RegistroProveedor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAñadir;
+    private javax.swing.JMenu btnActualizar;
     private javax.swing.JMenu btnBuscarProveedor;
-    private javax.swing.JButton btnEliminar;
+    private javax.swing.JMenu btnCancelarProv;
+    private javax.swing.JMenu btnEliminarProv;
     private javax.swing.JMenu btnGuardar;
-    private javax.swing.JButton btnModificar;
     private javax.swing.JMenu btnNuevo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -569,12 +876,18 @@ public class RegistroProveedor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel pnAnadir;
+    private javax.swing.JPanel pnEliminar;
+    private javax.swing.JPanel pnModificar;
     private javax.swing.JTable tableInsumosAsociados;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCorreo;
