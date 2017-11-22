@@ -86,6 +86,10 @@ public class RegistroProveedor extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) tableInsumosAsociados.getModel();
         modelo.setNumRows(0);
         Object[] fila = new Object[6];
+        if(listaProveedorxInsumo==null){
+            System.out.println("No hay nadaaa");
+            return;
+        }
         for (int i = 0; i < listaProveedorxInsumo.size(); i++) {
             fila[0] = listaProveedorxInsumo.get(i).getInsumo().getCodigoInsumo();
             fila[1] = listaProveedorxInsumo.get(i).getInsumo().getNombreInsumo();
@@ -482,11 +486,14 @@ public class RegistroProveedor extends javax.swing.JFrame {
         tableInsumosAsociados.setEnabled(true);
         tableInsumosAsociados.removeAll();
         btnAñadir.setEnabled(true);
+        txtRUC.setText("");
         btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
         txtRUC.setEnabled(true);
         txtEmpresa.setEnabled(true);
         btnNuevo.setSelected(false);
+        DefaultTableModel modelo = (DefaultTableModel) tableInsumosAsociados.getModel();
+        modelo.setNumRows(0);
         listaProveedorxInsumo=new ArrayList<ProveedorxInsumo>();
     }//GEN-LAST:event_btnNuevoMouseClicked
 
@@ -519,7 +526,14 @@ public class RegistroProveedor extends javax.swing.JFrame {
         btnGuardar.setSelected(false);
     }//GEN-LAST:event_btnGuardarMouseClicked
     public void cargarInsumosAsociados(int codigo){
-        listaProveedorxInsumo=logNegProvxIns.devolverListaInsumodeProv(codigo);
+        try{
+            logNegProvxIns=new ProveedorxInsumoBL();
+            listaProveedorxInsumo=logNegProvxIns.devolverListaInsumodeProv(codigo);
+        
+        }
+        catch(Exception e){
+            
+        }
         actualizarDatosTabla();
     }
     private void btnBuscarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarProveedorMouseClicked
@@ -532,6 +546,20 @@ public class RegistroProveedor extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(RegistroProveedor.class.getName()).log(Level.SEVERE, null, ex);
         }
+        txtNombre.setEnabled(false);
+        txtApellido.setEnabled(false);
+        txtCorreo.setEnabled(false);
+        txtTelefono.setEnabled(false);
+        txtDireccion.setEnabled(false);
+        txtEmpresa.setEnabled(false);
+        txtTipoInstitucion.setEnabled(false);
+        tableInsumosAsociados.setEnabled(true);
+        btnAñadir.setEnabled(true);
+        btnModificar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+        txtRUC.setEnabled(false);
+        txtEmpresa.setEnabled(false);
+        btnNuevo.setSelected(true);
     }//GEN-LAST:event_btnBuscarProveedorMouseClicked
 
     /**

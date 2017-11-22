@@ -30,4 +30,8 @@ public class UnidadMedidaBL {
     public ArrayList<UnidadMedida> devolverLista(){
         return accesoDatos.devolverLista();
     }
+
+    public UnidadMedida BuscarUnidadMedidaporId(int idUnidad) {
+        return accesoDatos.BuscarUnidadMedidaporId(idUnidad);
+    }
 }

@@ -49,22 +49,28 @@ public class ProveedorxInsumoDA {
         return listaInsumos;
     }
     public ArrayList<ProveedorxInsumo> devolverListaInsumodeProv(int codigoProv) {
-
+        System.out.println("En da: "+codigoProv);
         ArrayList<ProveedorxInsumo> listaInsumos = new ArrayList<ProveedorxInsumo>();
         try {
             Statement sentencia = Conexion.getConexion().createStatement();
-            ResultSet rs = sentencia.executeQuery("SELECT * FROM ProveedorxInsumo WHERE IdInsumo = " + codigoProv+";");
-
+            ResultSet rs = sentencia.executeQuery("SELECT * FROM ProveedorxInsumo WHERE IdProveedor = " + codigoProv);
+            System.out.println("SELECT * FROM ProveedorxInsumo WHERE IdProveedor = " + codigoProv);
             while (rs.next()) {
+                System.out.println("entró a rs.next");
                 ProveedorxInsumo provxIns;
                 MarcaBL logicaM = new MarcaBL();
                 int idIns= Integer.parseInt(rs.getString("idInsumo"));
-                String nombreUnidad = rs.getString("nombreUnidad");
-                //int stock=rs.getString("stock");
+                int idUnidadMedida = Integer.parseInt(rs.getString("idUnidadMedida"));
+                int stock=Integer.parseInt(rs.getString("stock"));
                 int idMarca=Integer.parseInt(rs.getString("idMarca"));
                 double precio=Double.parseDouble(rs.getString("precioUnitario"));
-                provxIns = new ProveedorxInsumo(codigoProv, idIns, nombreUnidad, 0, (logicaM.BuscarMarcaporCodigo(idMarca)).getNombre(), precio);
+                System.out.println("idIns: "+idIns+"; idUniMed:  "+idUnidadMedida+", Stock: "+stock+" ,idMarca: "+idMarca+"; precio:"+precio);
+                provxIns = new ProveedorxInsumo(codigoProv, idIns, idUnidadMedida, stock, (logicaM.BuscarMarcaporCodigo(idMarca)).getNombre(), precio);
+                System.out.println("holiii");
+                System.out.println("idProv: "+provxIns.getProveedor().getCodigo()+"idIns: "+provxIns.getInsumo().getCodigoInsumo()+"; idUniMed:  "+provxIns.getUniMed().getId()+", Stock: "+provxIns.getStock()+" ,idMarca: "+provxIns.getMarca().getIdMarca()+"; precio:"+provxIns.getPrecio());
+                System.out.println("logró crear provxIns");
                 listaInsumos.add(provxIns);
+                System.out.println("lo agregó a la lista. Tamaño: "+listaInsumos.size());
             }
             Conexion.closeConexion();
         } catch (Exception e) {
@@ -83,13 +89,18 @@ public class ProveedorxInsumoDA {
             System.out.println("PxI.getPrecio() "+PxI.getPrecio());
             System.out.println("PxI.getMarca().getIdMarca() "+PxI.getMarca().getIdMarca());
             System.out.println("PxI.getProveedor().getCodigo() "+PxI.getProveedor().getCodigo());           
+            System.out.println("PxI.getUniMed().getId() "+PxI.getUniMed().getId());           
+            System.out.println("PxI.getStock() "+PxI.getStock());           
             
             
             
             query += PxI.getProveedor().getCodigo();
             query += "," + PxI.getInsumo().getCodigoInsumo();
             query += "," + PxI.getPrecio();
-            query += "," + PxI.getMarca().getIdMarca() + ");";
+            query += "," + PxI.getMarca().getIdMarca();
+            query += "," + PxI.getUniMed().getId();
+            query += "," +  PxI.getStock()+ ");";
+            
             System.out.println(query);
             sentencia.executeUpdate(query);
             Conexion.closeConexion();
