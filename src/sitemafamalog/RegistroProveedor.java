@@ -54,6 +54,13 @@ public class RegistroProveedor extends javax.swing.JFrame {
         txtRUC.setEnabled(false);
         txtEmpresa.setEnabled(false);
         txtTipoInstitucion.setEnabled(false);
+        
+        btnNuevo.setEnabled(true);
+        btnGuardar.setEnabled(false);
+        btnBuscarProveedor.setEnabled(true);
+        btnActualizar.setEnabled(false);
+        btnEliminarProv.setEnabled(false);
+        btnCancelarProv.setEnabled(false);
     }
 
     public void setProveedor(Proveedor P) {
@@ -141,13 +148,16 @@ public class RegistroProveedor extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         pnEliminar = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         btnNuevo = new javax.swing.JMenu();
         btnGuardar = new javax.swing.JMenu();
         btnBuscarProveedor = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        btnActualizar = new javax.swing.JMenu();
+        btnEliminarProv = new javax.swing.JMenu();
+        btnCancelarProv = new javax.swing.JMenu();
 
         jLabel7.setText("jLabel7");
 
@@ -481,40 +491,74 @@ public class RegistroProveedor extends javax.swing.JFrame {
                 .addGap(5, 5, 5))
         );
 
+        jPanel6.setBackground(new java.awt.Color(204, 0, 0));
+        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel6MouseClicked(evt);
+            }
+        });
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("X");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
                 .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jLabel10.setText("jLabel10");
 
-        jMenuBar2.setBorder(null);
+        jMenuBar2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+        jMenuBar2.setAlignmentY(0.5F);
         jMenuBar2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jMenuBar2.setMaximumSize(new java.awt.Dimension(259, 19));
 
         btnNuevo.setText("Nuevo");
-        btnNuevo.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnNuevo.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         btnNuevo.setName("btnNuevo"); // NOI18N
         btnNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -524,7 +568,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
         jMenuBar2.add(btnNuevo);
 
         btnGuardar.setText("Guardar");
-        btnGuardar.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnGuardar.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnGuardarMouseClicked(evt);
@@ -533,7 +577,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
         jMenuBar2.add(btnGuardar);
 
         btnBuscarProveedor.setText("Buscar");
-        btnBuscarProveedor.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnBuscarProveedor.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         btnBuscarProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBuscarProveedorMouseClicked(evt);
@@ -541,13 +585,22 @@ public class RegistroProveedor extends javax.swing.JFrame {
         });
         jMenuBar2.add(btnBuscarProveedor);
 
-        jMenu1.setText("Eliminar");
-        jMenu1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jMenuBar2.add(jMenu1);
+        btnActualizar.setText("Actualizar");
+        btnActualizar.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jMenuBar2.add(btnActualizar);
 
-        jMenu2.setText("Cancelar");
-        jMenu2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jMenuBar2.add(jMenu2);
+        btnEliminarProv.setText("Eliminar");
+        btnEliminarProv.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jMenuBar2.add(btnEliminarProv);
+
+        btnCancelarProv.setText("Cancelar");
+        btnCancelarProv.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        btnCancelarProv.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCancelarProvMouseClicked(evt);
+            }
+        });
+        jMenuBar2.add(btnCancelarProv);
 
         setJMenuBar(jMenuBar2);
 
@@ -602,6 +655,14 @@ public class RegistroProveedor extends javax.swing.JFrame {
 
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
         prov = new Proveedor();
+        
+        btnNuevo.setEnabled(false);
+        btnGuardar.setEnabled(true);
+        btnBuscarProveedor.setEnabled(false);
+        btnActualizar.setEnabled(false);
+        btnEliminarProv.setEnabled(false);
+        btnCancelarProv.setEnabled(true);
+        
         prov.setCodigo(logNegProv.devolverUltimoId()+1);
         txtNombre.setEnabled(true);
         txtNombre.setText("");
@@ -625,7 +686,6 @@ public class RegistroProveedor extends javax.swing.JFrame {
         pnEliminar.setEnabled(true);
         txtRUC.setEnabled(true);
         txtEmpresa.setEnabled(true);
-        btnNuevo.setSelected(false);
         DefaultTableModel modelo = (DefaultTableModel) tableInsumosAsociados.getModel();
         modelo.setNumRows(0);
         listaProveedorxInsumo=new ArrayList<ProveedorxInsumo>();
@@ -692,7 +752,14 @@ public class RegistroProveedor extends javax.swing.JFrame {
         pnEliminar.setEnabled(true);
         txtRUC.setEnabled(false);
         txtEmpresa.setEnabled(false);
-        btnNuevo.setSelected(true);
+        
+        
+        btnNuevo.setEnabled(false);
+        btnGuardar.setEnabled(false);
+        btnBuscarProveedor.setEnabled(false);
+        btnActualizar.setEnabled(true);
+        btnEliminarProv.setEnabled(true);
+        btnCancelarProv.setEnabled(true);
     }//GEN-LAST:event_btnBuscarProveedorMouseClicked
 
     private void pnAnadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnAnadirMouseClicked
@@ -708,6 +775,48 @@ public class RegistroProveedor extends javax.swing.JFrame {
     private void pnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnEliminarMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_pnEliminarMouseClicked
+
+    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jPanel6MouseClicked
+
+    private void btnCancelarProvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarProvMouseClicked
+        // TODO add your handling code here:
+        btnNuevo.setEnabled(true);
+        btnGuardar.setEnabled(false);
+        btnBuscarProveedor.setEnabled(true);
+        btnActualizar.setEnabled(false);
+        btnEliminarProv.setEnabled(false);
+        btnCancelarProv.setEnabled(false);
+        
+        prov.setCodigo(logNegProv.devolverUltimoId()+1);
+        txtNombre.setEnabled(false);
+        txtNombre.setText("");
+        txtApellido.setEnabled(false);
+        txtApellido.setText("");
+        txtCorreo.setEnabled(false);
+        txtCorreo.setText("");
+        txtTelefono.setEnabled(false);
+        txtTelefono.setText("");
+        txtDireccion.setEnabled(false);
+        txtDireccion.setText("");
+        txtEmpresa.setEnabled(false);
+        txtEmpresa.setText("");
+        txtTipoInstitucion.setEnabled(false);
+        txtTipoInstitucion.setText("");
+        tableInsumosAsociados.setEnabled(false);
+        tableInsumosAsociados.removeAll();
+        pnAnadir.setEnabled(false);
+        txtRUC.setText("");
+        pnModificar.setEnabled(false);
+        pnEliminar.setEnabled(false);
+        txtRUC.setEnabled(false);
+        txtEmpresa.setEnabled(false);
+        DefaultTableModel modelo = (DefaultTableModel) tableInsumosAsociados.getModel();
+        modelo.setNumRows(0);
+        listaProveedorxInsumo=new ArrayList<ProveedorxInsumo>();
+    }//GEN-LAST:event_btnCancelarProvMouseClicked
 
     /**
      * @param args the command line arguments
@@ -746,7 +855,10 @@ public class RegistroProveedor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu btnActualizar;
     private javax.swing.JMenu btnBuscarProveedor;
+    private javax.swing.JMenu btnCancelarProv;
+    private javax.swing.JMenu btnEliminarProv;
     private javax.swing.JMenu btnGuardar;
     private javax.swing.JMenu btnNuevo;
     private javax.swing.JLabel jLabel1;
@@ -755,6 +867,7 @@ public class RegistroProveedor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -763,14 +876,13 @@ public class RegistroProveedor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnAnadir;
