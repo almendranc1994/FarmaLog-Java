@@ -8,6 +8,7 @@ package sitemafamalog;
 //Hace el import de Vista.CarritoCompras
 //Hacer el import de Vista.RecepcionInsumos
 
+import AccesoDatos.Conexion;
 import javax.swing.JPanel;
 /**
  *
@@ -15,6 +16,15 @@ import javax.swing.JPanel;
  */
 import Vista.CarritoCompras.CarritoCompras;
 import Vista.CarritoCompras.SolicitudesCompra;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 public class Home extends javax.swing.JFrame {
 
     /**
@@ -66,6 +76,7 @@ public class Home extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        btnReporteProveedores = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -501,6 +512,14 @@ public class Home extends javax.swing.JFrame {
 
         jPanel1.add(pnlComprasRealizadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 140, 50));
 
+        btnReporteProveedores.setText("Reporte Proveedores");
+        btnReporteProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporteProveedoresActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnReporteProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 150, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -646,6 +665,38 @@ public class Home extends javax.swing.JFrame {
         SolicitudesCompra frmSolCompras = new SolicitudesCompra();
         frmSolCompras.setVisible(true);
     }//GEN-LAST:event_pnlSolicitudesCompraMouseClicked
+
+    private void btnReporteProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteProveedoresActionPerformed
+        // TODO add your handling code here:
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con =  DriverManager.getConnection(
+                    "jdbc:mysql://200.16.7.96/inf282g1", 
+                    "inf282g1", "BRXRKa3O5JUiqJWn");
+//            JasperReport jr = (JasperReport)
+//       JRLoader.loadObjectFromFile(
+// SitemaFamaLog.class.getResource
+//        ("/Reportes/ReporteProveedores.jasper").getFile());
+            InputStream jasperStream = getClass().getResourceAsStream("/Reportes/ReporteProveedores.jasper");
+            JasperReport jr = (JasperReport) JRLoader.loadObject(jasperStream);
+//            String dir = "D:\\facultad\\8vo ciclo\\LP2\\ta\\javaGit\\FarmaLog-Java\\src\\Reportes\\ReporteProveedores.jrxml";
+//            JasperReport  jr = JasperCompileManager.compileReport(dir);
+            //HashMap parametros = new HashMap();
+            //parametros.put("nombreEmpresa", "IDIOMAS PUCP");
+            //parametros.put("parametroSexo","M");
+            
+            JasperPrint impresion =
+                    JasperFillManager.fillReport(
+                            jr, null, con);
+            
+            JasperViewer viewer = new JasperViewer(impresion);
+            
+            viewer.setVisible(true);
+            
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btnReporteProveedoresActionPerformed
     
     public void setColor(JPanel panel){
         panel.setBackground(new java.awt.Color(156,156,156));
@@ -690,6 +741,7 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReporteProveedores;
     private javax.swing.JLabel exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

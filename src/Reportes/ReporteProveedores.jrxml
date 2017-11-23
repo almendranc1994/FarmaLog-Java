@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f8f8fb43-f00e-4b97-abb1-989d9f940457">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c6f5da00-e7c6-460f-9587-c80af31af3b4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT
      Proveedor.`nombreEmpresa` AS Proveedor_nombreEmpresa,
@@ -17,22 +20,15 @@ FROM
 		<groupExpression><![CDATA[$F{Proveedor_nombreEmpresa}]]></groupExpression>
 		<groupHeader>
 			<band height="33">
-				<staticText>
-					<reportElement mode="Opaque" x="0" y="0" width="100" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="6af6196a-33e7-4f27-b28a-cb5bebe200da"/>
-					<textElement>
-						<font size="12"/>
-					</textElement>
-					<text><![CDATA[Proveedor_nombreEmpresa]]></text>
-				</staticText>
 				<textField>
-					<reportElement mode="Opaque" x="100" y="0" width="455" height="32" forecolor="#006699" backcolor="#E6E6E6" uuid="58d78df7-1dfb-43b9-8590-6e3cbd4822e8"/>
+					<reportElement mode="Opaque" x="100" y="0" width="455" height="32" forecolor="#006699" backcolor="#E6E6E6" uuid="0edc2a2b-567a-4750-8830-790565f3ecbb"/>
 					<textElement>
 						<font size="24" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{Proveedor_nombreEmpresa}]]></textFieldExpression>
 				</textField>
 				<line>
-					<reportElement x="-20" y="32" width="595" height="1" forecolor="#666666" uuid="986cb3fa-d922-44d5-84c1-c165f2576ed1"/>
+					<reportElement x="-20" y="32" width="595" height="1" forecolor="#666666" uuid="d6bfd620-872a-4296-b9b8-fb4ee67f2d1d"/>
 				</line>
 			</band>
 		</groupHeader>
@@ -46,20 +42,20 @@ FROM
 	<title>
 		<band height="72">
 			<frame>
-				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="e637167f-3050-4936-9a2e-753ed261e8d8"/>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="48486086-a7fc-4090-af2f-307c6000b352"/>
 				<staticText>
-					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="becaad52-0f8e-4f99-b752-7ed61759b175"/>
+					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="9fb24353-0c1c-4a00-9d9e-ddb477e7880d"/>
 					<textElement>
 						<font size="34" isBold="true"/>
 					</textElement>
-					<text><![CDATA[TITLE]]></text>
+					<text><![CDATA[Proveedores]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="0e126159-14ba-4a3d-b7b9-964864beaadc"/>
+					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="6d83a795-3a8b-414e-a046-f7d63d760590"/>
 					<textElement textAlignment="Right">
 						<font size="14" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Add a description here]]></text>
+					<text><![CDATA[]]></text>
 				</staticText>
 			</frame>
 		</band>
@@ -70,24 +66,24 @@ FROM
 	<columnHeader>
 		<band height="21">
 			<line>
-				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="cd36f03f-079a-44d4-8b08-ce0f999d2685"/>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="9a7ad9b3-ac01-4b38-915e-6a0df04cb407"/>
 			</line>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="c18dc09d-bcd4-4c31-be7a-621b18e2e5c9"/>
+				<reportElement mode="Opaque" x="0" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="00659508-dbbf-4a69-b577-c2274226a209"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Proveedor_nombres]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="185" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="04ff34fd-169e-46c5-9bdc-d01c6ba766f3"/>
+				<reportElement mode="Opaque" x="185" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="37a4b098-fbb8-49f6-b5e4-6dacdb17fd20"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Proveedor_apellidos]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="370" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="92356a16-6a76-4e12-97cf-141b311c5255"/>
+				<reportElement mode="Opaque" x="370" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="668dcfb7-9ce2-4f26-bfd4-fbf877564049"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -98,24 +94,24 @@ FROM
 	<detail>
 		<band height="20">
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="7bc372e9-433a-428a-98d5-354ee082b9bf"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="f8938469-3fb7-4cda-8064-d9d671520365"/>
 			</line>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="0" width="185" height="20" uuid="8bb84adf-5e0f-46e5-80e7-c488edde09a1"/>
+				<reportElement x="0" y="0" width="185" height="20" uuid="9045c336-3db8-4037-9285-13ccaf7ab8d1"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Proveedor_nombres}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="185" y="0" width="185" height="20" uuid="1ce184c3-899b-4e79-ab72-ff96c1bd6b79"/>
+				<reportElement x="185" y="0" width="185" height="20" uuid="6d5cd1f2-2b85-441b-bac5-d31d02f10cf5"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Proveedor_apellidos}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="370" y="0" width="185" height="20" uuid="40eca7b9-5f9b-4b26-a89c-ea72a9ea7e98"/>
+				<reportElement x="370" y="0" width="185" height="20" uuid="0d2a63cf-178a-4c28-b782-3122292e6dcc"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
@@ -129,16 +125,16 @@ FROM
 	<pageFooter>
 		<band height="17">
 			<textField>
-				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="dded07b2-a1cf-4a1f-a0ad-6a4e4269637e"/>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="e150c33e-0d50-44a3-aef1-b45345b60aac"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="678b5a8f-0c42-423c-8f55-580daacb47a0"/>
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="8dd2b5af-9703-4242-8568-3b989ec7bf06"/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="0" y="4" width="100" height="13" uuid="4b47fa43-08aa-4b08-9a0c-eb7533b0774f"/>
+				<reportElement x="0" y="4" width="100" height="13" uuid="7d249681-27da-41ff-88bc-81be7c9e24ca"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>
