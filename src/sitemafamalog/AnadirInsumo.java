@@ -48,7 +48,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
             cbMarca.setEnabled(false);
             cbUniMed.setEnabled(false);
             txtStock.setEnabled(false);
-            btnAgregar.setEnabled(false);
+            pnAgregar.setEnabled(false);
             btnNuevo.setEnabled(false);
         }
         else{
@@ -56,7 +56,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
             cbMarca.setEnabled(true);
             cbUniMed.setEnabled(true);
             txtStock.setEnabled(true);
-            btnAgregar.setEnabled(true);
+            pnAgregar.setEnabled(true);
             btnNuevo.setEnabled(true);
             InsumoBL logNegIns=new InsumoBL();
             try{
@@ -82,8 +82,8 @@ public class AnadirInsumo extends javax.swing.JFrame {
         cbMarca.setEnabled(false);
         cbUniMed.setEnabled(false);
         txtStock.setEnabled(false);
-        btnAgregar.setEnabled(false);
-        btnNuevo.setEnabled(false);
+        pnAgregar.setEnabled(false);
+        btnNuevo.setEnabled(true);
         try {
             listaMarcas = logNegMarca.devolverLista();
             System.out.println("marcas: " + listaMarcas.size());
@@ -113,7 +113,6 @@ public class AnadirInsumo extends javax.swing.JFrame {
         txtNombreInsumo = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
-        btnAgregar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaInsumos = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -124,16 +123,27 @@ public class AnadirInsumo extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         cbMarca = new javax.swing.JComboBox<>();
         cbUniMed = new javax.swing.JComboBox<>();
+        pnAgregar = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        Salir = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Añadir Insumos");
         setName("Añadir Insumo"); // NOI18N
+        setUndecorated(true);
 
+        jLabel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel1.setText("Nombre:");
 
         txtNombreInsumo.setName("txtNombre"); // NOI18N
 
+        btnBuscar.setBackground(new java.awt.Color(0, 155, 200));
+        btnBuscar.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscar.setText("Buscar");
+        btnBuscar.setBorder(null);
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscar.setName("btnBuscar"); // NOI18N
         btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -146,19 +156,15 @@ public class AnadirInsumo extends javax.swing.JFrame {
             }
         });
 
+        btnNuevo.setBackground(new java.awt.Color(0, 155, 200));
+        btnNuevo.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnNuevo.setForeground(new java.awt.Color(255, 255, 255));
         btnNuevo.setText("Nuevo");
+        btnNuevo.setBorder(null);
         btnNuevo.setName("btnNuevo"); // NOI18N
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoActionPerformed(evt);
-            }
-        });
-
-        btnAgregar.setText("Agregar");
-        btnAgregar.setName("btnAgregar"); // NOI18N
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
             }
         });
 
@@ -173,6 +179,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
         tablaInsumos.setName("tableAñadirInsumos"); // NOI18N
         jScrollPane1.setViewportView(tablaInsumos);
 
+        jLabel2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel2.setText("Marca:");
 
         txtPrecio.addActionListener(new java.awt.event.ActionListener() {
@@ -181,82 +188,140 @@ public class AnadirInsumo extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel3.setText("Unidad de Medida:");
 
+        jLabel4.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel4.setText("Precio Unitario:");
 
+        jLabel5.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel5.setText("Stock:");
+
+        pnAgregar.setBackground(new java.awt.Color(0, 155, 200));
+        pnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnAgregarMouseClicked(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Agregar");
+
+        javax.swing.GroupLayout pnAgregarLayout = new javax.swing.GroupLayout(pnAgregar);
+        pnAgregar.setLayout(pnAgregarLayout);
+        pnAgregarLayout.setHorizontalGroup(
+            pnAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnAgregarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnAgregarLayout.setVerticalGroup(
+            pnAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+        );
+
+        Salir.setBackground(new java.awt.Color(204, 0, 51));
+        Salir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SalirMouseClicked(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("X");
+
+        javax.swing.GroupLayout SalirLayout = new javax.swing.GroupLayout(Salir);
+        Salir.setLayout(SalirLayout);
+        SalirLayout.setHorizontalGroup(
+            SalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
+        );
+        SalirLayout.setVerticalGroup(
+            SalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SalirLayout.createSequentialGroup()
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
+                                .addGap(29, 29, 29)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel4))
+                                        .addGap(24, 24, 24)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cbMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txtPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                                                .addComponent(txtStock))
+                                            .addComponent(cbUniMed, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
                                 .addComponent(jLabel1)
                                 .addGap(57, 57, 57)
                                 .addComponent(txtNombreInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBuscar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                                .addComponent(txtStock))
-                            .addComponent(cbUniMed, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Salir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addComponent(Salir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtNombreInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar)
-                    .addComponent(btnNuevo))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cbMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAgregar)
-                        .addGap(24, 24, 24))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbUniMed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(5, 5, 5)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addContainerGap(59, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbUniMed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(9, 9, 9)
+                .addComponent(pnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -297,31 +362,6 @@ public class AnadirInsumo extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Ingrese un número positivo en stock");
         return false;
     }
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        System.out.println(Integer.parseInt(tablaInsumos.getModel().getValueAt(tablaInsumos.getSelectedRow(), 0).toString()) + "");
-        System.out.println(cbUniMed.getSelectedItem().toString());
-        System.out.println(Double.parseDouble(txtPrecio.getText()));
-        try {
-            if (!tablaInsumos.getSelectionModel().isSelectionEmpty() && validarPrecio(txtPrecio.getText()) && validarStock(txtStock.getText())) {
-                UnidadMedida uniMed = (new UnidadMedidaBL()).BuscarUnidadMedidaporNombre(cbUniMed.getSelectedItem().toString());
-                Marca marca = (new MarcaBL()).BuscarMarcaporNombre(cbMarca.getSelectedItem().toString());
-                Insumo I = logicaInsumo.BuscarInsumo(Integer.parseInt(tablaInsumos.getModel().getValueAt(tablaInsumos.getSelectedRow(), 0).toString()));
-                int stock = Integer.parseInt(txtStock.getText());
-                double precio = Double.parseDouble(txtPrecio.getText());
-                System.out.println(""+registro.getProv().getCodigo()+I.getCodigoInsumo()+uniMed.getUnidad()+stock+marca.getNombre()+precio);
-                pxIns = new ProveedorxInsumo(registro.getProv().getCodigo(), I.getCodigoInsumo(), uniMed.getUnidad(), stock, marca.getNombre(), precio);
-                registro.anadirInsumoEnTabla(I, cbUniMed.getSelectedItem().toString(),cbMarca.getSelectedItem().toString(),stock,precio);
-                registro.agregarPxI(pxIns);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            //pxIns=new ProveedorxInsumo();
-        } finally {
-            //this.dispose();
-        }
-        //this.dispose();
-    }//GEN-LAST:event_btnAgregarActionPerformed
-
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
         System.out.println("Botón apretado o: " + txtNombreInsumo.getText());
         InsumoBL logNegIns = new InsumoBL();
@@ -340,7 +380,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
         cbMarca.setEnabled(true);
         cbUniMed.setEnabled(true);
         txtStock.setEnabled(true);
-        btnAgregar.setEnabled(true);
+        pnAgregar.setEnabled(true);
         btnNuevo.setEnabled(true);
     }//GEN-LAST:event_btnBuscarMouseClicked
 
@@ -351,6 +391,43 @@ public class AnadirInsumo extends javax.swing.JFrame {
     private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecioActionPerformed
+
+    private void pnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnAgregarMouseClicked
+
+        System.out.println(Integer.parseInt(tablaInsumos.getModel().getValueAt(tablaInsumos.getSelectedRow(), 0).toString()) + "");
+        System.out.println(cbUniMed.getSelectedItem().toString());
+        System.out.println(Double.parseDouble(txtPrecio.getText()));
+        try {
+            if (!tablaInsumos.getSelectionModel().isSelectionEmpty() && validarPrecio(txtPrecio.getText()) && validarStock(txtStock.getText())) {
+                UnidadMedida uniMed = (new UnidadMedidaBL()).BuscarUnidadMedidaporNombre(cbUniMed.getSelectedItem().toString());
+                Marca marca = (new MarcaBL()).BuscarMarcaporNombre(cbMarca.getSelectedItem().toString());
+                Insumo I = logicaInsumo.BuscarInsumo(Integer.parseInt(tablaInsumos.getModel().getValueAt(tablaInsumos.getSelectedRow(), 0).toString()));
+                int stock = Integer.parseInt(txtStock.getText());
+                double precio = Double.parseDouble(txtPrecio.getText());
+                System.out.println(""+registro.getProv().getCodigo()+I.getCodigoInsumo()+uniMed.getUnidad()+stock+marca.getNombre()+precio);
+                pxIns = new ProveedorxInsumo(registro.getProv().getCodigo(), I.getCodigoInsumo(), uniMed.getUnidad(), stock, marca.getNombre(), precio);
+                if(registro.isAdd()){
+                    registro.anadirInsumoEnTabla(I, cbUniMed.getSelectedItem().toString(),cbMarca.getSelectedItem().toString(),stock,precio);
+                    registro.agregarPxI(pxIns);
+                }
+                else{
+                    registro.modificarTabla(I, cbUniMed.getSelectedItem().toString(),cbMarca.getSelectedItem().toString(),stock,precio);
+                    registro.modificarPxIenLista(pxIns);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error?");
+            //pxIns=new ProveedorxInsumo();
+        } finally {
+            //this.dispose();
+        }
+        if(registro.isAdd()==false)
+            this.dispose();
+    }//GEN-LAST:event_pnAgregarMouseClicked
+
+    private void SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_SalirMouseClicked
     public void actualizarDatosTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tablaInsumos.getModel();
         modelo.setNumRows(0);
@@ -399,7 +476,7 @@ public class AnadirInsumo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
+    private javax.swing.JPanel Salir;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JComboBox<String> cbMarca;
@@ -409,7 +486,10 @@ public class AnadirInsumo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel pnAgregar;
     private javax.swing.JTable tablaInsumos;
     private javax.swing.JTextField txtNombreInsumo;
     private javax.swing.JTextField txtPrecio;

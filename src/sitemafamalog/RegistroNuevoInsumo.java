@@ -54,14 +54,19 @@ public class RegistroNuevoInsumo extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de Insumo"));
 
+        jLabel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel1.setText("Codigo:");
 
+        jLabel2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel2.setText("Nombre:");
 
+        jLabel3.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel3.setText("Descripción:");
 
+        jLabel4.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel4.setText("U. Medida:");
 
+        jLabel5.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel5.setText("Precio Unitario:");
 
         txtCodigoInsumo.setName("txtCodigoInsumo"); // NOI18N
