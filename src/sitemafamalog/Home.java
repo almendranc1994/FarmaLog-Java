@@ -47,7 +47,7 @@ public class Home extends javax.swing.JFrame {
     private ConectadosCtrl onlineUsersCtrl;
     public Home() {
         empCtrl = new EmpleadoBL();
-        onlineUsersCtrl = new ConectadosCtrl();
+        
         dp = new JDesktopPane();
         this.setContentPane(dp);
         initComponents();
@@ -55,7 +55,11 @@ public class Home extends javax.swing.JFrame {
         navBar.setVisible(navBarVisible);
         listaSolSuministro = gestorSolicudSuministro.obtenerListaSolicitudSuministro();        
         actualizarTabla();
+        onlineUsersCtrl = new ConectadosCtrl(jPanel2);
         onlineUsersCtrl.start();
+        
+    }
+    public void insertar(){
         
     }
     public void logIn(Empleado emp){

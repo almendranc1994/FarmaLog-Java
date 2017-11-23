@@ -7,6 +7,7 @@ package Controlador;
 
 import Modelo.Empleado;
 import java.util.ArrayList;
+import javax.swing.JPanel;
 
 /**
  *
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 public class ConectadosCtrl extends Thread{
     private EmpleadoBL empCtrl;
     private ArrayList<Empleado> lis;
-    public ConectadosCtrl(){
+    public ConectadosCtrl(JPanel jp){
         empCtrl = new EmpleadoBL();
         lis = new ArrayList<Empleado>();
     }
