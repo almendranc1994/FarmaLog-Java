@@ -8,12 +8,20 @@ package sitemafamalog;
 //Hace el import de Vista.CarritoCompras
 //Hacer el import de Vista.RecepcionInsumos
 
+import Controlador.PrioridadBL;
+import Controlador.SolicitudSuministroBL;
+import Modelo.Empleado;
+import Modelo.SolicitudSuministro;
 import java.awt.FlowLayout;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,11 +32,43 @@ public class Home extends javax.swing.JFrame {
     /**
      * Creates new form Home
      */
+    
+    private Empleado currentEmpleado;
     private boolean navBarVisible;
+    private SolicitudSuministroBL gestorSolicudSuministro = new SolicitudSuministroBL();
+    private PrioridadBL gestorPrioridad = new PrioridadBL();
+    private ArrayList<SolicitudSuministro> listaSolSuministro;
     public Home() {
         initComponents();
         navBarVisible = false;
         navBar.setVisible(navBarVisible);
+        listaSolSuministro = gestorSolicudSuministro.obtenerListaSolicitudSuministro();        
+        actualizarTabla();
+        
+    }
+    
+    public void actualizarTabla(){
+        DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
+        Object [] fila = new Object [6];
+        for(int i=0; i<listaSolSuministro.size(); i++){
+            fila[0] = listaSolSuministro.get(i).getCodigoSolicitudSuministro();
+            DateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
+            String date = formatter1.format(listaSolSuministro.get(i).getFechaPeticion());
+            fila[1] = date;
+            DateFormat formatter2 = new SimpleDateFormat("dd/MM/yyyy");
+            String date2 = formatter2.format(listaSolSuministro.get(i).getFechaLimite());            
+            fila[2] = date2;            
+            fila[3] = listaSolSuministro.get(i).getPrioridad();;
+            fila[4] = listaSolSuministro.get(i).getInstitucion();
+            modelo.addRow(fila);
+        }
+    }
+    
+    public void setCurrentEmpleado(Empleado emp){
+        currentEmpleado = emp;
+        
+        jLabel1.setText(currentEmpleado.getNombres());
+        System.out.println(currentEmpleado.getNombres());
     }
 
     /**
@@ -56,8 +96,21 @@ public class Home extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         pnlComprasRealizadas = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
+        pnlComprasRealizadas1 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         navBarButton = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        InsumosPanel = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -84,6 +137,7 @@ public class Home extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 51, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/icons8-Proveedor-50.png"))); // NOI18N
         jLabel8.setText("Proveedores");
 
         javax.swing.GroupLayout pnlProveedorLayout = new javax.swing.GroupLayout(pnlProveedor);
@@ -117,6 +171,7 @@ public class Home extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/icons8-Agregar a carrito de compras-26.png"))); // NOI18N
         jLabel2.setText("Compra Insumos");
 
         javax.swing.GroupLayout pnlCompraInsumoLayout = new javax.swing.GroupLayout(pnlCompraInsumo);
@@ -151,6 +206,7 @@ public class Home extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 51, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/icons8-Carretilla elevadora-50.png"))); // NOI18N
         jLabel5.setText("Insumos");
 
         javax.swing.GroupLayout pnlGestionInsumosLayout = new javax.swing.GroupLayout(pnlGestionInsumos);
@@ -183,6 +239,7 @@ public class Home extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 51, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/icons8-Hoja de papel-50.png"))); // NOI18N
         jLabel11.setText("Solicitudes");
 
         javax.swing.GroupLayout pnlGestionSolicitudesLayout = new javax.swing.GroupLayout(pnlGestionSolicitudes);
@@ -215,6 +272,7 @@ public class Home extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 51, 255));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/icons8-Carrito de la compra cargado-50.png"))); // NOI18N
         jLabel14.setText("Carrito de Compras");
 
         javax.swing.GroupLayout pnlCarritoComprasLayout = new javax.swing.GroupLayout(pnlCarritoCompras);
@@ -249,6 +307,7 @@ public class Home extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(0, 51, 255));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/icons8-Orden de compra-50.png"))); // NOI18N
         jLabel18.setText("Solicitudes de Compras");
 
         javax.swing.GroupLayout pnlSolicitudesCompraLayout = new javax.swing.GroupLayout(pnlSolicitudesCompra);
@@ -262,9 +321,7 @@ public class Home extends javax.swing.JFrame {
         );
         pnlSolicitudesCompraLayout.setVerticalGroup(
             pnlSolicitudesCompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSolicitudesCompraLayout.createSequentialGroup()
-                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 5, Short.MAX_VALUE))
+            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pnlComprasRealizadas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -283,6 +340,7 @@ public class Home extends javax.swing.JFrame {
         jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(0, 51, 255));
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/icons8-Historial de pedidos-50.png"))); // NOI18N
         jLabel20.setText("Historial");
 
         javax.swing.GroupLayout pnlComprasRealizadasLayout = new javax.swing.GroupLayout(pnlComprasRealizadas);
@@ -301,20 +359,56 @@ public class Home extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        pnlComprasRealizadas1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlComprasRealizadas1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnlComprasRealizadas1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlComprasRealizadas1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnlComprasRealizadas1MousePressed(evt);
+            }
+        });
+
+        jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/ic_exit_to_app_black_24dp_1x.png"))); // NOI18N
+        jLabel21.setText("Salir");
+
+        javax.swing.GroupLayout pnlComprasRealizadas1Layout = new javax.swing.GroupLayout(pnlComprasRealizadas1);
+        pnlComprasRealizadas1.setLayout(pnlComprasRealizadas1Layout);
+        pnlComprasRealizadas1Layout.setHorizontalGroup(
+            pnlComprasRealizadas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlComprasRealizadas1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel21)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlComprasRealizadas1Layout.setVerticalGroup(
+            pnlComprasRealizadas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlComprasRealizadas1Layout.createSequentialGroup()
+                .addComponent(jLabel21)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout navBarLayout = new javax.swing.GroupLayout(navBar);
         navBar.setLayout(navBarLayout);
         navBarLayout.setHorizontalGroup(
             navBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlComprasRealizadas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlCarritoCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlGestionSolicitudes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlGestionInsumos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlCompraInsumo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlSolicitudesCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(navBarLayout.createSequentialGroup()
-                .addGroup(navBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlCarritoCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlGestionSolicitudes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlGestionInsumos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlCompraInsumo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlSolicitudesCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlComprasRealizadas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(pnlComprasRealizadas1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         navBarLayout.setVerticalGroup(
             navBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,10 +427,14 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(pnlSolicitudesCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlComprasRealizadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(393, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 331, Short.MAX_VALUE)
+                .addComponent(pnlComprasRealizadas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        jPanel1.add(navBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 190, 620));
+        jPanel1.add(navBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 210, 620));
+
+        jPanel3.setBackground(new java.awt.Color(0, 155, 200));
 
         navBarButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         navBarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/ic_menu_black_24dp_2x.png"))); // NOI18N
@@ -348,24 +446,127 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/ic_account_circle_white_24dp_2x.png"))); // NOI18N
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/Logo.jpg"))); // NOI18N
+        jLabel7.setText("FarmaLog");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addGap(50, 50, 50)
                 .addComponent(navBarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(981, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 379, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addGap(389, 389, 389)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(navBarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(navBarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1140, 70));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1270, 70));
+
+        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo Solicitud", "Fecha Peticion", "Fecha Peticion", "Prioridad", "Institucion", ""
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 560, 240));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel3.setText("Solicitudes de Suministros Pendientes");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/icons8-Informe Gráfico-50.png"))); // NOI18N
+        jLabel4.setText("DASHBOARD");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, -1, -1));
+
+        jButton1.setText("Elimiinar Solicitud");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 410, -1, -1));
+
+        jButton2.setText("Ver Solicitud");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, -1, -1));
+
+        InsumosPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout InsumosPanelLayout = new javax.swing.GroupLayout(InsumosPanel);
+        InsumosPanel.setLayout(InsumosPanelLayout);
+        InsumosPanelLayout.setHorizontalGroup(
+            InsumosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 870, Short.MAX_VALUE)
+        );
+        InsumosPanelLayout.setVerticalGroup(
+            InsumosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 620, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(InsumosPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 870, 620));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setText("Usuarios en línea:");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addContainerGap(73, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addContainerGap(589, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 70, 190, 620));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -473,6 +674,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         CompraDeInsumos frmNewCompIns = new CompraDeInsumos();
         frmNewCompIns.setVisible(true);
+        
     }//GEN-LAST:event_pnlCompraInsumoMousePressed
 
     private void pnlGestionInsumosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGestionInsumosMousePressed
@@ -535,6 +737,43 @@ public class Home extends javax.swing.JFrame {
             navBar.setVisible(navBarVisible);
         }
     }//GEN-LAST:event_navBarButtonMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        for (int i=0;i<model.getRowCount();i++) {
+              Boolean checked=(Boolean)model.getValueAt(i,5);
+              if (checked!=null && checked) {
+                   SolicitudSuministro s = listaSolSuministro.get(i);
+                   gestorSolicudSuministro.eliminarSolicitudSuministro(s.getCodigoSolicitudSuministro());
+                   model.removeRow(i);
+                   i--;
+              }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        int index = jTable1.getSelectedRow();
+        SolicitudSuministro seleccionado = listaSolSuministro.get(index);
+        VerSolicitudSuministro fmr = new VerSolicitudSuministro(seleccionado, this);
+        fmr.setSolicitud(seleccionado);
+        fmr.setVisible(true);
+//        ListaSolicitudesSuministro.this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void pnlComprasRealizadas1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlComprasRealizadas1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pnlComprasRealizadas1MouseEntered
+
+    private void pnlComprasRealizadas1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlComprasRealizadas1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pnlComprasRealizadas1MouseExited
+
+    private void pnlComprasRealizadas1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlComprasRealizadas1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pnlComprasRealizadas1MousePressed
     
     public void setColor(JPanel panel){
         panel.setBackground(new java.awt.Color(156,156,156));
@@ -579,20 +818,33 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel InsumosPanel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JPanel navBar;
     private javax.swing.JLabel navBarButton;
     private javax.swing.JPanel pnlCarritoCompras;
     private javax.swing.JPanel pnlCompraInsumo;
     private javax.swing.JPanel pnlComprasRealizadas;
+    private javax.swing.JPanel pnlComprasRealizadas1;
     private javax.swing.JPanel pnlGestionInsumos;
     private javax.swing.JPanel pnlGestionSolicitudes;
     private javax.swing.JPanel pnlProveedor;
