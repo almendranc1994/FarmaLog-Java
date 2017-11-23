@@ -99,7 +99,7 @@ public class BuscarProveedor extends javax.swing.JFrame {
         setForeground(java.awt.Color.white);
         setUndecorated(true);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
 
         tblProveedores.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -144,6 +144,7 @@ public class BuscarProveedor extends javax.swing.JFrame {
         btnSeleccionar.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
         btnSeleccionar.setForeground(new java.awt.Color(255, 255, 255));
         btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.setBorder(null);
         btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeleccionarActionPerformed(evt);

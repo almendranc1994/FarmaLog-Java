@@ -134,7 +134,7 @@ public class logueo extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(330, 160, 100, 17);
 
-        txtContrasena.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        txtContrasena.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         txtContrasena.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
         txtContrasena.setName("txtContrasena"); // NOI18N
         txtContrasena.addActionListener(new java.awt.event.ActionListener() {
@@ -143,10 +143,8 @@ public class logueo extends javax.swing.JFrame {
             }
         });
         txtContrasena.addKeyListener(new java.awt.event.KeyAdapter() {
-
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtContrasenaKeyPressed(evt);
-
             }
         });
         getContentPane().add(txtContrasena);
@@ -190,7 +188,7 @@ public class logueo extends javax.swing.JFrame {
             Home frmHome=new Home();
             frmHome.setCurrentEmpleado(emp);
             frmHome.setVisible(true);
-            JOptionPane.showMessageDialog(null,"Bienvenido "+emp.getNombres() + " "+emp.getApellidos());
+            //JOptionPane.showMessageDialog(null,"Bienvenido "+emp.getNombres() + " "+emp.getApellidos());
             
         }
         else{   
@@ -214,7 +212,7 @@ public class logueo extends javax.swing.JFrame {
                 Home frmHome=new Home();
                 frmHome.setCurrentEmpleado(emp);
                 frmHome.setVisible(true);
-                JOptionPane.showMessageDialog(null,"Bienvenido "+emp.getNombres() + " "+emp.getApellidos());
+                //JOptionPane.showMessageDialog(null,"Bienvenido "+emp.getNombres() + " "+emp.getApellidos());
                 
             }
 
@@ -236,7 +234,7 @@ public class logueo extends javax.swing.JFrame {
                 Home frmHome=new Home();
                 frmHome.setCurrentEmpleado(emp);
                 frmHome.setVisible(true);
-                JOptionPane.showMessageDialog(null,"Bienvenido "+emp.getNombres() + " "+emp.getApellidos());
+                //JOptionPane.showMessageDialog(null,"Bienvenido "+emp.getNombres() + " "+emp.getApellidos());
                 
             }
             else{   
