@@ -19,9 +19,20 @@ import java.awt.Point;
 import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.net.ssl.SSLServerSocket;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
@@ -45,7 +56,8 @@ public class Home extends javax.swing.JFrame {
     private ArrayList<SolicitudSuministro> listaSolSuministro;
     private JDesktopPane dp;
     private ConectadosCtrl onlineUsersCtrl;
-    public Home() {
+    public ServerSocket ss;
+    public Home() throws  IOException {
         empCtrl = new EmpleadoBL();
         
         dp = new JDesktopPane();
@@ -55,9 +67,31 @@ public class Home extends javax.swing.JFrame {
         navBar.setVisible(navBarVisible);
         listaSolSuministro = gestorSolicudSuministro.obtenerListaSolicitudSuministro();        
         actualizarTabla();
-        onlineUsersCtrl = new ConectadosCtrl(jPanel2);
+        onlineUsersCtrl = new ConectadosCtrl();
         onlineUsersCtrl.start();
-        
+//        while(true){
+            DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
+            Object [] fila = new Object[1];
+            for(int i=0;i<onlineUsersCtrl.lis.size();i++){
+                fila[0] = onlineUsersCtrl.lis.get(i).getNombres();
+                model.addRow(fila);
+            }
+            
+//            ss = new ServerSocket(1201);
+//        }
+//        Scanner s= new Scanner(System.in);
+//        System.out.println("Enter a string?");
+//
+//        String input = s.nextLine();
+//        
+//        byte[] buffer = input.getBytes();
+//        
+        DatagramSocket sck = new DatagramSocket();
+        InetAddress address = InetAddress.getByName("127.0.0.1");
+//        
+//        DatagramPacket mypacket = new DatagramPacket(buffer, buffer.length, address,8888);
+//        
+//        sck.send(mypacket);
     }
     public void insertar(){
         
@@ -119,7 +153,8 @@ public class Home extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -468,24 +503,40 @@ public class Home extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel6.setText("Usuarios en línea:");
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Usuarios en linea"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable2.setColumnSelectionAllowed(true);
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable2);
+        jTable2.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addContainerGap(73, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addContainerGap(589, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 70, 190, 620));
@@ -778,6 +829,23 @@ public class Home extends javax.swing.JFrame {
         fmr.setVisible(true);
         //        ListaSolicitudesSuministro.this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        // TODO add your handling code here:
+        System.out.println(jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString());
+        Empleado empRec = new Empleado();
+        for(int i=0;i<onlineUsersCtrl.lis.size();i++){
+            if(onlineUsersCtrl.lis.get(i).getNombres() == jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString()){
+                empRec = onlineUsersCtrl.lis.get(i);
+                break;
+            }
+            
+        }
+        
+        Chat frmChat = new Chat(currentEmpleado, empRec);
+        frmChat.setVisible(true);
+        
+    }//GEN-LAST:event_jTable2MouseClicked
     
     public void setColor(JPanel panel){
         panel.setBackground(new java.awt.Color(156,156,156));
@@ -816,7 +884,11 @@ public class Home extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home().setVisible(true);
+                try {
+                    new Home().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -834,15 +906,16 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JPanel navBar;
     private javax.swing.JLabel navBarButton;
     private javax.swing.JPanel pnlCarritoCompras;

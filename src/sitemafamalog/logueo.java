@@ -8,6 +8,9 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane; 
 import Modelo.Empleado;
 import Controlador.EmpleadoBL;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Karla Isabel Pedraza Salinas 20141056
@@ -187,10 +190,16 @@ public class logueo extends javax.swing.JFrame {
         Empleado emp = empCtrl.LogEmpleado(txtUsuario.getText(), txtContrasena.getText());
         if(emp != null){
             this.dispose();
-            Home frmHome=new Home();
-            frmHome.setCurrentEmpleado(emp);
-            frmHome.setVisible(true);
-            JOptionPane.showMessageDialog(null,"Bienvenido "+emp.getNombres() + " "+emp.getApellidos());
+            Home frmHome;
+            try {
+                frmHome = new Home();
+                frmHome.setCurrentEmpleado(emp);
+                frmHome.setVisible(true);
+                JOptionPane.showMessageDialog(null,"Bienvenido "+emp.getNombres() + " "+emp.getApellidos());
+            } catch (IOException ex) {
+                Logger.getLogger(logueo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             
         }
         else{   
@@ -211,10 +220,16 @@ public class logueo extends javax.swing.JFrame {
             if(emp != null){
                 this.dispose();
 
-                Home frmHome=new Home();
-                frmHome.setCurrentEmpleado(emp);
-                frmHome.setVisible(true);
-                JOptionPane.showMessageDialog(null,"Bienvenido "+emp.getNombres() + " "+emp.getApellidos());
+                Home frmHome;
+                try {
+                    frmHome = new Home();
+                    frmHome.setCurrentEmpleado(emp);
+                    frmHome.setVisible(true);
+                    JOptionPane.showMessageDialog(null,"Bienvenido "+emp.getNombres() + " "+emp.getApellidos());
+                } catch (IOException ex) {
+                    Logger.getLogger(logueo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
                 
             }
 
@@ -233,11 +248,17 @@ public class logueo extends javax.swing.JFrame {
             Empleado emp = empCtrl.LogEmpleado(txtUsuario.getText(), txtContrasena.getText());
             if(emp != null){
                 this.dispose();
-                Home frmHome=new Home();
-                frmHome.setCurrentEmpleado(emp);
-                frmHome.logIn(emp);
-                frmHome.setVisible(true);
-                JOptionPane.showMessageDialog(null,"Bienvenido "+emp.getNombres() + " "+emp.getApellidos());
+                Home frmHome;
+                try {
+                    frmHome = new Home();
+                    frmHome.setCurrentEmpleado(emp);
+                    frmHome.logIn(emp);
+                    frmHome.setVisible(true);
+                    JOptionPane.showMessageDialog(null,"Bienvenido "+emp.getNombres() + " "+emp.getApellidos());
+                } catch (IOException ex) {
+                    Logger.getLogger(logueo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
                 
             }
             else{   

@@ -8,6 +8,8 @@ package Controlador;
 import Modelo.Empleado;
 import java.util.ArrayList;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,10 +17,13 @@ import javax.swing.JPanel;
  */
 public class ConectadosCtrl extends Thread{
     private EmpleadoBL empCtrl;
-    private ArrayList<Empleado> lis;
-    public ConectadosCtrl(JPanel jp){
+    public ArrayList<Empleado> lis;
+    
+    public ConectadosCtrl(){
         empCtrl = new EmpleadoBL();
         lis = new ArrayList<Empleado>();
+        lis = empCtrl.getEmpleadosOnline();
+        
     }
     
     public void run(){
@@ -26,6 +31,12 @@ public class ConectadosCtrl extends Thread{
             while(true){
                 Thread.sleep(3000);
                 lis = empCtrl.getEmpleadosOnline();
+//                DefaultTableModel model = (DefaultTableModel)jt.getModel();
+//                Object [] fila = new Object[1];
+//                for(int i=0;i<lis.size();i++){
+//                    fila[0] = lis.get(i).getNombres();
+//                    model.addRow(fila);
+//                }
             }
         }
         catch(Exception e){
