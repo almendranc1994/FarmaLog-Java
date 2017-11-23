@@ -8,29 +8,25 @@ package sitemafamalog;
 import Controlador.InsumoBL;
 import Controlador.UnidadMedidaBL;
 import Modelo.Insumo;
-import Modelo.UnidadMedida;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Andre
+ * @author alulab14
  */
-public class RegistroNuevoInsumo extends javax.swing.JFrame {
+public class RegistroNuevoInsumo extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form RegistroNuevoInsumo
+     * Creates new form RegistroNuevoInsumoI
      */
     private Insumo newInsumo;
     private InsumoBL logNegInsumo;
     private UnidadMedidaBL medidasCtrl;
-        
     public RegistroNuevoInsumo() {
         medidasCtrl = new UnidadMedidaBL();
         initComponents();
         newInsumo = new Insumo();
         logNegInsumo = new InsumoBL();
-        
     }
 
     /**
@@ -55,9 +51,6 @@ public class RegistroNuevoInsumo extends javax.swing.JFrame {
         txtPU = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Registro Nuevo Insumo");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de Insumo"));
 
@@ -176,17 +169,21 @@ public class RegistroNuevoInsumo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 44, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cbUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUnidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbUnidadActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
@@ -195,7 +192,7 @@ public class RegistroNuevoInsumo extends javax.swing.JFrame {
         newInsumo.setNombreInsumo(txtNombre.getText());
         newInsumo.setDescripcionInsumo(txtDescripcion.getText());
         if(logNegInsumo.registrarInsumo(newInsumo))
-            JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente!");
+        JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente!");
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -203,44 +200,6 @@ public class RegistroNuevoInsumo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void cbUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUnidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbUnidadActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroNuevoInsumo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroNuevoInsumo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroNuevoInsumo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroNuevoInsumo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RegistroNuevoInsumo().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

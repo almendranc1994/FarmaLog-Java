@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VerSolicitudSuministro extends javax.swing.JFrame {
     private SolicitudSuministro solicitud;
+    javax.swing.JInternalFrame ventanaPadreI;
     javax.swing.JFrame ventanaPadre;
     private ArrayList<DetalleSolicitud> lista;
     private DetalleSolicitudBL gestorDetalleSolicitud;
@@ -36,6 +37,21 @@ public class VerSolicitudSuministro extends javax.swing.JFrame {
     /**
      * Creates new form VerSolicitudSuministro
      */
+    public VerSolicitudSuministro(SolicitudSuministro solicitud, javax.swing.JInternalFrame ventanaPadre){
+        this.ventanaPadreI = ventanaPadre;
+        this.solicitud = solicitud;
+        initComponents();        
+        txtCodigo.setText(String.valueOf(solicitud.getCodigoSolicitudSuministro()));
+        txtFechaPeticion.setText(solicitud.getFechaPeticion().toString());
+        txtFechaLimite.setText(solicitud.getFechaLimite().toString());
+        txtPrioridad.setText(String.valueOf(solicitud.getPrioridad()));
+        txtInstitucion.setText(solicitud.getInstitucion());        
+        gestorDetalleSolicitud = new DetalleSolicitudBL();
+        lista = gestorDetalleSolicitud.obtenerLista(solicitud.getCodigoSolicitudSuministro());
+        System.out.println(lista.size());
+        gestorInsumo = new InsumoBL();
+        actualizarTabla();
+    }
     public VerSolicitudSuministro(SolicitudSuministro solicitud, javax.swing.JFrame ventanaPadre){
         this.ventanaPadre = ventanaPadre;
         this.solicitud = solicitud;

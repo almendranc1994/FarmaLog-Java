@@ -119,4 +119,14 @@ public class ProveedoresDA {
             return -1;
         }
     }
+    public void eliminarProveedor(int codigo) {
+        try{
+            CallableStatement cStmt = Conexion.getConexion().prepareCall("{call ELIMINAR_PROVEEDOR(?)}");
+            cStmt.setInt(1, codigo);
+            cStmt.execute();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println(e.getMessage());
+        }
+    }
 }

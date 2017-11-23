@@ -5,10 +5,12 @@
  */
 package sitemafamalog;
 
+import Modelo.Proveedor;
+import Modelo.Insumo;
+import Modelo.Marca;
+import Modelo.UnidadMedida;
 import Controlador.ProveedoresBL;
 import Controlador.ProveedorxInsumoBL;
-import Modelo.Insumo;
-import Modelo.Proveedor;
 import Modelo.ProveedorxInsumo;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -27,12 +29,85 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
      * Creates new form RegistroProveedoresI
      */
     
-    public Proveedor prov;
+    public Object[] getCurrentfila() {
+        return currentfila;
+    }
+
+    /**
+     * @param currentfila the currentfila to set
+     */
+    public void setCurrentfila(Object[] currentfila) {
+        this.currentfila = currentfila;
+    }
+
+    /**
+     * @return the selectedIndex
+     */
+    public int getSelectedIndex() {
+        return selectedIndex;
+    }
+
+    /**
+     * @param selectedIndex the selectedIndex to set
+     */
+    public void setSelectedIndex(int selectedIndex) {
+        this.selectedIndex = selectedIndex;
+    }
+
+    /**
+     * @return the add
+     */
+    public boolean isAdd() {
+        return add;
+    }
+
+    /**
+     * @param add the add to set
+     */
+    public void setAdd(boolean add) {
+        this.add = add;
+    }
+
+    /**
+     * @return the provxIns
+     */
+    public ProveedorxInsumo getProvxIns() {
+        return provxIns;
+    }
+
+    /**
+     * @param provxIns the provxIns to set
+     */
+    public void setProvxIns(ProveedorxInsumo provxIns) {
+        this.provxIns = provxIns;
+    }
+
+    /**
+     * @return the prov
+     */
+    public Proveedor getProv() {
+        return prov;
+    }
+
+    /**
+     * @param prov the prov to set
+     */
+    public void setProv(Proveedor prov) {
+        this.prov = prov;
+    }
+    
+    private Proveedor prov;
+    private ProveedorxInsumo provxIns;
+    private boolean add=false;
+    private int selectedIndex;
     private ProveedoresBL logNegProv;
     public BuscarProveedor busqueda;
     public AnadirInsumo anadir;
     private ProveedorxInsumoBL logNegProvxIns;
     private ArrayList<ProveedorxInsumo> listaProveedorxInsumo;
+    private Object[] currentfila;
+    
+    
     public RegistroProveedor() {
         initComponents();
         
@@ -73,8 +148,23 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
         pnAnadir.setEnabled(true);
         pnModificar.setEnabled(true);
         pnEliminar.setEnabled(true);
+        this.setProv(P);
     }
 
+     void modificarTabla(Insumo I, String Unidad, String Marca,int stock, double precio) {
+        DefaultTableModel modelo = (DefaultTableModel) tableInsumosAsociados.getModel();
+        modelo.setValueAt(I.getCodigoInsumo(), selectedIndex, 0);
+        modelo.setValueAt(I.getNombreInsumo(), selectedIndex, 1);
+        modelo.setValueAt(Unidad, selectedIndex, 2);
+        modelo.setValueAt(Marca, selectedIndex, 3);
+        modelo.setValueAt(stock, selectedIndex, 4);
+        modelo.setValueAt(precio, selectedIndex, 5);
+        
+    }
+
+    void modificarPxIenLista(ProveedorxInsumo pxIns) {
+        listaProveedorxInsumo.set(selectedIndex,pxIns);
+    }
     public void anadirInsumoEnTabla(Insumo I, String Unidad, String Marca,int stock, double precio) {
         DefaultTableModel modelo = (DefaultTableModel) tableInsumosAsociados.getModel();
         Object[] fila = new Object[6];
@@ -84,7 +174,6 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
         fila[3] = Marca;
         fila[4]=stock;
         fila[5]=precio;
-        
         modelo.addRow(fila);
     }
     public void actualizarDatosTabla() {
@@ -503,10 +592,20 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
 
         btnActualizar.setText("Actualizar");
         btnActualizar.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        btnActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnActualizarMouseClicked(evt);
+            }
+        });
         jMenuBar2.add(btnActualizar);
 
         btnEliminarProv.setText("Eliminar");
         btnEliminarProv.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        btnEliminarProv.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarProvMouseClicked(evt);
+            }
+        });
         jMenuBar2.add(btnEliminarProv);
 
         btnCancelarProv.setText("Cancelar");
@@ -535,16 +634,15 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
-        prov = new Proveedor();
-
+        setProv(new Proveedor());
         btnNuevo.setEnabled(false);
         btnGuardar.setEnabled(true);
         btnBuscarProveedor.setEnabled(false);
         btnActualizar.setEnabled(false);
         btnEliminarProv.setEnabled(false);
         btnCancelarProv.setEnabled(true);
-
-        prov.setCodigo(logNegProv.devolverUltimoId()+1);
+        
+        getProv().setCodigo(logNegProv.devolverUltimoId()+1);
         txtNombre.setEnabled(true);
         txtNombre.setText("");
         txtApellido.setEnabled(true);
@@ -575,20 +673,20 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
         // TODO add your handling code here:
         if (!txtEmpresa.getText().equals("")&& !txtRUC.getText().equals("")&& !txtTelefono.getText().equals("")) {
-            prov.setNombres(txtNombre.getText());
-            prov.setApellidos(txtApellido.getText());
-            prov.setCorreo(txtCorreo.getText());
-            prov.setDireccion(txtDireccion.getText());
-            prov.setTelefono(txtTelefono.getText());
-            prov.setNombreEmpresa(txtEmpresa.getText());
-            prov.setRuc(txtRUC.getText());
-            prov.setInstitucion(txtTipoInstitucion.getText());
+            getProv().setNombres(txtNombre.getText());
+            getProv().setApellidos(txtApellido.getText());
+            getProv().setCorreo(txtCorreo.getText());
+            getProv().setDireccion(txtDireccion.getText());
+            getProv().setTelefono(txtTelefono.getText());
+            getProv().setNombreEmpresa(txtEmpresa.getText());
+            getProv().setRuc(txtRUC.getText());
+            getProv().setInstitucion(txtTipoInstitucion.getText());
             logNegProvxIns=new ProveedorxInsumoBL();
-            if (logNegProv.registrarProveedor(prov)) {
-                JOptionPane.showMessageDialog(null, listaProveedorxInsumo.size()+" codigo del proveedor: "+prov.getCodigo());
+            if (logNegProv.registrarProveedor(getProv())) {
+                //JOptionPane.showMessageDialog(null, listaProveedorxInsumo.size()+" codigo del proveedor: "+getProv().getCodigo());
                 System.out.println(listaProveedorxInsumo.size());
                 for (ProveedorxInsumo proveedorxInsumo : listaProveedorxInsumo) {
-                    proveedorxInsumo.setProveedor((new ProveedoresBL()).BuscarProveedor(prov.getCodigo()));
+                    proveedorxInsumo.setProveedor((new ProveedoresBL()).BuscarProveedor(getProv().getCodigo()));
                     logNegProvxIns.registrarProveedorxInsumo(proveedorxInsumo);
                 }
                 JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente!");
@@ -601,6 +699,16 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
         btnGuardar.setSelected(false);
     }//GEN-LAST:event_btnGuardarMouseClicked
 
+    public void cargarInsumosAsociados(int codigo){
+        try{
+            logNegProvxIns=new ProveedorxInsumoBL();
+            listaProveedorxInsumo=logNegProvxIns.devolverListaInsumodeProv(codigo);
+        }
+        catch(Exception e){
+            
+        }
+        actualizarDatosTabla();
+    }
     private void btnBuscarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarProveedorMouseClicked
         try {
             // TODO add your handling code here:
@@ -624,7 +732,8 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
         pnEliminar.setEnabled(true);
         txtRUC.setEnabled(false);
         txtEmpresa.setEnabled(false);
-
+        
+        
         btnNuevo.setEnabled(false);
         btnGuardar.setEnabled(false);
         btnBuscarProveedor.setEnabled(false);
@@ -633,6 +742,7 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
         btnCancelarProv.setEnabled(true);
     }//GEN-LAST:event_btnBuscarProveedorMouseClicked
 
+    
     private void btnCancelarProvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarProvMouseClicked
         // TODO add your handling code here:
         btnNuevo.setEnabled(true);
@@ -703,6 +813,8 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtTipoInstitucionActionPerformed
 
     private void pnAnadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnAnadirMouseClicked
+        add=true;
+        System.out.println("Anadir "+add);
         anadir = new AnadirInsumo();
         anadir.registro = this;
         anadir.setVisible(true);
@@ -710,11 +822,83 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
 
     private void pnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnModificarMouseClicked
         // TODO add your handling code here:
+        // TODO add your handling code here:
+        if(!tableInsumosAsociados.getSelectionModel().isSelectionEmpty()){
+            selectedIndex=tableInsumosAsociados.getSelectedRow();
+            provxIns=listaProveedorxInsumo.get(selectedIndex);
+            add=false;
+            currentfila = new Object[6];
+            currentfila[0] = Integer.parseInt(tableInsumosAsociados.getModel().getValueAt(selectedIndex, 0).toString());
+            currentfila[1] = tableInsumosAsociados.getModel().getValueAt(selectedIndex, 1).toString();
+            currentfila[2] = tableInsumosAsociados.getModel().getValueAt(selectedIndex, 2).toString();
+            currentfila[3] = tableInsumosAsociados.getModel().getValueAt(selectedIndex, 3).toString();
+            currentfila[4]= tableInsumosAsociados.getModel().getValueAt(selectedIndex, 4).toString();
+            currentfila[5]= tableInsumosAsociados.getModel().getValueAt(selectedIndex, 5).toString();
+            anadir.setValues();
+            anadir.setVisible(true);
+        }
     }//GEN-LAST:event_pnModificarMouseClicked
 
     private void pnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnEliminarMouseClicked
         // TODO add your handling code here:
+        if(!tableInsumosAsociados.getSelectionModel().isSelectionEmpty()){
+            selectedIndex=tableInsumosAsociados.getSelectedRow();
+            ((DefaultTableModel)tableInsumosAsociados.getModel()).removeRow(selectedIndex);
+            listaProveedorxInsumo.remove(selectedIndex);
+        }
     }//GEN-LAST:event_pnEliminarMouseClicked
+
+    private void btnEliminarProvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarProvMouseClicked
+        // TODO add your handling code here:
+        logNegProv=new ProveedoresBL();
+        logNegProvxIns=new ProveedorxInsumoBL();
+        System.out.println(getProv().getCodigo());
+        logNegProv.eliminarProveedor(getProv().getCodigo());
+        logNegProvxIns.eliminarRastroDelProveedor(getProv().getCodigo());
+        
+        btnNuevo.setEnabled(true);
+        btnGuardar.setEnabled(false);
+        btnBuscarProveedor.setEnabled(true);
+        btnActualizar.setEnabled(false);
+        btnEliminarProv.setEnabled(false);
+        btnCancelarProv.setEnabled(false);
+        
+        txtNombre.setEnabled(false);
+        txtNombre.setText("");
+        txtApellido.setEnabled(false);
+        txtApellido.setText("");
+        txtCorreo.setEnabled(false);
+        txtCorreo.setText("");
+        txtTelefono.setEnabled(false);
+        txtTelefono.setText("");
+        txtDireccion.setEnabled(false);
+        txtDireccion.setText("");
+        txtEmpresa.setEnabled(false);
+        txtEmpresa.setText("");
+        txtTipoInstitucion.setEnabled(false);
+        txtTipoInstitucion.setText("");
+        tableInsumosAsociados.setEnabled(false);
+        tableInsumosAsociados.removeAll();
+        pnAnadir.setEnabled(false);
+        txtRUC.setText("");
+        pnModificar.setEnabled(false);
+        pnEliminar.setEnabled(false);
+        txtRUC.setEnabled(false);
+        txtEmpresa.setEnabled(false);
+        DefaultTableModel modelo = (DefaultTableModel) tableInsumosAsociados.getModel();
+        modelo.setNumRows(0);
+        listaProveedorxInsumo=new ArrayList<ProveedorxInsumo>();
+    }//GEN-LAST:event_btnEliminarProvMouseClicked
+
+    private void btnActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMouseClicked
+        // TODO add your handling code here:
+        logNegProvxIns.eliminarRastroDelProveedor(getProv().getCodigo());
+        for (ProveedorxInsumo proveedorxInsumo : listaProveedorxInsumo) {
+            proveedorxInsumo.setProveedor((new ProveedoresBL()).BuscarProveedor(getProv().getCodigo()));
+            logNegProvxIns.registrarProveedorxInsumo(proveedorxInsumo);
+        }
+        JOptionPane.showMessageDialog(null, "Se ha actualizado exitosamente!");
+    }//GEN-LAST:event_btnActualizarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -676,6 +676,7 @@ public class Home extends javax.swing.JFrame {
     private void pnlProveedorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlProveedorMousePressed
         // TODO add your handling code here:
         jPanel4.setVisible(false);
+        jDesktopPane1.removeAll();
         RegistroProveedor frmNewProveedor = new RegistroProveedor();
         frmNewProveedor.setVisible(true);
         
@@ -687,62 +688,41 @@ public class Home extends javax.swing.JFrame {
         
         
         jDesktopPane1.add(frmNewProveedor);
-//        try{
-//            frmNewProveedor.setSelected(true);
-//        }
-//        catch( java.beans.PropertyVetoException e){
-//            
-//        }
-        
-        //DashboardPanel.setVisible(false);
-//        JPanel ProveedoresPanel = new JPanel();
-//        ProveedoresPanel.setVisible(true);
-//        ProveedoresPanel.setSize(870, 620);
-//        ProveedoresPanel.setAlignmentX(210);
-//        ProveedoresPanel.setAlignmentY(70);
-//        ProveedoresPanel.setVisible(true);
-//        
-        
-//        ProveedoresPanel.getContentPane.add(frmNewProveedor);
-          
-//        JInternalFrame internalFrame = new JInternalFrame();
-//        internalFrame.setContentPane(frmNewProveedor.getContentPane());
-//        internalFrame.pack();
-//        
-//        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(internalFrame.getContentPane());
-//        internalFrame.getContentPane().setLayout(jInternalFrame1Layout);
-//        jInternalFrame1Layout.setHorizontalGroup(
-//            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addGap(0, 0, Short.MAX_VALUE)
-//        );
-//        jInternalFrame1Layout.setVerticalGroup(
-//            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addGap(0, 0, Short.MAX_VALUE)
-//        );
 
-//        ProveedoresPanel.add(internalFrame, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 560, 589));
-
-        
-//        internalFrame.setBounds(280, 90, 560, 589);
-//        dp.add(internalFrame);
-        
-//        internalFrame.setVisible(true);
-        
-        
-//        this.add(internalFrame);
     }//GEN-LAST:event_pnlProveedorMousePressed
 
     private void pnlCompraInsumoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlCompraInsumoMousePressed
         // TODO add your handling code here:
+        jPanel4.setVisible(false);
+        jDesktopPane1.removeAll();
         CompraDeInsumos frmNewCompIns = new CompraDeInsumos();
         frmNewCompIns.setVisible(true);
+        
+        frmNewCompIns.setAlignmentX(210);
+        frmNewCompIns.setAlignmentY(70);
+        frmNewCompIns.setSize(870, 620);
+        frmNewCompIns.setResizable(false);
+        
+        jDesktopPane1.add(frmNewCompIns);
+        
         
     }//GEN-LAST:event_pnlCompraInsumoMousePressed
 
     private void pnlGestionInsumosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGestionInsumosMousePressed
         // TODO add your handling code here:
+        
+        
+        jPanel4.setVisible(false);
+        jDesktopPane1.removeAll();
         RegistroNuevoInsumo frmNewInsumo = new RegistroNuevoInsumo();
         frmNewInsumo.setVisible(true);
+        
+        frmNewInsumo.setAlignmentX(210);
+        frmNewInsumo.setAlignmentY(70);
+        frmNewInsumo.setSize(870, 620);
+        frmNewInsumo.setResizable(false);
+        
+        jDesktopPane1.add(frmNewInsumo);
     }//GEN-LAST:event_pnlGestionInsumosMousePressed
 
     private void pnlGestionSolicitudesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGestionSolicitudesMousePressed

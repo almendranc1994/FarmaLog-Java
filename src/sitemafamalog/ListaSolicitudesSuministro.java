@@ -4,31 +4,31 @@
  * and open the template in the editor.
  */
 package sitemafamalog;
-import Controlador.SolicitudSuministroBL;
+
 import Controlador.PrioridadBL;
+import Controlador.SolicitudSuministroBL;
 import Modelo.SolicitudSuministro;
-import Modelo.Prioridad;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
- * @author Andre
+ * @author alulab14
  */
-public class ListaSolicitudesSuministro extends javax.swing.JFrame {
+public class ListaSolicitudesSuministro extends javax.swing.JInternalFrame {
     private SolicitudSuministroBL gestorSolicudSuministro = new SolicitudSuministroBL();
     private PrioridadBL gestorPrioridad = new PrioridadBL();
     private ArrayList<SolicitudSuministro> listaSolSuministro;
     /**
-     * Creates new form ListaSolicitudesSuministro
+     * Creates new form ListaSolicitudesSuministroI
      */
     public ListaSolicitudesSuministro() {
         initComponents();
         listaSolSuministro = gestorSolicudSuministro.obtenerListaSolicitudSuministro();        
         actualizarTabla();
     }
-    
     public void actualizarTabla(){
         DefaultTableModel modelo = (DefaultTableModel)tableLstSolicitudesSuministro.getModel();
         Object [] fila = new Object [6];
@@ -45,7 +45,7 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
             modelo.addRow(fila);
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,15 +55,11 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableLstSolicitudesSuministro = new javax.swing.JTable();
         btnEliminarSolicitud = new javax.swing.JButton();
         btnVerSolicitud = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Lista Solicitudes Suministro");
 
         tableLstSolicitudesSuministro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,7 +118,7 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVerSolicitud)
@@ -139,11 +135,24 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEliminarSolicitud)
                     .addComponent(btnVerSolicitud))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEliminarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarSolicitudActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tableLstSolicitudesSuministro.getModel();
+        for (int i=0;i<model.getRowCount();i++) {
+            Boolean checked=(Boolean)model.getValueAt(i,5);
+            if (checked!=null && checked) {
+                SolicitudSuministro s = listaSolSuministro.get(i);
+                gestorSolicudSuministro.eliminarSolicitudSuministro(s.getCodigoSolicitudSuministro());
+                model.removeRow(i);
+                i--;
+            }
+        }
+    }//GEN-LAST:event_btnEliminarSolicitudActionPerformed
 
     private void btnVerSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerSolicitudActionPerformed
         int index = tableLstSolicitudesSuministro.getSelectedRow();
@@ -154,58 +163,10 @@ public class ListaSolicitudesSuministro extends javax.swing.JFrame {
         ListaSolicitudesSuministro.this.dispose();
     }//GEN-LAST:event_btnVerSolicitudActionPerformed
 
-    private void btnEliminarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarSolicitudActionPerformed
-        DefaultTableModel model = (DefaultTableModel) tableLstSolicitudesSuministro.getModel();
-        for (int i=0;i<model.getRowCount();i++) {
-              Boolean checked=(Boolean)model.getValueAt(i,5);
-              if (checked!=null && checked) {
-                   SolicitudSuministro s = listaSolSuministro.get(i);
-                   gestorSolicudSuministro.eliminarSolicitudSuministro(s.getCodigoSolicitudSuministro());
-                   model.removeRow(i);
-                   i--;
-              }
-        }
-    }//GEN-LAST:event_btnEliminarSolicitudActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListaSolicitudesSuministro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListaSolicitudesSuministro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListaSolicitudesSuministro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListaSolicitudesSuministro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ListaSolicitudesSuministro().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminarSolicitud;
     private javax.swing.JButton btnVerSolicitud;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableLstSolicitudesSuministro;

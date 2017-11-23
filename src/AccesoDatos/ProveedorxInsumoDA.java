@@ -10,6 +10,7 @@ import Modelo.Insumo;
 import Modelo.ProveedorxInsumo;
 import Controlador.MarcaBL;
 import com.mysql.jdbc.Connection;
+import java.sql.CallableStatement;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -110,6 +111,16 @@ public class ProveedorxInsumoDA {
             System.out.println("No lo agrego");
             Conexion.closeConexion();
             return false;
+        }
+    }
+    public void eliminarRastroDelProveedor(int codigo) {
+        try{
+            CallableStatement cStmt = Conexion.getConexion().prepareCall("{call ELIMINAR_PROVEEDOR_EN_PROVXINS(?)}");
+            cStmt.setInt(1, codigo);
+            cStmt.execute();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 }

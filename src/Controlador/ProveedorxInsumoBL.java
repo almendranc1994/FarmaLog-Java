@@ -32,4 +32,10 @@ public class ProveedorxInsumoBL {
         return accesoDatos.devolverListaInsumodeProv(codigoProv);
     }
     
+    public void eliminarRastroDelProveedor(int codigo) {
+        accesoDatos.eliminarRastroDelProveedor(codigo);
+    }
+    
+    
+    
 }

@@ -41,6 +41,41 @@ public class AnadirInsumo extends javax.swing.JFrame {
     public ProveedorxInsumo getProveedorxInsumo(){
         return pxIns;
     }
+    void setValues() {
+        System.out.println("SET VALUEEEEES "+registro.isAdd());
+        if(registro.isAdd()==true){
+            txtPrecio.setEnabled(false);
+            cbMarca.setEnabled(false);
+            cbUniMed.setEnabled(false);
+            txtStock.setEnabled(false);
+            btnAgregar.setEnabled(false);
+            btnNuevo.setEnabled(false);
+        }
+        else{
+            txtPrecio.setEnabled(true);
+            cbMarca.setEnabled(true);
+            cbUniMed.setEnabled(true);
+            txtStock.setEnabled(true);
+            btnAgregar.setEnabled(true);
+            btnNuevo.setEnabled(true);
+            InsumoBL logNegIns=new InsumoBL();
+            try{
+                listaInsumos = logNegIns.devolverListaInsumo(registro.getCurrentfila()[1].toString());   
+            }
+            catch(Exception e){
+                listaInsumos=null;
+            }
+            if (listaInsumos != null) {
+                actualizarDatosTabla();
+            }
+            tablaInsumos.setRowSelectionInterval(0, 0);
+            cbMarca.setSelectedItem(registro.getCurrentfila()[3]);
+            cbUniMed.setSelectedItem(registro.getCurrentfila()[2]);
+            txtPrecio.setText(""+registro.getCurrentfila()[5]);
+            txtStock.setText(""+registro.getCurrentfila()[4]);
+            
+        }
+    }
     public AnadirInsumo() {
         initComponents();
         txtPrecio.setEnabled(false);
@@ -273,8 +308,8 @@ public class AnadirInsumo extends javax.swing.JFrame {
                 Insumo I = logicaInsumo.BuscarInsumo(Integer.parseInt(tablaInsumos.getModel().getValueAt(tablaInsumos.getSelectedRow(), 0).toString()));
                 int stock = Integer.parseInt(txtStock.getText());
                 double precio = Double.parseDouble(txtPrecio.getText());
-                System.out.println(""+registro.prov.getCodigo()+I.getCodigoInsumo()+uniMed.getUnidad()+stock+marca.getNombre()+precio);
-                pxIns = new ProveedorxInsumo(registro.prov.getCodigo(), I.getCodigoInsumo(), uniMed.getUnidad(), stock, marca.getNombre(), precio);
+                System.out.println(""+registro.getProv().getCodigo()+I.getCodigoInsumo()+uniMed.getUnidad()+stock+marca.getNombre()+precio);
+                pxIns = new ProveedorxInsumo(registro.getProv().getCodigo(), I.getCodigoInsumo(), uniMed.getUnidad(), stock, marca.getNombre(), precio);
                 registro.anadirInsumoEnTabla(I, cbUniMed.getSelectedItem().toString(),cbMarca.getSelectedItem().toString(),stock,precio);
                 registro.agregarPxI(pxIns);
             }
