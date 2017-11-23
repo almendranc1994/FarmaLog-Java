@@ -23,4 +23,17 @@ public class EmpleadoBL {
         
         
     }
+    public void logOut(Empleado emp){
+        accesoDatos.logOut(emp);
+        
+    }
+    public void logIn(Empleado emp){
+        accesoDatos.logIn(emp);
+    }
+    public ArrayList<Empleado> getEmpleadosOnline(){
+        ArrayList<Empleado> onlineUsers = new ArrayList<Empleado>();
+        
+        onlineUsers = accesoDatos.getOnlineUsers();
+        return onlineUsers;
+    }
 }

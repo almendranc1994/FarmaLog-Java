@@ -235,6 +235,7 @@ public class logueo extends javax.swing.JFrame {
                 this.dispose();
                 Home frmHome=new Home();
                 frmHome.setCurrentEmpleado(emp);
+                frmHome.logIn(emp);
                 frmHome.setVisible(true);
                 JOptionPane.showMessageDialog(null,"Bienvenido "+emp.getNombres() + " "+emp.getApellidos());
                 

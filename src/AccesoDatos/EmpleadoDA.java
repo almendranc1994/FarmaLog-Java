@@ -23,6 +23,49 @@ public class EmpleadoDA {
     public EmpleadoDA(){
         
     }
+    
+    public ArrayList<Empleado> getOnlineUsers(){
+        ArrayList<Empleado> lisOnline = new ArrayList<>();
+        try{
+            Statement sentencia=Conexion.getConexion().createStatement();
+            ResultSet rs = sentencia.executeQuery("SELECT * FROM Empleado where conectado=1");
+            while(rs.next()){
+                System.out.println(Integer.parseInt(rs.getString("idEmpleado")));
+                lisOnline.add( new Empleado(Integer.parseInt(rs.getString("idEmpleado")),Integer.parseInt(rs.getString("idArea")),
+                rs.getString("nombres"),rs.getString("apellidos"),rs.getString("correo"),rs.getString("telefono")));
+                
+                
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return lisOnline;
+    }
+    public void logOut(Empleado emp){
+        
+        try{
+            Statement sentencia=Conexion.getConexion().createStatement();
+            sentencia.executeUpdate("UPDATE Empleado SET conectado = 0 WHERE idEmpleado ="+emp.getId()+"");
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+    }
+    public void logIn(Empleado emp){
+        
+        try{
+            Statement sentencia=Conexion.getConexion().createStatement();
+            sentencia.executeUpdate("UPDATE Empleado SET conectado = 1 WHERE idEmpleado ="+emp.getId()+"");
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+    }
     public Empleado buscarEmpleado(String username, String password){
         Empleado emp;
         

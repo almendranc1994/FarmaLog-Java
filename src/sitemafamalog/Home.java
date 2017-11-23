@@ -8,6 +8,8 @@ package sitemafamalog;
 //Hace el import de Vista.CarritoCompras
 //Hacer el import de Vista.RecepcionInsumos
 
+import Controlador.ConectadosCtrl;
+import Controlador.EmpleadoBL;
 import Controlador.PrioridadBL;
 import Controlador.SolicitudSuministroBL;
 import Modelo.Empleado;
@@ -36,12 +38,16 @@ public class Home extends javax.swing.JFrame {
      */
     
     private Empleado currentEmpleado;
+    private EmpleadoBL empCtrl;
     private boolean navBarVisible;
     private SolicitudSuministroBL gestorSolicudSuministro = new SolicitudSuministroBL();
     private PrioridadBL gestorPrioridad = new PrioridadBL();
     private ArrayList<SolicitudSuministro> listaSolSuministro;
     private JDesktopPane dp;
+    private ConectadosCtrl onlineUsersCtrl;
     public Home() {
+        empCtrl = new EmpleadoBL();
+        onlineUsersCtrl = new ConectadosCtrl();
         dp = new JDesktopPane();
         this.setContentPane(dp);
         initComponents();
@@ -49,10 +55,12 @@ public class Home extends javax.swing.JFrame {
         navBar.setVisible(navBarVisible);
         listaSolSuministro = gestorSolicudSuministro.obtenerListaSolicitudSuministro();        
         actualizarTabla();
-        
+        onlineUsersCtrl.start();
         
     }
-    
+    public void logIn(Empleado emp){
+        empCtrl.logIn(emp);
+    }
     public void actualizarTabla(){
         DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
         Object [] fila = new Object [6];
@@ -728,31 +736,6 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_navBarButtonMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        for (int i=0;i<model.getRowCount();i++) {
-              Boolean checked=(Boolean)model.getValueAt(i,5);
-              if (checked!=null && checked) {
-                   SolicitudSuministro s = listaSolSuministro.get(i);
-                   gestorSolicudSuministro.eliminarSolicitudSuministro(s.getCodigoSolicitudSuministro());
-                   model.removeRow(i);
-                   i--;
-              }
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        
-        int index = jTable1.getSelectedRow();
-        SolicitudSuministro seleccionado = listaSolSuministro.get(index);
-        VerSolicitudSuministro fmr = new VerSolicitudSuministro(seleccionado, this);
-        fmr.setSolicitud(seleccionado);
-        fmr.setVisible(true);
-//        ListaSolicitudesSuministro.this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void pnlComprasRealizadas1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlComprasRealizadas1MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_pnlComprasRealizadas1MouseEntered
@@ -763,7 +746,34 @@ public class Home extends javax.swing.JFrame {
 
     private void pnlComprasRealizadas1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlComprasRealizadas1MousePressed
         // TODO add your handling code here:
+        empCtrl.logOut(currentEmpleado);
+        this.dispose();
     }//GEN-LAST:event_pnlComprasRealizadas1MousePressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        for (int i=0;i<model.getRowCount();i++) {
+            Boolean checked=(Boolean)model.getValueAt(i,5);
+            if (checked!=null && checked) {
+                SolicitudSuministro s = listaSolSuministro.get(i);
+                gestorSolicudSuministro.eliminarSolicitudSuministro(s.getCodigoSolicitudSuministro());
+                model.removeRow(i);
+                i--;
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+
+        int index = jTable1.getSelectedRow();
+        SolicitudSuministro seleccionado = listaSolSuministro.get(index);
+        VerSolicitudSuministro fmr = new VerSolicitudSuministro(seleccionado, this);
+        fmr.setSolicitud(seleccionado);
+        fmr.setVisible(true);
+        //        ListaSolicitudesSuministro.this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
     
     public void setColor(JPanel panel){
         panel.setBackground(new java.awt.Color(156,156,156));
