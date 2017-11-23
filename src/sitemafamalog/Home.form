@@ -48,7 +48,7 @@
         <Container class="javax.swing.JPanel" name="navBar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="8b" green="2f" red="18" type="rgb"/>
+              <Color blue="c8" green="9b" red="0" type="rgb"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>

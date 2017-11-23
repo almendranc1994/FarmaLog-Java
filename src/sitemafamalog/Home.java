@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -125,7 +126,7 @@ public class Home extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        navBar.setBackground(new java.awt.Color(24, 47, 139));
+        navBar.setBackground(new java.awt.Color(0, 155, 200));
         navBar.setToolTipText("");
 
         pnlProveedor.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -678,6 +679,10 @@ public class Home extends javax.swing.JFrame {
         jPanel4.setVisible(false);
         jDesktopPane1.removeAll();
         RegistroProveedor frmNewProveedor = new RegistroProveedor();
+        //frmNewProveedor.setBorder( null );
+        //frmNewProveedor.putClientProperty("frmNewProveedor.isPalette", Boolean.TRUE);
+        BasicInternalFrameUI bi = (BasicInternalFrameUI)frmNewProveedor.getUI();
+        bi.setNorthPane(null);
         frmNewProveedor.setVisible(true);
         
         frmNewProveedor.setAlignmentX(210);
@@ -696,6 +701,8 @@ public class Home extends javax.swing.JFrame {
         jPanel4.setVisible(false);
         jDesktopPane1.removeAll();
         CompraDeInsumos frmNewCompIns = new CompraDeInsumos();
+        BasicInternalFrameUI bi = (BasicInternalFrameUI)frmNewCompIns.getUI();
+        bi.setNorthPane(null);
         frmNewCompIns.setVisible(true);
         
         frmNewCompIns.setAlignmentX(210);
@@ -715,6 +722,8 @@ public class Home extends javax.swing.JFrame {
         jPanel4.setVisible(false);
         jDesktopPane1.removeAll();
         RegistroNuevoInsumo frmNewInsumo = new RegistroNuevoInsumo();
+        BasicInternalFrameUI bi = (BasicInternalFrameUI)frmNewInsumo.getUI();
+        bi.setNorthPane(null);
         frmNewInsumo.setVisible(true);
         
         frmNewInsumo.setAlignmentX(210);

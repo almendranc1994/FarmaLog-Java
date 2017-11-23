@@ -110,7 +110,6 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
     
     public RegistroProveedor() {
         initComponents();
-        
         logNegProv = new ProveedoresBL();
 
         txtNombre.setEnabled(false);
@@ -239,6 +238,8 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
         btnEliminarProv = new javax.swing.JMenu();
         btnCancelarProv = new javax.swing.JMenu();
 
+        setBorder(null);
+
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -359,7 +360,7 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
                     .addComponent(txtTelefono)
                     .addComponent(txtDireccion)
                     .addComponent(txtTipoInstitucion))
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -539,10 +540,9 @@ public class RegistroProveedor extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel14)
+                        .addGap(0, 719, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
