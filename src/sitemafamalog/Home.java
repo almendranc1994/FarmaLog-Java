@@ -77,6 +77,7 @@ public class Home extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         btnReporteProveedores = new javax.swing.JButton();
+        btnReporteInsumosXProveedor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -520,6 +521,14 @@ public class Home extends javax.swing.JFrame {
         });
         jPanel1.add(btnReporteProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 150, -1, -1));
 
+        btnReporteInsumosXProveedor.setText("Reporte Insumos x Proveedor");
+        btnReporteInsumosXProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporteInsumosXProveedorActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnReporteInsumosXProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 440, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -669,10 +678,6 @@ public class Home extends javax.swing.JFrame {
     private void btnReporteProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteProveedoresActionPerformed
         // TODO add your handling code here:
         try{
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con =  DriverManager.getConnection(
-                    "jdbc:mysql://200.16.7.96/inf282g1", 
-                    "inf282g1", "BRXRKa3O5JUiqJWn");
 //            JasperReport jr = (JasperReport)
 //       JRLoader.loadObjectFromFile(
 // SitemaFamaLog.class.getResource
@@ -687,7 +692,7 @@ public class Home extends javax.swing.JFrame {
             
             JasperPrint impresion =
                     JasperFillManager.fillReport(
-                            jr, null, con);
+                            jr, null, Conexion.getConexion());
             
             JasperViewer viewer = new JasperViewer(impresion);
             
@@ -697,6 +702,25 @@ public class Home extends javax.swing.JFrame {
             System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_btnReporteProveedoresActionPerformed
+
+    private void btnReporteInsumosXProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteInsumosXProveedorActionPerformed
+        // TODO add your handling code here:
+        try{
+            InputStream jasperStream = getClass().getResourceAsStream("/Reportes/RepProveedoresXInsumo.jasper");
+            JasperReport jr = (JasperReport) JRLoader.loadObject(jasperStream);
+            
+            JasperPrint impresion =
+                    JasperFillManager.fillReport(
+                            jr, null, Conexion.getConexion());
+            
+            JasperViewer viewer = new JasperViewer(impresion);
+            
+            viewer.setVisible(true);
+            
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btnReporteInsumosXProveedorActionPerformed
     
     public void setColor(JPanel panel){
         panel.setBackground(new java.awt.Color(156,156,156));
@@ -741,6 +765,7 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReporteInsumosXProveedor;
     private javax.swing.JButton btnReporteProveedores;
     private javax.swing.JLabel exit;
     private javax.swing.JLabel jLabel1;

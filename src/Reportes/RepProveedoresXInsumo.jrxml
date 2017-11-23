@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="15902c97-681c-4346-a2e0-7b8ba2865f1a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     Insumo.`idInsumo` AS Insumo_idInsumo,
+     Insumo.`nombre` AS Insumo_nombre,
+     Insumo.`stock` AS Insumo_stock,
+     ProveedorxInsumo.`idProveedor` AS ProveedorxInsumo_idProveedor,
+     ProveedorxInsumo.`idInsumo` AS ProveedorxInsumo_idInsumo,
+     ProveedorxInsumo.`stock` AS ProveedorxInsumo_stock,
+     Proveedor.`idProveedor` AS Proveedor_idProveedor,
+     Proveedor.`nombres` AS Proveedor_nombres,
+     Proveedor.`apellidos` AS Proveedor_apellidos,
+     Proveedor.`ruc` AS Proveedor_ruc
+FROM
+     `Proveedor` Proveedor INNER JOIN `ProveedorxInsumo` ProveedorxInsumo ON Proveedor.`idProveedor` = ProveedorxInsumo.`idProveedor`
+     INNER JOIN `Insumo` Insumo ON ProveedorxInsumo.`idInsumo` = Insumo.`idInsumo`]]>
+	</queryString>
+	<field name="Insumo_idInsumo" class="java.lang.Integer"/>
+	<field name="Insumo_nombre" class="java.lang.String"/>
+	<field name="Insumo_stock" class="java.math.BigDecimal"/>
+	<field name="ProveedorxInsumo_idProveedor" class="java.lang.Integer"/>
+	<field name="ProveedorxInsumo_idInsumo" class="java.lang.Integer"/>
+	<field name="ProveedorxInsumo_stock" class="java.lang.Integer"/>
+	<field name="Proveedor_idProveedor" class="java.lang.Integer"/>
+	<field name="Proveedor_nombres" class="java.lang.String"/>
+	<field name="Proveedor_apellidos" class="java.lang.String"/>
+	<field name="Proveedor_ruc" class="java.lang.String"/>
+	<group name="Insumo_idInsumo">
+		<groupExpression><![CDATA[$F{Insumo_idInsumo}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="393" splitType="Stretch">
+			<barChart>
+				<chart>
+					<reportElement x="0" y="0" width="790" height="380" uuid="2f41335a-9c4b-4527-a9d6-5a220acfb0f1"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{Insumo_nombre}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{Proveedor_nombres}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{ProveedorxInsumo_stock}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>
