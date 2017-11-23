@@ -188,14 +188,15 @@ public class logueo extends javax.swing.JFrame {
         if(emp != null){
             this.dispose();
             Home frmHome=new Home();
+            frmHome.setCurrentEmpleado(emp);
             frmHome.setVisible(true);
             JOptionPane.showMessageDialog(null,"Bienvenido "+emp.getNombres() + " "+emp.getApellidos());
+            
         }
         else{   
             JOptionPane.showMessageDialog(null,"Ingrese usuario y contraseña correctos");
         }
-
-
+    
         this.dispose();
 
     }//GEN-LAST:event_btnIngresarActionPerformed
@@ -211,8 +212,10 @@ public class logueo extends javax.swing.JFrame {
                 this.dispose();
 
                 Home frmHome=new Home();
+                frmHome.setCurrentEmpleado(emp);
                 frmHome.setVisible(true);
                 JOptionPane.showMessageDialog(null,"Bienvenido "+emp.getNombres() + " "+emp.getApellidos());
+                
             }
 
             else{   
@@ -231,8 +234,10 @@ public class logueo extends javax.swing.JFrame {
             if(emp != null){
                 this.dispose();
                 Home frmHome=new Home();
+                frmHome.setCurrentEmpleado(emp);
                 frmHome.setVisible(true);
                 JOptionPane.showMessageDialog(null,"Bienvenido "+emp.getNombres() + " "+emp.getApellidos());
+                
             }
             else{   
                 JOptionPane.showMessageDialog(null,"Ingrese usuario y contraseña correctos");
