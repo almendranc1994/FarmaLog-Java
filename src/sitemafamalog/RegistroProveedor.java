@@ -674,6 +674,11 @@ public class RegistroProveedor extends javax.swing.JFrame {
 
         btnActualizar.setText("Actualizar");
         btnActualizar.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        btnActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnActualizarMouseClicked(evt);
+            }
+        });
         jMenuBar2.add(btnActualizar);
 
         btnEliminarProv.setText("Eliminar");
@@ -795,11 +800,12 @@ public class RegistroProveedor extends javax.swing.JFrame {
             getProv().setInstitucion(txtTipoInstitucion.getText());
             logNegProvxIns=new ProveedorxInsumoBL();
             if (logNegProv.registrarProveedor(getProv())) {
-                JOptionPane.showMessageDialog(null, listaProveedorxInsumo.size()+" codigo del proveedor: "+getProv().getCodigo());
-                System.out.println(listaProveedorxInsumo.size());
+                //JOptionPane.showMessageDialog(null, listaProveedorxInsumo.size()+" codigo del proveedor: "+getProv().getCodigo());
+                System.out.println("tamaño de la lista: "+listaProveedorxInsumo.size());
                 for (ProveedorxInsumo proveedorxInsumo : listaProveedorxInsumo) {
                     proveedorxInsumo.setProveedor((new ProveedoresBL()).BuscarProveedor(getProv().getCodigo()));
                     logNegProvxIns.registrarProveedorxInsumo(proveedorxInsumo);
+                    System.out.println("registrado el proveedorxInsumo: "+proveedorxInsumo.getMarca().getNombre());
                 }
                 JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente!");
             }
@@ -972,8 +978,22 @@ public class RegistroProveedor extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) tableInsumosAsociados.getModel();
         modelo.setNumRows(0);
         listaProveedorxInsumo=new ArrayList<ProveedorxInsumo>();
+        JOptionPane.showMessageDialog(null, "Se ha eliminado exitosamente!");
+        
         
     }//GEN-LAST:event_btnEliminarProvMouseClicked
+
+    private void btnActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMouseClicked
+        // TODO add your handling code here:
+        logNegProvxIns.eliminarRastroDelProveedor(getProv().getCodigo());
+        for (ProveedorxInsumo proveedorxInsumo : listaProveedorxInsumo) {
+            proveedorxInsumo.setProveedor((new ProveedoresBL()).BuscarProveedor(getProv().getCodigo()));
+            logNegProvxIns.registrarProveedorxInsumo(proveedorxInsumo);
+        }
+        
+        JOptionPane.showMessageDialog(null, "Se ha actualizado exitosamente!");
+        
+    }//GEN-LAST:event_btnActualizarMouseClicked
 
     /**
      * @param args the command line arguments
