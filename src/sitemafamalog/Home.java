@@ -95,8 +95,6 @@ public class Home extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         pnlGestionInsumos = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        pnlGestionSolicitudes = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
         pnlCarritoCompras = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         pnlSolicitudesCompra = new javax.swing.JPanel();
@@ -229,39 +227,6 @@ public class Home extends javax.swing.JFrame {
         pnlGestionInsumosLayout.setVerticalGroup(
             pnlGestionInsumosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel5)
-        );
-
-        pnlGestionSolicitudes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        pnlGestionSolicitudes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pnlGestionSolicitudesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnlGestionSolicitudesMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                pnlGestionSolicitudesMousePressed(evt);
-            }
-        });
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 51, 255));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sitemafamalog/images/icons8-Hoja de papel-50.png"))); // NOI18N
-        jLabel11.setText("Solicitudes");
-
-        javax.swing.GroupLayout pnlGestionSolicitudesLayout = new javax.swing.GroupLayout(pnlGestionSolicitudes);
-        pnlGestionSolicitudes.setLayout(pnlGestionSolicitudesLayout);
-        pnlGestionSolicitudesLayout.setHorizontalGroup(
-            pnlGestionSolicitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlGestionSolicitudesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnlGestionSolicitudesLayout.setVerticalGroup(
-            pnlGestionSolicitudesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel11)
         );
 
         pnlCarritoCompras.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -408,7 +373,6 @@ public class Home extends javax.swing.JFrame {
             navBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlComprasRealizadas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnlCarritoCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlGestionSolicitudes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnlGestionInsumos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnlCompraInsumo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnlSolicitudesCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -428,14 +392,12 @@ public class Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlGestionInsumos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlGestionSolicitudes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlCarritoCompras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlSolicitudesCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlComprasRealizadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 331, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 366, Short.MAX_VALUE)
                 .addComponent(pnlComprasRealizadas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -492,6 +454,8 @@ public class Home extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1270, 70));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Usuarios en línea:");
@@ -654,16 +618,6 @@ public class Home extends javax.swing.JFrame {
         setColor(pnlGestionInsumos);
     }//GEN-LAST:event_pnlGestionInsumosMouseEntered
 
-    private void pnlGestionSolicitudesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGestionSolicitudesMouseEntered
-        // TODO add your handling code here:
-        setColor(pnlGestionSolicitudes);
-    }//GEN-LAST:event_pnlGestionSolicitudesMouseEntered
-
-    private void pnlGestionSolicitudesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGestionSolicitudesMouseExited
-        // TODO add your handling code here:
-        resetColor(pnlGestionSolicitudes);
-    }//GEN-LAST:event_pnlGestionSolicitudesMouseExited
-
     private void pnlCarritoComprasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlCarritoComprasMouseEntered
         // TODO add your handling code here:
         setColor(pnlCarritoCompras);
@@ -733,12 +687,6 @@ public class Home extends javax.swing.JFrame {
         
         jDesktopPane1.add(frmNewInsumo);
     }//GEN-LAST:event_pnlGestionInsumosMousePressed
-
-    private void pnlGestionSolicitudesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGestionSolicitudesMousePressed
-        // TODO add your handling code here:
-        ListaSolicitudesSuministro frmNewSol = new ListaSolicitudesSuministro();
-        frmNewSol.setVisible(true);
-    }//GEN-LAST:event_pnlGestionSolicitudesMousePressed
 
     private void pnlCarritoComprasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlCarritoComprasMousePressed
         // TODO add your handling code here:
@@ -873,7 +821,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
@@ -898,7 +845,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel pnlComprasRealizadas;
     private javax.swing.JPanel pnlComprasRealizadas1;
     private javax.swing.JPanel pnlGestionInsumos;
-    private javax.swing.JPanel pnlGestionSolicitudes;
     private javax.swing.JPanel pnlProveedor;
     private javax.swing.JPanel pnlSolicitudesCompra;
     // End of variables declaration//GEN-END:variables
